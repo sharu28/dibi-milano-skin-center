@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  --color-clinic-bg: #F9F9F7;
+  --color-clinic-text: #2D2D2D;
+  --color-clinic-accent: #D4C5B9; /* Soft beige/sand */
+  --color-clinic-light: #FFFFFF;
+  --color-clinic-dark: #1A1A1A;
+}
+
+body {
+  background-color: var(--color-clinic-bg);
+  color: var(--color-clinic-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.serif-text {
+  font-family: var(--font-serif);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* Custom scrollbar for elegance */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-clinic-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-clinic-accent);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c3b2a4;
+}

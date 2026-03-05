@@ -34,6 +34,7 @@ export default function Navbar() {
           {/* Left Links (Desktop) */}
           <div className="hidden md:flex items-center space-x-8 text-xs font-medium tracking-widest text-gray-800">
             <Link to="/" className="hover:text-gray-500 transition-colors">HOME</Link>
+            <Link to="/products" className="hover:text-gray-500 transition-colors">PRODUCTS</Link>
             
             <div 
               className="relative group"
@@ -107,6 +108,7 @@ export default function Navbar() {
       >
         <div className="px-4 pt-2 pb-6 space-y-1">
           <Link to="/" className="block px-3 py-3 text-sm font-medium tracking-widest text-gray-800 border-b border-gray-50">HOME</Link>
+          <Link to="/products" className="block px-3 py-3 text-sm font-medium tracking-widest text-gray-800 border-b border-gray-50">PRODUCTS</Link>
           
           <div className="border-b border-gray-50">
             <button 

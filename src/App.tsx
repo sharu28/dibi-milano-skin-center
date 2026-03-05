@@ -10,6 +10,8 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Service from './pages/Service';
 import Careers from './pages/Careers';
+import Products from './pages/Products';
+import Product from './pages/Product';
 
 export default function App() {
   return (
@@ -21,6 +23,8 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/service/:slug" element={<Service />} />
             <Route path="/careers" element={<Careers />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/products/:slug" element={<Product />} />
           </Routes>
         </main>
         <Footer />

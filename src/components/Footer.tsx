@@ -25,7 +25,7 @@ export default function Footer() {
             <div className="space-y-3 text-sm text-gray-600">
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 mt-0.5 text-[#D4C5B9]" />
-                <span>10 Rosmead Pl,<br />Colombo 00700, Sri Lanka</span>
+                <span>No 10, 2nd Floor, Dasa Group Building<br />Rosmead Place<br />Colombo 7</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-[#D4C5B9]" />
@@ -33,7 +33,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-3">
                 <MessageCircle className="w-5 h-5 text-[#D4C5B9]" />
-                <a href="https://wa.me/94112674546" className="hover:text-gray-900 transition-colors">WhatsApp Us</a>
+                <a href="https://wa.me/94776333505" className="hover:text-gray-900 transition-colors">+94 77 633 3505</a>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-[#D4C5B9]" />

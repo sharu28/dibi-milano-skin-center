@@ -1,0 +1,15 @@
+node_modules
+/.cache
+/build
+/dist
+/public/build
+/.mf
+.env
+.shopify
+.react-router
+tsconfig.tsbuildinfo
+# Local copy of product images — not used at runtime (Shopify CDN serves them).
+# Keeps Oxygen deploys small.
+/public/product-images
+# Source-of-truth import file — large, regeneratable from public/products-detailed.json
+products.csv

@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  --color-clinic-bg: #F9F9F7;
+  --color-clinic-text: #2D2D2D;
+  --color-clinic-accent: #D4C5B9;
+  --color-clinic-light: #FFFFFF;
+  --color-clinic-dark: #1A1A1A;
+}
+
+body {
+  background-color: var(--color-clinic-bg);
+  color: var(--color-clinic-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.serif-text {
+  font-family: var(--font-serif);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-clinic-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-clinic-accent);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c3b2a4;
+}
+
+/* Cart drawer line item baseline styles */
+.cart-main { @apply flex flex-col gap-6; }
+.cart-details { @apply flex flex-col gap-4; }
+.cart-line { @apply border-b border-gray-100 py-4; }
+.cart-line-inner { @apply flex gap-4; }
+.cart-line-inner img { @apply w-20 h-20 object-cover; }
+.cart-line p { @apply text-sm text-gray-900; }
+.cart-line ul { @apply text-xs text-gray-500 mt-1; }
+.cart-line-quantity { @apply flex items-center gap-2 mt-3 text-sm; }
+.cart-line-quantity button {
+  @apply w-7 h-7 flex items-center justify-center border border-gray-300 hover:border-[#D4C5B9] disabled:opacity-40;
+}
+.cart-summary-aside,
+.cart-summary-page { @apply mt-6 pt-6 border-t border-gray-200 space-y-4; }
+.cart-subtotal { @apply flex justify-between text-sm; }
+.cart-summary-aside dl,
+.cart-summary-page dl { @apply text-sm; }
+.cart-summary-aside a,
+.cart-summary-page a {
+  @apply inline-flex w-full items-center justify-center py-3 mt-4 bg-[#1A1A1A] text-white text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#D4C5B9] transition-colors;
+}
+
+/* Product form (variant selector + add to cart) on PDP */
+.product-options-grid { @apply flex flex-wrap gap-2 mt-2; }
+.product-options-item {
+  @apply px-4 py-2 border border-gray-300 text-xs uppercase tracking-widest hover:border-[#D4C5B9] cursor-pointer;
+}
+.product-options-item[disabled] { @apply opacity-40 cursor-not-allowed; }

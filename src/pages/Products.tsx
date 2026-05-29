@@ -4,6 +4,37 @@ import { motion } from 'motion/react';
 import { ArrowRight, ChevronDown, Sparkles } from 'lucide-react';
 import { products, getUniqueLines } from '../data/products';
 
+const WHATSAPP_NUMBER = '94776333505';
+
+const collectionDescriptions: Record<string, string> = {
+  'CREAM AND SERUM ANTI AGING AGE METHOD': 'Age Method brings together DIBI Milano home-care products for routines focused on comfort, freshness, and visible age-related skin concerns.',
+  'ACID INFUSION': 'Acid Infusion is a renewal-focused collection for clients looking to support smoother-looking texture and a brighter, more even-looking complexion.',
+  'BIOSTIMULATING SYSTEM LAB': 'Biostimulating System Lab supports professional routines centred on skin vitality, resilience, and a healthier-looking finish.',
+  'COLLAGE SYSTEM LAB': 'Collage System Lab is a collagen-focused collection for routines built around smoothness, softness, and a firmer-looking appearance.',
+  'CREME AND COSMETICS DEFENCE SOLUTION': 'Defence Solution is suited to skin that feels delicate, stressed, or reactive and needs a calmer home-care routine.',
+  'FACE PERFECTION': 'Face Perfection covers the everyday cleansing and preparation steps that help a skincare routine feel balanced and complete.',
+  'FILLER CODE COSMETIC EFFECT FILLERS': 'Filler Code is designed for routines focused on a smoother, fuller-looking finish around expression-prone areas.',
+  'CREAM MOISTURIZING AND NOURISHING HYDRA PERFECTION': 'Hydra Perfection focuses on moisture support, comfort, and a fresh-looking complexion.',
+  'COSMETICS LIFTING EFFECT LIFT CREATOR': 'Lift Creator is built for lifting-focused routines and a more toned-looking finish.',
+  'FACE REGENERATING PRODUCTS PROCELLULAR 365': 'Procellular 365 supports recovery-focused routines for skin that needs comfort and renewed-looking texture.',
+  'COSMETICS SEBUM BALANCING PURE EQUALIZER': 'Pure Equalizer is a balancing collection for oily, combination, or blemish-prone skin routines.',
+  'CREAMS AND SERUM ANTI WRINKLE WHITE SCIENCE': 'White Science is a brightening-focused collection for uneven-looking tone and luminosity.'
+};
+
+function getCollectionDescription(selectedLine: string) {
+  if (selectedLine === 'All') {
+    return 'Explore DIBI Milano professional skincare products available through DIBI Milano Skin Center Colombo. Browse by collection, then speak with our team to choose products that fit your skin and routine.';
+  }
+
+  return collectionDescriptions[selectedLine] || `Explore the ${selectedLine} collection and ask our skin team how it can fit into your home-care routine.`;
+}
+
+function getWhatsAppHref(selectedLine: string) {
+  const topic = selectedLine === 'All' ? 'DIBI Milano products' : `the ${selectedLine} collection`;
+  const message = encodeURIComponent(`Hi DIBI Milano Skin Center, I would like help choosing ${topic}.`);
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+}
+
 export default function Products() {
   const [selectedLine, setSelectedLine] = useState<string>('All');
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -105,19 +136,14 @@ export default function Products() {
         </div>
       </section>
 
-      {/* Collection Description Section */}
       <section className="py-16 bg-white border-b border-gray-100">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <Sparkles className="w-4 h-4 text-[#D4C5B9]" />
-            <span className="text-xs font-semibold tracking-[0.2em] text-[#D4C5B9] uppercase">Collection Description</span>
+            <span className="text-xs font-semibold tracking-[0.2em] text-[#D4C5B9] uppercase">DIBI Milano Products</span>
           </div>
           <p className="text-xl md:text-2xl font-serif text-gray-700 leading-relaxed">
-            {/* PLACEHOLDER: Collection Description */}
-            {selectedLine === 'All' 
-              ? "Our comprehensive skincare range combines cutting-edge dermatological research with luxurious textures. Each product is formulated to address specific skin concerns while delivering a sensorial experience that transforms your daily routine into a moment of self-care."
-              : `The ${selectedLine} collection represents the pinnacle of targeted skincare innovation. Meticulously crafted with advanced active ingredients, this line offers professional-grade solutions for discerning individuals seeking visible, lasting results.`
-            }
+            {getCollectionDescription(selectedLine)}
           </p>
         </div>
       </section>
@@ -178,9 +204,7 @@ export default function Products() {
                       {product.name}
                     </h3>
                     
-                    {/* Placeholder: Quick Benefits */}
                     <div className="mt-3 flex flex-wrap gap-1">
-                      {/* PLACEHOLDER: Generated benefit tags based on ingredients */}
                       {product.ingredients.includes('HYALURONIC') && (
                         <span className="px-2 py-0.5 bg-gray-100 text-[10px] text-gray-600">Hydrating</span>
                       )}
@@ -207,25 +231,28 @@ export default function Products() {
             <span className="text-xs font-semibold tracking-[0.2em] text-[#D4C5B9] uppercase">Expert Recommendation</span>
           </div>
           
-          {/* PLACEHOLDER: Personalized CTA Content */}
           <h2 className="text-3xl md:text-4xl font-light text-white tracking-[0.1em] uppercase mb-6">
             {selectedLine === 'All' 
-              ? "Not Sure Where to Start?"
-              : `Complete Your ${selectedLine} Routine`
+              ? "Need Help Choosing?"
+              : `Ask About ${selectedLine}`
             }
           </h2>
           
           <p className="text-lg text-white/70 font-serif italic mb-10 max-w-2xl mx-auto">
-            {/* PLACEHOLDER: Dynamic recommendation text */}
             {selectedLine === 'All'
-              ? "Our skincare experts analyze your unique skin profile to recommend the perfect product combination for your concerns and goals."
-              : "Maximize the benefits of your skincare routine with complementary products specifically selected to enhance the efficacy of this collection."
+              ? "Message our skin team for guidance before adding new products to your routine."
+              : "Ask how this collection fits with your current routine, treatment plan, and skin concerns."
             }
           </p>
           
-          <button className="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-900 text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#D4C5B9] transition-all duration-300">
-            Get Personalized Recommendations <ArrowRight className="ml-2 w-4 h-4" />
-          </button>
+          <a
+            href={getWhatsAppHref(selectedLine)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-900 text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#D4C5B9] transition-all duration-300"
+          >
+            Ask on WhatsApp <ArrowRight className="ml-2 w-4 h-4" />
+          </a>
         </div>
       </section>
     </div>

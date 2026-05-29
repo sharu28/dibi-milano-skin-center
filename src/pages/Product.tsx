@@ -1,8 +1,106 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowLeft, ArrowRight, ChevronDown, ChevronUp, Sparkles, Star, Info, Beaker, Heart, Share2 } from 'lucide-react';
-import { getProductBySlug, products, getProductsByLine } from '../data/products';
+import { ArrowLeft, ArrowRight, ChevronDown, ChevronUp, Sparkles, Star, Info, Beaker, MessageCircle } from 'lucide-react';
+import { getProductBySlug, getProductsByLine, Product as ProductType } from '../data/products';
+
+const WHATSAPP_NUMBER = '94776333505';
+
+const lineGuidance: Record<string, string> = {
+  'NUOVAPELLE': 'Created for clients looking for a refined anti-ageing home-care step.',
+  'CREAM AND SERUM ANTI AGING AGE METHOD': 'Designed for age-focused routines that support skin comfort, tone, and visible freshness.',
+  'ACID INFUSION': 'A targeted line for renewal-focused routines and uneven-looking texture or tone.',
+  'BIOSTIMULATING SYSTEM LAB': 'Part of a professional home-care system focused on skin vitality and resilience.',
+  'COLLAGE SYSTEM LAB': 'A collagen-focused line for routines centred on smoothness, comfort, and a firmer-looking finish.',
+  'CREME AND COSMETICS DEFENCE SOLUTION': 'A gentle support line for skin that feels delicate, stressed, or reactive.',
+  'FACE PERFECTION': 'Everyday cleansing and preparation products for a balanced professional routine.',
+  'FILLER CODE COSMETIC EFFECT FILLERS': 'Created for routines focused on a smoother, fuller-looking finish.',
+  'CREAM MOISTURIZING AND NOURISHING HYDRA PERFECTION': 'A hydration-focused line for skin that needs comfort and moisture support.',
+  'COSMETICS LIFTING EFFECT LIFT CREATOR': 'Designed for lifting-focused routines and a more toned-looking complexion.',
+  'FACE ANTI OXIDANT MAGNIFIC MASK': 'A treatment mask line for routines that need antioxidant care and radiance support.',
+  'FACE REGENERATING PRODUCTS PROCELLULAR 365': 'A regeneration-focused line for skin that needs recovery, comfort, and renewed-looking texture.',
+  'COSMETICS SEBUM BALANCING PURE EQUALIZER': 'A balancing line for oily, combination, or blemish-prone skin routines.',
+  'ANTI AGING WITH GOLD THE GOLD': 'A premium age-focused line for glow, comfort, and a polished finish.',
+  'CREAMS AND SERUM ANTI WRINKLE WHITE SCIENCE': 'A brightening-focused line for uneven-looking tone and luminosity.'
+};
+
+const priorityIngredients = [
+  'SODIUM HYALURONATE',
+  'HYALURONIC',
+  'NIACINAMIDE',
+  'RETINOL',
+  'PEPTIDE',
+  'COLLAGEN',
+  'CAFFEINE',
+  'VITAMIN',
+  'MANDELIC ACID',
+  'FERULIC ACID',
+  'GLYCERIN',
+  'SHEA',
+  'SQUALANE',
+  'CERAMIDE',
+  'TOCOPHEROL'
+];
+
+function cleanCopy(value: string) {
+  return value
+    .replace(/&nbsp;/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function getIngredientList(product: ProductType) {
+  return product.ingredients
+    .split(',')
+    .map((ingredient) => cleanCopy(ingredient))
+    .filter(Boolean);
+}
+
+function getHighlightedIngredients(product: ProductType) {
+  const ingredients = getIngredientList(product);
+  const highlighted = ingredients.filter((ingredient) => {
+    const upperIngredient = ingredient.toUpperCase();
+    return priorityIngredients.some((priority) => upperIngredient.includes(priority));
+  });
+
+  return (highlighted.length > 0 ? highlighted : ingredients.slice(0, 4)).slice(0, 4);
+}
+
+function getLineGuidance(product: ProductType) {
+  return lineGuidance[product.line] || 'Part of the professional DIBI Milano home-care range.';
+}
+
+function getUsageSummary(product: ProductType) {
+  const directions = cleanCopy(product.directions);
+
+  if (/morning and evening|day and night/i.test(directions)) {
+    return 'Suitable for a morning and evening routine when recommended for your skin.';
+  }
+
+  if (/night|evening/i.test(directions)) {
+    return 'Best placed in an evening routine, following the product directions.';
+  }
+
+  if (/mask|rinse|minutes/i.test(directions)) {
+    return 'Use as a treatment step according to the recommended timing on the product directions.';
+  }
+
+  return 'Use as directed, with routine guidance from the DIBI Milano skin team.';
+}
+
+function getProductHighlights(product: ProductType) {
+  return [
+    getLineGuidance(product),
+    getUsageSummary(product),
+    'Best selected after a skin consultation so the product matches your current skin condition.',
+    'Available through DIBI Milano Skin Center Colombo for professional home-care support.'
+  ];
+}
+
+function getWhatsAppHref(product: ProductType) {
+  const message = encodeURIComponent(`Hi DIBI Milano Skin Center, I would like advice on ${product.name}.`);
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+}
 
 export default function Product() {
   const { slug } = useParams<{ slug: string }>();
@@ -136,58 +234,41 @@ export default function Product() {
                 {product.name}
               </h1>
               
-              {/* Placeholder: Product Tagline */}
               <p className="text-lg font-serif italic text-gray-600">
-                {/* PLACEHOLDER: Generated product tagline based on key ingredients */}
-                Advanced formulation targeting visible signs of aging with clinically-proven active ingredients
+                {product.description || `${product.name} from the ${product.line} collection, available through DIBI Milano Skin Center Colombo.`}
               </p>
               
-              {/* Placeholder: Key Benefits */}
               <div className="bg-white p-6 border border-gray-100">
                 <div className="flex items-center space-x-2 mb-4">
                   <Sparkles className="w-4 h-4 text-[#D4C5B9]" />
-                  <span className="text-xs font-semibold tracking-[0.15em] text-gray-500 uppercase">Key Benefits</span>
+                  <span className="text-xs font-semibold tracking-[0.15em] text-gray-500 uppercase">Product Guidance</span>
                 </div>
                 <ul className="space-y-3">
-                  {/* PLACEHOLDER: Generate 4 key benefits based on product ingredients */}
-                  <li className="flex items-start">
-                    <Star className="w-4 h-4 text-[#D4C5B9] mr-3 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm text-gray-700">Deeply hydrates and plumps skin for a youthful appearance</span>
-                  </li>
-                  <li className="flex items-start">
-                    <Star className="w-4 h-4 text-[#D4C5B9] mr-3 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm text-gray-700">Reduces the appearance of fine lines and wrinkles</span>
-                  </li>
-                  <li className="flex items-start">
-                    <Star className="w-4 h-4 text-[#D4C5B9] mr-3 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm text-gray-700">Strengthens skin barrier for improved resilience</span>
-                  </li>
-                  <li className="flex items-start">
-                    <Star className="w-4 h-4 text-[#D4C5B9] mr-3 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm text-gray-700">Enhances natural radiance and even skin tone</span>
-                  </li>
+                  {getProductHighlights(product).map((highlight) => (
+                    <li key={highlight} className="flex items-start">
+                      <Star className="w-4 h-4 text-[#D4C5B9] mr-3 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-gray-700">{highlight}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
               
               {/* Action Buttons */}
-              <div className="flex space-x-4">
-                <button className="flex-1 py-4 bg-[#1A1A1A] text-white text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#D4C5B9] transition-colors">
-                  Add to Cart
-                </button>
-                <button className="p-4 border border-gray-200 hover:border-[#D4C5B9] transition-colors">
-                  <Heart className="w-5 h-5" />
-                </button>
-                <button className="p-4 border border-gray-200 hover:border-[#D4C5B9] transition-colors">
-                  <Share2 className="w-5 h-5" />
-                </button>
+              <div>
+                <a
+                  href={getWhatsAppHref(product)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center py-4 bg-[#1A1A1A] text-white text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#D4C5B9] transition-colors"
+                >
+                  Ask About This Product <MessageCircle className="ml-2 w-4 h-4" />
+                </a>
               </div>
               
-              {/* Placeholder: Skin Type Recommendations */}
               <div className="flex items-center space-x-4 text-xs text-gray-500">
                 <span className="flex items-center">
                   <Info className="w-4 h-4 mr-1" />
-                  {/* PLACEHOLDER: Best for skin types */}
-                  Best for: All Skin Types
+                  Suitability: Confirm with your skin therapist
                 </span>
               </div>
             </div>
@@ -221,21 +302,18 @@ export default function Product() {
                   className="overflow-hidden"
                 >
                   <div className="px-6 md:px-8 pb-8">
-                    {/* Placeholder: Key Active Ingredients Highlight */}
                     <div className="mb-6 p-4 bg-[#F9F9F7] border-l-4 border-[#D4C5B9]">
                       <div className="flex items-center space-x-2 mb-2">
                         <Sparkles className="w-4 h-4 text-[#D4C5B9]" />
-                        <span className="text-xs font-semibold tracking-[0.1em] text-gray-500 uppercase">Key Active Ingredients</span>
+                        <span className="text-xs font-semibold tracking-[0.1em] text-gray-500 uppercase">Formula Notes</span>
                       </div>
                       <p className="text-sm text-gray-700">
-                        {/* PLACEHOLDER: Extract and explain key active ingredients */}
-                        This formula features powerful actives including {product.ingredients.split(',').slice(0, 3).join(', ')}, 
-                        working synergistically to deliver visible results.
+                        Ingredient highlights include {getHighlightedIngredients(product).join(', ')}. Review the full ingredient list below and ask our team if you have sensitivities or are using active skincare at home.
                       </p>
                     </div>
                     
                     <p className="text-sm text-gray-600 leading-relaxed font-mono">
-                      {product.ingredients}
+                      {cleanCopy(product.ingredients)}
                     </p>
                     <p className="mt-4 text-xs text-gray-400 italic">
                       For the complete and updated list of ingredients, please refer to the product packaging.
@@ -268,21 +346,18 @@ export default function Product() {
                   className="overflow-hidden"
                 >
                   <div className="px-6 md:px-8 pb-8">
-                    {/* Placeholder: Enhanced Application Tips */}
                     <div className="mb-6 p-4 bg-[#F9F9F7] border-l-4 border-[#D4C5B9]">
                       <div className="flex items-center space-x-2 mb-2">
                         <Sparkles className="w-4 h-4 text-[#D4C5B9]" />
                         <span className="text-xs font-semibold tracking-[0.1em] text-gray-500 uppercase">Expert Application Tips</span>
                       </div>
                       <p className="text-sm text-gray-700">
-                        {/* PLACEHOLDER: Generate expert application tips */}
-                        For optimal results, apply to freshly cleansed, slightly damp skin. 
-                        Use gentle upward motions to promote lymphatic drainage and enhance absorption.
+                        Apply on clean skin unless the product directions say otherwise. Introduce active products gradually and pause use if your skin feels uncomfortable.
                       </p>
                     </div>
                     
                     <p className="text-sm text-gray-700 leading-relaxed">
-                      {product.directions}
+                      {cleanCopy(product.directions)}
                     </p>
                   </div>
                 </motion.div>
@@ -290,20 +365,19 @@ export default function Product() {
             </AnimatePresence>
           </div>
           
-          {/* Placeholder: The Science Section */}
           <div className="border-b border-gray-100">
             <button
-              onClick={() => toggleSection('science')}
+              onClick={() => toggleSection('guidance')}
               className="w-full flex items-center justify-between p-6 md:p-8 hover:bg-gray-50 transition-colors"
             >
               <div className="flex items-center space-x-3">
                 <Sparkles className="w-5 h-5 text-[#D4C5B9]" />
-                <h2 className="text-sm font-semibold tracking-[0.15em] uppercase">The Science</h2>
+                <h2 className="text-sm font-semibold tracking-[0.15em] uppercase">Professional Guidance</h2>
               </div>
-              {expandedSection === 'science' ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+              {expandedSection === 'guidance' ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
             </button>
             <AnimatePresence>
-              {expandedSection === 'science' && (
+              {expandedSection === 'guidance' && (
                 <motion.div
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: 'auto', opacity: 1 }}
@@ -312,33 +386,12 @@ export default function Product() {
                   className="overflow-hidden"
                 >
                   <div className="px-6 md:px-8 pb-8 space-y-4">
-                    {/* PLACEHOLDER: Generate scientific explanation */}
                     <p className="text-sm text-gray-700 leading-relaxed">
-                      This advanced formulation leverages cutting-edge delivery systems to ensure 
-                      active ingredients penetrate the skin barrier effectively. The molecular structure 
-                      of key components has been optimized for maximum bioavailability.
+                      DIBI Milano products are best chosen as part of a complete routine, especially if you are using exfoliating acids, retinoids, brightening products, or post-treatment home care.
                     </p>
                     <p className="text-sm text-gray-700 leading-relaxed">
-                      Clinical studies have demonstrated significant improvements in skin hydration, 
-                      elasticity, and overall appearance within 4-6 weeks of consistent use. The formula 
-                      works at the cellular level to support natural skin regeneration processes.
+                      Visit or message DIBI Milano Skin Center Colombo for guidance on where this product fits in your current skincare routine.
                     </p>
-                    
-                    {/* Placeholder: Clinical Results */}
-                    <div className="grid grid-cols-3 gap-4 mt-6">
-                      <div className="text-center p-4 bg-[#F9F9F7]">
-                        <p className="text-2xl font-light text-[#D4C5B9]">94%</p>
-                        <p className="text-xs text-gray-500 mt-1">Saw improved hydration</p>
-                      </div>
-                      <div className="text-center p-4 bg-[#F9F9F7]">
-                        <p className="text-2xl font-light text-[#D4C5B9]">87%</p>
-                        <p className="text-xs text-gray-500 mt-1">Noticed firmer skin</p>
-                      </div>
-                      <div className="text-center p-4 bg-[#F9F9F7]">
-                        <p className="text-2xl font-light text-[#D4C5B9]">91%</p>
-                        <p className="text-xs text-gray-500 mt-1">Would recommend</p>
-                      </div>
-                    </div>
                   </div>
                 </motion.div>
               )}

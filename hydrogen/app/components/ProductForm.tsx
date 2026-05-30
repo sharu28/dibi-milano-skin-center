@@ -102,6 +102,7 @@ export function ProductForm({
         );
       })}
       <AddToCartButton
+        className="w-full py-4 bg-[#1A1A1A] text-white text-xs font-semibold tracking-[0.2em] uppercase hover:bg-black disabled:opacity-50 transition-colors"
         disabled={!selectedVariant || !selectedVariant.availableForSale}
         onClick={() => {
           open('cart');
@@ -118,7 +119,7 @@ export function ProductForm({
             : []
         }
       >
-        {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
+        {selectedVariant?.availableForSale ? 'Add to Cart' : 'Sold Out'}
       </AddToCartButton>
     </div>
   );

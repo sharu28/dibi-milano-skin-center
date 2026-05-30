@@ -11,12 +11,11 @@ import {
   useSelectedOptionInUrlParam,
 } from '@shopify/hydrogen';
 import {motion, AnimatePresence} from 'motion/react';
-import {ArrowLeft, ArrowRight, ChevronDown, ChevronUp, Info, MessageCircle, Sparkles} from 'lucide-react';
+import {ArrowLeft, ArrowRight, Info, Sparkles, Star} from 'lucide-react';
 import {ProductPrice} from '~/components/ProductPrice';
 import {ProductForm} from '~/components/ProductForm';
+import {ShareButton} from '~/components/ShareButton';
 import {redirectIfHandleIsLocalized} from '~/lib/redirect';
-
-const WHATSAPP_NUMBER = '94776333505';
 
 export const meta: Route.MetaFunction = ({data}) => {
   return [
@@ -49,17 +48,19 @@ async function loadCriticalData({context, params, request}: Route.LoaderArgs) {
   return {product};
 }
 
-function getWhatsAppHref(productName: string) {
-  const message = encodeURIComponent(
-    `Hi DIBI Milano Skin Center, I would like advice on ${productName}.`,
-  );
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+function parseBenefits(raw: string | null | undefined): string[] {
+  if (!raw) return [];
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed.filter((v): v is string => typeof v === 'string') : [];
+  } catch {
+    return [];
+  }
 }
 
 export default function Product() {
   const {product} = useLoaderData<typeof loader>();
   const [selectedImage, setSelectedImage] = useState(0);
-  const [expandedSection, setExpandedSection] = useState<string | null>('description');
 
   const selectedVariant = useOptimisticVariant(
     product.selectedOrFirstAvailableVariant,
@@ -76,8 +77,10 @@ export default function Product() {
   const images = product.images?.nodes ?? [];
   const displayImage = images[selectedImage] ?? selectedVariant?.image ?? product.featuredImage;
 
-  const toggleSection = (section: string) =>
-    setExpandedSection(expandedSection === section ? null : section);
+  const tagline = product.tagline?.value ?? '';
+  const benefits = parseBenefits(product.benefits?.value);
+  const bestFor = product.bestFor?.value ?? '';
+  const eyebrow = product.productType ?? '';
 
   return (
     <div className="min-h-screen bg-[#F9F9F7]">
@@ -161,10 +164,10 @@ export default function Product() {
             </div>
 
             <div className="lg:sticky lg:top-32 lg:self-start space-y-8">
-              {product.vendor && (
+              {eyebrow && (
                 <div>
-                  <span className="inline-block text-xs font-semibold tracking-[0.2em] text-[#D4C5B9] uppercase">
-                    {product.vendor}
+                  <span className="inline-block text-xs font-semibold tracking-[0.2em] text-[#B8A99A] uppercase">
+                    {eyebrow}
                   </span>
                 </div>
               )}
@@ -180,104 +183,48 @@ export default function Product() {
                 />
               </div>
 
-              {product.description && (
-                <p className="text-lg font-serif italic text-gray-600">{product.description}</p>
+              {tagline && (
+                <p className="text-lg font-serif italic text-gray-600 leading-relaxed">
+                  {tagline}
+                </p>
               )}
 
-              <ProductForm
-                productOptions={productOptions}
-                selectedVariant={selectedVariant}
-              />
-
-              <div>
-                <a
-                  href={getWhatsAppHref(product.title)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-center py-4 border border-[#1A1A1A] text-[#1A1A1A] text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#1A1A1A] hover:text-white transition-colors"
-                >
-                  Ask About This Product <MessageCircle className="ml-2 w-4 h-4" />
-                </a>
-              </div>
-
-              <div className="flex items-center space-x-4 text-xs text-gray-500">
-                <span className="flex items-center">
-                  <Info className="w-4 h-4 mr-1" />
-                  Confirm suitability with your skin therapist
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-gray-200 bg-white">
-        <div className="max-w-4xl mx-auto">
-          {product.descriptionHtml && (
-            <div className="border-b border-gray-100">
-              <button
-                onClick={() => toggleSection('description')}
-                className="w-full flex items-center justify-between p-6 md:p-8 hover:bg-gray-50 transition-colors"
-              >
-                <div className="flex items-center space-x-3">
-                  <Sparkles className="w-5 h-5 text-[#D4C5B9]" />
-                  <h2 className="text-sm font-semibold tracking-[0.15em] uppercase">Details</h2>
-                </div>
-                {expandedSection === 'description' ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-              </button>
-              <AnimatePresence>
-                {expandedSection === 'description' && (
-                  <motion.div
-                    initial={{height: 0, opacity: 0}}
-                    animate={{height: 'auto', opacity: 1}}
-                    exit={{height: 0, opacity: 0}}
-                    transition={{duration: 0.3}}
-                    className="overflow-hidden"
-                  >
-                    <div
-                      className="px-6 md:px-8 pb-8 text-sm text-gray-700 leading-relaxed prose prose-sm max-w-none"
-                      dangerouslySetInnerHTML={{__html: product.descriptionHtml}}
-                    />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          )}
-
-          <div className="border-b border-gray-100">
-            <button
-              onClick={() => toggleSection('guidance')}
-              className="w-full flex items-center justify-between p-6 md:p-8 hover:bg-gray-50 transition-colors"
-            >
-              <div className="flex items-center space-x-3">
-                <Info className="w-5 h-5 text-[#D4C5B9]" />
-                <h2 className="text-sm font-semibold tracking-[0.15em] uppercase">Professional Guidance</h2>
-              </div>
-              {expandedSection === 'guidance' ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-            </button>
-            <AnimatePresence>
-              {expandedSection === 'guidance' && (
-                <motion.div
-                  initial={{height: 0, opacity: 0}}
-                  animate={{height: 'auto', opacity: 1}}
-                  exit={{height: 0, opacity: 0}}
-                  transition={{duration: 0.3}}
-                  className="overflow-hidden"
-                >
-                  <div className="px-6 md:px-8 pb-8 space-y-4 text-sm text-gray-700 leading-relaxed">
-                    <p>
-                      DIBI Milano products are best chosen as part of a complete routine, especially
-                      if you are using exfoliating acids, retinoids, brightening products, or
-                      post-treatment home care.
-                    </p>
-                    <p>
-                      Visit or message DIBI Milano Skin Center Colombo for guidance on where this
-                      product fits in your current skincare routine.
-                    </p>
+              {benefits.length > 0 && (
+                <div className="bg-white border border-gray-200 p-6 md:p-7 space-y-4">
+                  <div className="flex items-center space-x-2">
+                    <Sparkles className="w-4 h-4 text-[#B8A99A]" />
+                    <h2 className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-900">
+                      Key Benefits
+                    </h2>
                   </div>
-                </motion.div>
+                  <ul className="space-y-3">
+                    {benefits.map((b, i) => (
+                      <li key={i} className="flex items-start space-x-3 text-sm text-gray-700">
+                        <Star className="w-4 h-4 mt-0.5 text-[#B8A99A] flex-shrink-0" />
+                        <span className="leading-relaxed">{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )}
-            </AnimatePresence>
+
+              <div className="flex items-stretch space-x-3">
+                <div className="flex-1">
+                  <ProductForm
+                    productOptions={productOptions}
+                    selectedVariant={selectedVariant}
+                  />
+                </div>
+                <ShareButton title={product.title} />
+              </div>
+
+              {bestFor && (
+                <div className="flex items-center space-x-2 text-xs text-gray-500">
+                  <Info className="w-4 h-4" />
+                  <span>Best for: {bestFor}</span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>

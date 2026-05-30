@@ -17,7 +17,6 @@ const IMAGE_BASE =
 // Per-line marketing template seed. Each product inherits its line's
 // defaults. Merchant edits in Shopify Admin override after import.
 const GENERIC_DEFAULT = {
-  productType: 'Skincare',
   tagline:
     'Professional formula crafted by DIBI Milano for visible, lasting results.',
   keyBenefits: [
@@ -30,10 +29,68 @@ const GENERIC_DEFAULT = {
 };
 
 const LINE_DEFAULTS = {
-  NUOVAPELLE: {
-    productType: 'Cream and Serum Anti Aging Age Method',
-    tagline:
-      'Advanced formulation targeting visible signs of aging with clinically-proven active ingredients.',
+  'ACID INFUSION': {
+    tagline: 'Targeted acid renewal that refines texture and reveals brighter skin.',
+    keyBenefits: [
+      'Gently exfoliates for smoother surface texture',
+      'Boosts cell turnover for renewed radiance',
+      'Refines the look of pores',
+      'Preps skin for better serum absorption',
+    ],
+    bestFor: 'Dull or Textured Skin',
+  },
+  'ANTI AGING WITH GOLD THE GOLD': {
+    tagline: 'Luxurious gold-infused ritual designed to recapture youthful radiance.',
+    keyBenefits: [
+      'Visibly redensifies and firms mature skin',
+      'Restores a luminous, gold-tinted glow',
+      'Smooths the look of deep wrinkles',
+      'Indulgent, multi-sensory ritual',
+    ],
+    bestFor: 'Mature Skin',
+  },
+  'BIOSTIMULATING SYSTEM LAB': {
+    tagline: 'High-performance biostimulating actives engineered to revitalize cellular vitality.',
+    keyBenefits: [
+      "Reactivates skin's natural renewal processes",
+      'Restores tone and density',
+      'Visibly improves overall skin quality',
+      'Recommended after professional treatments',
+    ],
+    bestFor: 'Tired or Devitalized Skin',
+  },
+  'COLLAGE SYSTEM LAB': {
+    tagline: 'Collagen-targeting system lab formulated for visibly firmer, plumper skin.',
+    keyBenefits: [
+      'Supports collagen-rich skin structure',
+      'Plumps the look of fine lines',
+      'Improves skin firmness over time',
+      'Layers seamlessly under daily routines',
+    ],
+    bestFor: 'Mature or Loss-of-Firmness Skin',
+  },
+  'COSMETICS LIFTING EFFECT LIFT CREATOR': {
+    tagline: 'Sculpting lifting ritual that visibly redefines facial contours.',
+    keyBenefits: [
+      'Visibly redefines facial contours',
+      'Restores firmness and bounce',
+      'Smooths expression lines',
+      'Leaves skin toned and luminous',
+    ],
+    bestFor: 'Loss-of-Firmness Skin',
+  },
+  'COSMETICS SEBUM BALANCING PURE EQUALIZER': {
+    tagline: 'Daily balance for skin prone to imperfections and excess shine.',
+    keyBenefits: [
+      'Visibly reduces excess shine',
+      'Helps prevent blemishes',
+      'Refines the look of pores',
+      'Maintains skin comfort',
+    ],
+    bestFor: 'Oily or Combination Skin',
+  },
+  'CREAM AND SERUM ANTI AGING AGE METHOD': {
+    tagline: 'Advanced formulation targeting visible signs of aging with clinically-proven active ingredients.',
     keyBenefits: [
       'Deeply hydrates and plumps skin for a youthful appearance',
       'Reduces the appearance of fine lines and wrinkles',
@@ -42,20 +99,7 @@ const LINE_DEFAULTS = {
     ],
     bestFor: 'All Skin Types',
   },
-  LIFTOSOME: {
-    productType: 'Lifting and Firming Treatment',
-    tagline:
-      'Sculpting ritual that visibly redefines facial contours and restores elasticity.',
-    keyBenefits: [
-      'Visibly redefines facial contours',
-      'Restores firmness and bounce',
-      'Smooths the appearance of expression lines',
-      'Leaves skin toned and luminous',
-    ],
-    bestFor: 'Mature Skin',
-  },
-  HYDRA: {
-    productType: 'Intensive Hydration',
+  'CREAM MOISTURIZING AND NOURISHING HYDRA PERFECTION': {
     tagline: 'Deep moisture replenishment for skin that feels comfortable and looks vibrant.',
     keyBenefits: [
       'Floods skin with long-lasting hydration',
@@ -65,93 +109,75 @@ const LINE_DEFAULTS = {
     ],
     bestFor: 'Dehydrated Skin',
   },
-  LUMINOSITY: {
-    productType: 'Brightening and Radiance',
-    tagline: 'Targeted radiance ritual that evens tone and revives dull complexions.',
+  'CREAMS AND SERUM ANTI WRINKLE WHITE SCIENCE': {
+    tagline: 'Brightening science that evens tone and reduces the look of wrinkles.',
     keyBenefits: [
       'Evens skin tone and reduces dark spots',
-      'Boosts natural radiance',
-      'Refines surface texture',
+      'Smooths the look of fine wrinkles',
+      'Boosts overall radiance',
       'Improves clarity over time',
     ],
     bestFor: 'Dull or Uneven Skin Tone',
   },
-  PURIFYING: {
-    productType: 'Purifying and Balancing',
-    tagline: 'Daily clarity for skin prone to imperfections and excess shine.',
-    keyBenefits: [
-      'Visibly reduces excess shine',
-      'Helps prevent blemishes',
-      'Refines the look of pores',
-      'Maintains skin comfort',
-    ],
-    bestFor: 'Oily or Combination Skin',
-  },
-  SENSITIVE: {
-    productType: 'Soothing and Comfort',
-    tagline: 'Gentle daily comfort for skin that reacts easily.',
+  'CREME AND COSMETICS DEFENCE SOLUTION': {
+    tagline: 'Daily defence for skin that needs comfort and protection.',
     keyBenefits: [
       'Calms visible redness',
       'Strengthens the skin barrier',
       'Reduces feelings of tightness',
-      'Fragrance-conscious formula',
+      'Fragrance-conscious comfort',
     ],
     bestFor: 'Sensitive or Reactive Skin',
   },
-  CLEANSING: {
-    productType: 'Cleansing Ritual',
-    tagline: 'A complete cleansing step that respects the skin barrier.',
+  'FACE ANTI OXIDANT MAGNIFIC MASK': {
+    tagline: 'Antioxidant ritual mask that revives stressed, tired-looking skin.',
     keyBenefits: [
-      'Removes makeup and impurities thoroughly',
-      'Preserves skin moisture balance',
-      'Leaves skin soft and ready for serums',
-      'Suitable for daily morning and evening use',
+      'Revives dull, fatigued complexion',
+      'Helps neutralize environmental stress',
+      'Leaves skin smooth and luminous',
+      'Spa-grade weekly ritual',
+    ],
+    bestFor: 'Stressed or Dull Skin',
+  },
+  'FACE PERFECTION': {
+    tagline: 'Daily essentials engineered for visibly perfected skin.',
+    keyBenefits: [
+      'Refines and smooths skin texture',
+      'Supports a fresh, perfected look',
+      'Layers easily across your routine',
+      'Suitable for daily use',
     ],
     bestFor: 'All Skin Types',
   },
-  EYE: {
-    productType: 'Eye Contour Care',
-    tagline: 'Precision care for the delicate eye contour area.',
+  'FACE REGENERATING PRODUCTS PROCELLULAR 365': {
+    tagline: 'Year-round cellular regeneration for visibly renewed skin.',
     keyBenefits: [
-      'Smooths the look of fine lines',
-      'Reduces puffiness and shadowing',
-      'Hydrates without heaviness',
-      'Brightens the under-eye area',
+      'Supports continuous skin renewal',
+      'Improves visible signs of fatigue',
+      "Restores skin's natural vitality",
+      'Designed for everyday use',
+    ],
+    bestFor: 'Devitalized Skin',
+  },
+  'FILLER CODE COSMETIC EFFECT FILLERS': {
+    tagline: 'Topical filler ritual that visibly plumps and smooths wrinkles.',
+    keyBenefits: [
+      'Visibly plumps deep wrinkles',
+      'Smooths expression lines',
+      'Restores skin density',
+      'Cosmetic alternative to professional fillers',
+    ],
+    bestFor: 'Mature Skin',
+  },
+  'NUOVAPELLE': {
+    tagline: 'Iconic DIBI Milano line for visibly renewed, radiant skin.',
+    keyBenefits: [
+      "Restores skin's natural radiance",
+      'Improves overall skin quality',
+      'Daily ritual essentials',
+      'Layers across the full Nuovapelle system',
     ],
     bestFor: 'All Skin Types',
-  },
-  BODY: {
-    productType: 'Body Ritual',
-    tagline: 'Spa-grade body care from the DIBI Milano professional line.',
-    keyBenefits: [
-      'Nourishes and softens the skin',
-      'Supports body contour and tone',
-      'Sensorial textures with a long-lasting finish',
-      'Crafted for daily ritual use',
-    ],
-    bestFor: 'All Skin Types',
-  },
-  SUN: {
-    productType: 'Sun Protection',
-    tagline: 'Broad-spectrum protection paired with advanced skin care.',
-    keyBenefits: [
-      'Broad-spectrum UV defense',
-      'Lightweight, non-greasy finish',
-      'Layers under makeup',
-      'Helps prevent photoaging',
-    ],
-    bestFor: 'All Skin Types',
-  },
-  MEN: {
-    productType: 'Men’s Grooming',
-    tagline: 'Targeted grooming care developed for men’s skin needs.',
-    keyBenefits: [
-      'Refreshes and tones tired skin',
-      'Smooths post-shave irritation',
-      'Layers easily into a quick routine',
-      'Crafted for daily use',
-    ],
-    bestFor: 'Men’s Skin',
   },
 };
 
@@ -177,6 +203,12 @@ function cleanText(s) {
     .replace(/&nbsp;/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+function titleCase(s) {
+  return cleanText(s)
+    .toLowerCase()
+    .replace(/\b([a-z])/g, (_, c) => c.toUpperCase());
 }
 
 function buildBodyHtml(p) {
@@ -268,6 +300,10 @@ for (const p of products) {
 
   const imgs = (p.images || []).map(imageUrl);
   const firstImg = imgs[0] || '';
+  const lineKey = (p.line || '').toUpperCase().replace(/\s+/g, ' ').trim();
+  if (!(lineKey in LINE_DEFAULTS)) {
+    console.warn(`No line template matched for: ${JSON.stringify(p.line)}`);
+  }
   const defaults = getDefaults(p.line);
   const benefitsCell = JSON.stringify(defaults.keyBenefits);
 
@@ -278,7 +314,7 @@ for (const p of products) {
       cleanText(p.name), // Title
       buildBodyHtml(p), // Body (HTML)
       'DIBI Milano', // Vendor
-      defaults.productType, // Type (drives PDP eyebrow)
+      titleCase(p.line), // Type (drives PDP eyebrow)
       buildTags(p), // Tags
       'TRUE', // Published
       'Title', // Option1 Name

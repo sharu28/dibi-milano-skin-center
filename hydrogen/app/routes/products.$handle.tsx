@@ -346,6 +346,10 @@ const PRODUCT_FRAGMENT = `#graphql
     handle
     descriptionHtml
     description
+    productType
+    tagline: metafield(namespace: "custom", key: "tagline") { value }
+    benefits: metafield(namespace: "custom", key: "key_benefits") { value }
+    bestFor: metafield(namespace: "custom", key: "best_for") { value }
     encodedVariantExistence
     encodedVariantAvailability
     featuredImage {

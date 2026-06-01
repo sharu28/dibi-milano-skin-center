@@ -1,0 +1,43 @@
+name: Deploy to Shopify Oxygen
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: oxygen-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: hydrogen
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: hydrogen/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Deploy to Oxygen
+        env:
+          SHOPIFY_HYDROGEN_DEPLOYMENT_TOKEN: ${{ secrets.SHOPIFY_HYDROGEN_DEPLOYMENT_TOKEN }}
+        run: |
+          npx shopify hydrogen deploy \
+            --token "$SHOPIFY_HYDROGEN_DEPLOYMENT_TOKEN" \
+            --env-branch "${GITHUB_REF_NAME}" \
+            --metadata-user "github-actions" \
+            --metadata-description "Deploy from ${GITHUB_SHA::7}" \
+            --no-lockfile-check

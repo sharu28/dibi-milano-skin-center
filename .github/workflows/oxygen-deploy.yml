@@ -33,11 +33,9 @@ jobs:
 
       - name: Deploy to Oxygen
         env:
-          SHOPIFY_HYDROGEN_DEPLOYMENT_TOKEN: ${{ secrets.SHOPIFY_HYDROGEN_DEPLOYMENT_TOKEN }}
+          SHOPIFY_HYDROGEN_DEPLOYMENT_TOKEN: ${{ secrets.OXYGEN_DEPLOYMENT_TOKEN_1000142550 }}
         run: |
           npx shopify hydrogen deploy \
-            --token "$SHOPIFY_HYDROGEN_DEPLOYMENT_TOKEN" \
-            --env-branch "${GITHUB_REF_NAME}" \
             --metadata-user "github-actions" \
             --metadata-description "Deploy from ${GITHUB_SHA::7}" \
             --no-lockfile-check

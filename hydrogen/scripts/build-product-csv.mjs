@@ -321,9 +321,9 @@ for (const p of products) {
       'Default Title', // Option1 Value
       h.toUpperCase().slice(0, 32), // SKU
       '50', // Grams
-      'shopify', // Inventory Tracker
-      '0', // Inventory Qty
-      'deny', // Inventory Policy
+      '', // Inventory Tracker (untracked = always sellable)
+      '0', // Inventory Qty (ignored when untracked)
+      'continue', // Inventory Policy (allow overselling as belt-and-braces)
       'manual', // Fulfillment Service
       '1.00', // Price
       'TRUE', // Requires Shipping

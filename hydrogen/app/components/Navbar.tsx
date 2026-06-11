@@ -27,7 +27,7 @@ export function Navbar({cart}: {cart: Promise<CartApiQueryFragment | null>}) {
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm py-4' : 'bg-transparent py-6'
+        isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm py-4' : 'bg-white/95 backdrop-blur-sm shadow-sm py-6'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

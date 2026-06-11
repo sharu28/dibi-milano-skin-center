@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
 import { services, Service as ServiceType } from '../data/services';
+import { bookingWhatsAppUrl } from '../data/contact';
 
 export default function Service() {
   const { slug } = useParams<{ slug: string }>();
@@ -254,8 +255,10 @@ export default function Service() {
         <p className="text-lg font-serif text-gray-600 mb-10 max-w-2xl mx-auto">
           Book your {service.name} treatment today and take the first step towards your skin goals.
         </p>
-        <a 
-          href={service.bookingLink} 
+        <a
+          href={bookingWhatsAppUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center justify-center px-10 py-5 bg-[#1A1A1A] text-white text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#D4C5B9] transition-all duration-300"
         >
           Book Now

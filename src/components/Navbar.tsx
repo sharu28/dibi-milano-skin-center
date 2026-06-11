@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { services } from '../data/services';
+import { bookingWhatsAppUrl } from '../data/contact';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -65,7 +66,14 @@ export default function Navbar() {
               </div>
             </div>
             
-            <a href="#" className="hover:text-gray-500 transition-colors">BOOK ONLINE</a>
+            <a
+              href={bookingWhatsAppUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-2.5 bg-[#1A1A1A] text-white hover:bg-[#D4C5B9] transition-all duration-300"
+            >
+              BOOK ONLINE
+            </a>
             <a href="#" className="hover:text-gray-500 transition-colors">SHOP</a>
           </div>
 
@@ -83,7 +91,7 @@ export default function Navbar() {
 
           {/* Right Links (Desktop) */}
           <div className="hidden md:flex items-center space-x-8 text-xs font-medium tracking-widest text-gray-800">
-            <a href="#" className="hover:text-gray-500 transition-colors">TRAINING</a>
+            <Link to="/training" className="hover:text-gray-500 transition-colors">TRAINING</Link>
             <a href="#" className="hover:text-gray-500 transition-colors">EGIFT CARDS</a>
             <a href="#" className="hover:text-gray-500 transition-colors">MORE</a>
           </div>
@@ -131,10 +139,17 @@ export default function Navbar() {
             </div>
           </div>
           
-          <a href="#" className="block px-3 py-3 text-sm font-medium tracking-widest text-gray-800 border-b border-gray-50">BOOK ONLINE</a>
           <a href="#" className="block px-3 py-3 text-sm font-medium tracking-widest text-gray-800 border-b border-gray-50">SHOP</a>
-          <a href="#" className="block px-3 py-3 text-sm font-medium tracking-widest text-gray-800 border-b border-gray-50">TRAINING</a>
+          <Link to="/training" className="block px-3 py-3 text-sm font-medium tracking-widest text-gray-800 border-b border-gray-50">TRAINING</Link>
           <a href="#" className="block px-3 py-3 text-sm font-medium tracking-widest text-gray-800 border-b border-gray-50">EGIFT CARDS</a>
+          <a
+            href={bookingWhatsAppUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block mt-3 px-3 py-3 text-center text-sm font-medium tracking-widest bg-[#1A1A1A] text-white hover:bg-[#D4C5B9] transition-all duration-300"
+          >
+            BOOK ONLINE
+          </a>
         </div>
       </div>
     </nav>

@@ -4,6 +4,7 @@ import type {Route} from './+types/service.$slug';
 import {motion} from 'motion/react';
 import {ChevronDown, ChevronUp} from 'lucide-react';
 import {services} from '~/data/services';
+import {bookingWhatsAppUrl} from '~/data/contact';
 
 export const meta: Route.MetaFunction = ({data}) => {
   if (!data?.service) return [{title: 'Service Not Found | DIBI Milano'}];
@@ -225,7 +226,9 @@ export default function ServicePage() {
           Book your {service.name} treatment today and take the first step towards your skin goals.
         </p>
         <a
-          href={service.bookingLink}
+          href={bookingWhatsAppUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center justify-center px-10 py-5 bg-[#1A1A1A] text-white text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#D4C5B9] transition-all duration-300"
         >
           Book Now

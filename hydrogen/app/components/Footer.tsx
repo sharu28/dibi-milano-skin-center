@@ -1,5 +1,6 @@
 import {Link} from 'react-router';
 import {Instagram, Facebook, Mail, MapPin, Phone, MessageCircle} from 'lucide-react';
+import {contact, bookingWhatsAppUrl} from '~/data/contact';
 
 export function Footer() {
   return (
@@ -21,15 +22,15 @@ export function Footer() {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-[#D4C5B9]" />
-                <span>0112 674 546</span>
+                <span>{contact.phone}</span>
               </div>
               <div className="flex items-center space-x-3">
                 <MessageCircle className="w-5 h-5 text-[#D4C5B9]" />
-                <a href="https://wa.me/94776333505" className="hover:text-gray-900 transition-colors">+94 77 633 3505</a>
+                <a href={`https://wa.me/${contact.whatsappNumber}`} className="hover:text-gray-900 transition-colors">{contact.whatsapp}</a>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-[#D4C5B9]" />
-                <a href="mailto:hello@dibimilano.com" className="hover:text-gray-900 transition-colors">hello@dibimilano.com</a>
+                <a href={`mailto:${contact.email}`} className="hover:text-gray-900 transition-colors">{contact.email}</a>
               </div>
             </div>
           </div>
@@ -41,7 +42,7 @@ export function Footer() {
               <li><Link to="/products" className="hover:text-[#D4C5B9] transition-colors">Shop Products</Link></li>
               <li><a href="#" className="hover:text-[#D4C5B9] transition-colors">About Us</a></li>
               <li><a href="#" className="hover:text-[#D4C5B9] transition-colors">Services</a></li>
-              <li><a href="#" className="hover:text-[#D4C5B9] transition-colors">Book Online</a></li>
+              <li><a href={bookingWhatsAppUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#D4C5B9] transition-colors">Book Online</a></li>
               <li><Link to="/careers" className="hover:text-[#D4C5B9] transition-colors">Careers</Link></li>
             </ul>
           </div>

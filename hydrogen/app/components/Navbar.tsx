@@ -4,6 +4,7 @@ import {Menu, X, ChevronDown, ShoppingBag} from 'lucide-react';
 import {useOptimisticCart} from '@shopify/hydrogen';
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
 import {services} from '~/data/services';
+import {bookingWhatsAppUrl} from '~/data/contact';
 import {useAside} from '~/components/Aside';
 
 export function Navbar({cart}: {cart: Promise<CartApiQueryFragment | null>}) {
@@ -63,7 +64,14 @@ export function Navbar({cart}: {cart: Promise<CartApiQueryFragment | null>}) {
               </div>
             </div>
 
-            <a href="#" className="hover:text-gray-500 transition-colors">BOOK ONLINE</a>
+            <a
+              href={bookingWhatsAppUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-2.5 bg-[#1A1A1A] text-white hover:bg-[#D4C5B9] transition-all duration-300"
+            >
+              BOOK ONLINE
+            </a>
           </div>
 
           <div className="flex-shrink-0 flex items-center justify-center absolute left-1/2 transform -translate-x-1/2">
@@ -78,7 +86,7 @@ export function Navbar({cart}: {cart: Promise<CartApiQueryFragment | null>}) {
           </div>
 
           <div className="hidden md:flex items-center space-x-8 text-xs font-medium tracking-widest text-gray-800">
-            <a href="#" className="hover:text-gray-500 transition-colors">TRAINING</a>
+            <Link to="/training" className="hover:text-gray-500 transition-colors">TRAINING</Link>
             <Link to="/careers" className="hover:text-gray-500 transition-colors">CAREERS</Link>
             <Link to="/products" className="hover:text-gray-500 transition-colors">SHOP</Link>
             <CartToggle cart={cart} />
@@ -127,8 +135,16 @@ export function Navbar({cart}: {cart: Promise<CartApiQueryFragment | null>}) {
             </div>
           </div>
 
-          <a href="#" className="block px-3 py-3 text-sm font-medium tracking-widest text-gray-800 border-b border-gray-50">BOOK ONLINE</a>
+          <Link to="/training" className="block px-3 py-3 text-sm font-medium tracking-widest text-gray-800 border-b border-gray-50">TRAINING</Link>
           <Link to="/careers" className="block px-3 py-3 text-sm font-medium tracking-widest text-gray-800 border-b border-gray-50">CAREERS</Link>
+          <a
+            href={bookingWhatsAppUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block mt-3 px-3 py-3 text-center text-sm font-medium tracking-widest bg-[#1A1A1A] text-white hover:bg-[#D4C5B9] transition-all duration-300"
+          >
+            BOOK ONLINE
+          </a>
         </div>
       </div>
     </nav>

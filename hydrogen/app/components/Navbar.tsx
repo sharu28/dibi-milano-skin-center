@@ -68,7 +68,7 @@ export function Navbar({cart}: {cart: Promise<CartApiQueryFragment | null>}) {
               href={bookingWhatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-2.5 bg-[#1A1A1A] text-white hover:bg-[#D4C5B9] transition-all duration-300"
+              className="hover:text-gray-500 transition-colors"
             >
               BOOK ONLINE
             </a>
@@ -141,7 +141,7 @@ export function Navbar({cart}: {cart: Promise<CartApiQueryFragment | null>}) {
             href={bookingWhatsAppUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="block mt-3 px-3 py-3 text-center text-sm font-medium tracking-widest bg-[#1A1A1A] text-white hover:bg-[#D4C5B9] transition-all duration-300"
+            className="block px-3 py-3 text-sm font-medium tracking-widest text-gray-800 border-b border-gray-50"
           >
             BOOK ONLINE
           </a>

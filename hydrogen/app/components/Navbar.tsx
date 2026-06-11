@@ -88,7 +88,6 @@ export function Navbar({cart}: {cart: Promise<CartApiQueryFragment | null>}) {
           <div className="hidden md:flex items-center space-x-8 text-xs font-medium tracking-widest text-gray-800">
             <Link to="/training" className="hover:text-gray-500 transition-colors">TRAINING</Link>
             <Link to="/careers" className="hover:text-gray-500 transition-colors">CAREERS</Link>
-            <Link to="/products" className="hover:text-gray-500 transition-colors">SHOP</Link>
             <CartToggle cart={cart} />
           </div>
 

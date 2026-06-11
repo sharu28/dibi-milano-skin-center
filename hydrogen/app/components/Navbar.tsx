@@ -64,7 +64,6 @@ export function Navbar({cart}: {cart: Promise<CartApiQueryFragment | null>}) {
             </div>
 
             <a href="#" className="hover:text-gray-500 transition-colors">BOOK ONLINE</a>
-            <Link to="/products" className="hover:text-gray-500 transition-colors">SHOP</Link>
           </div>
 
           <div className="flex-shrink-0 flex items-center justify-center absolute left-1/2 transform -translate-x-1/2">
@@ -81,6 +80,7 @@ export function Navbar({cart}: {cart: Promise<CartApiQueryFragment | null>}) {
           <div className="hidden md:flex items-center space-x-8 text-xs font-medium tracking-widest text-gray-800">
             <a href="#" className="hover:text-gray-500 transition-colors">TRAINING</a>
             <Link to="/careers" className="hover:text-gray-500 transition-colors">CAREERS</Link>
+            <Link to="/products" className="hover:text-gray-500 transition-colors">SHOP</Link>
             <CartToggle cart={cart} />
           </div>
 

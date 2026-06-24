@@ -1451,5 +1451,16 @@
         "default": "scheme-1"
       }
     ]
+  },
+  {
+    "name": "DIBI — Brand & Contact",
+    "settings": [
+      { "type": "text", "id": "dibi_phone", "label": "Phone (display)", "default": "0112 674 546" },
+      { "type": "text", "id": "dibi_phone_href", "label": "Phone (tel link)", "default": "tel:+94112674546" },
+      { "type": "text", "id": "dibi_whatsapp_number", "label": "WhatsApp number (digits only)", "default": "94776333505" },
+      { "type": "text", "id": "dibi_email", "label": "Email", "default": "hello@dibimilano.com" },
+      { "type": "text", "id": "dibi_booking_message", "label": "Booking prefilled message", "default": "Hi DIBI Milano, I'd like to book an appointment." },
+      { "type": "text", "id": "dibi_training_message", "label": "Training prefilled message", "default": "Hi DIBI Milano Academy, I'd like to enquire about course enrolment." }
+    ]
   }
 ]

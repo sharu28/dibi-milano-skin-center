@@ -176,6 +176,12 @@
       "show_cart_note": false,
       "cart_drawer_collection": "",
       "cart_color_scheme": "scheme-1",
+      "dibi_phone": "0112 674 546",
+      "dibi_phone_href": "tel:+94112674546",
+      "dibi_whatsapp_number": "94776333505",
+      "dibi_email": "hello@dibimilano.com",
+      "dibi_booking_message": "Hi DIBI Milano, I'd like to book an appointment.",
+      "dibi_training_message": "Hi DIBI Milano Academy, I'd like to enquire about course enrolment.",
       "sections": {
         "main-password-header": {
           "type": "main-password-header",

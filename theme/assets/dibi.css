@@ -1697,3 +1697,189 @@ collection-component .pagination__item--current {
 .dibi-training__faq-a p {
   margin: 0;
 }
+
+/* ==========================================================================
+   Careers page (Task 4.6) — matches hydrogen/app/routes/careers.tsx.
+   ========================================================================== */
+.dibi-careers__culture {
+  padding-block: 6rem;
+  padding-inline: 1rem;
+  background: #ffffff;
+}
+
+.dibi-careers__culture-inner {
+  max-width: 56rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.dibi-careers__eyebrow {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--dibi-muted);
+  margin: 0 0 2rem;
+}
+
+.dibi-careers__lead {
+  font-family: var(--dibi-font-heading);
+  color: var(--dibi-ink);
+  line-height: 1.6;
+  font-size: clamp(1.25rem, 3vw, 1.875rem);
+}
+
+.dibi-careers__lead p {
+  margin: 0;
+}
+
+.dibi-careers__openings {
+  padding-block: 6rem;
+  background: var(--dibi-bg);
+}
+
+.dibi-careers__inner {
+  max-width: 56rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.dibi-careers__head {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.dibi-careers__openings-heading {
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  font-size: clamp(1.875rem, 3vw, 2.25rem);
+  margin: 0 0 1.5rem;
+}
+
+.dibi-careers__openings-subtitle {
+  font-family: var(--dibi-font-heading);
+  color: var(--dibi-muted);
+  font-size: 1.125rem;
+}
+
+.dibi-careers__roles {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dibi-career-card {
+  background: #ffffff;
+  padding: 2rem;
+  border: 1px solid var(--dibi-line);
+  transition: border-color 0.3s ease;
+}
+
+.dibi-career-card:hover {
+  border-color: var(--dibi-accent);
+}
+
+.dibi-career-card__head {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .dibi-career-card__head {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.dibi-career-card__title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--dibi-ink);
+  margin: 0 0 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.dibi-career-card:hover .dibi-career-card__title {
+  color: var(--dibi-accent);
+}
+
+.dibi-career-card__meta {
+  font-size: 0.875rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dibi-muted);
+  margin: 0;
+}
+
+.dibi-career-card__apply {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.dibi-career-card__apply:hover {
+  color: var(--dibi-accent);
+}
+
+.dibi-career-card__apply svg {
+  transform: rotate(-90deg);
+}
+
+.dibi-career-card__desc {
+  font-family: var(--dibi-font-heading);
+  color: var(--dibi-muted);
+  line-height: 1.6;
+  margin-top: 1rem;
+}
+
+.dibi-career-card__desc p {
+  margin: 0;
+}
+
+.dibi-careers__cta {
+  margin-top: 5rem;
+  text-align: center;
+  background: #ffffff;
+  padding: 3rem;
+  border: 1px solid var(--dibi-line);
+}
+
+.dibi-careers__cta svg {
+  color: var(--dibi-accent);
+  margin: 0 auto 1.5rem;
+}
+
+.dibi-careers__cta-heading {
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  font-size: 1.5rem;
+  margin: 0 0 1rem;
+}
+
+.dibi-careers__cta-body {
+  font-family: var(--dibi-font-heading);
+  color: var(--dibi-muted);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  max-width: 42rem;
+  margin: 0 auto 2rem;
+}
+
+.dibi-careers__cta-body p {
+  margin: 0;
+}

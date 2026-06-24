@@ -1,0 +1,293 @@
+{%- comment -%}
+  DIBI careers listing — matches hydrogen/app/routes/careers.tsx.
+  Hero, culture intro, role cards (title, meta, description, apply link),
+  and an open-application email CTA.
+{%- endcomment -%}
+
+{%- liquid
+  assign overlay = section.settings.hero_overlay_opacity | divided_by: 100.0
+-%}
+
+<div class="dibi-careers" id="dibi-careers-{{ section.id }}">
+  {%- comment -%} Hero {%- endcomment -%}
+  <section class="dibi-hero" style="--dibi-hero-overlay: {{ overlay }};">
+    <div class="dibi-hero__slides">
+      {%- if section.settings.hero_image != blank -%}
+        {{
+          section.settings.hero_image
+          | image_url: width: 2200
+          | image_tag:
+            loading: 'eager',
+            sizes: '100vw',
+            widths: '750, 1100, 1500, 2200',
+            alt: section.settings.hero_heading,
+            class: 'dibi-hero__img'
+        }}
+      {%- else -%}
+        <div class="dibi-hero__img dibi-hero__img--placeholder">
+          {{ 'hero-apparel-2' | placeholder_svg_tag: 'dibi-hero__placeholder-svg' }}
+        </div>
+      {%- endif -%}
+      <div class="dibi-hero__overlay"></div>
+    </div>
+    <div class="dibi-hero__content dibi-reveal">
+      {%- if section.settings.hero_heading != blank -%}
+        <h1 class="dibi-hero__heading">{{ section.settings.hero_heading }}</h1>
+      {%- endif -%}
+      {%- if section.settings.hero_subheading != blank -%}
+        <div class="dibi-hero__subheading">{{ section.settings.hero_subheading }}</div>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} Culture intro {%- endcomment -%}
+  {%- if section.settings.intro_eyebrow != blank or section.settings.intro_body != blank -%}
+    <section class="dibi-careers__culture">
+      <div class="dibi-careers__culture-inner dibi-reveal">
+        {%- if section.settings.intro_eyebrow != blank -%}
+          <h2 class="dibi-careers__eyebrow">{{ section.settings.intro_eyebrow }}</h2>
+        {%- endif -%}
+        {%- if section.settings.intro_body != blank -%}
+          <div class="dibi-careers__lead">{{ section.settings.intro_body }}</div>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Openings {%- endcomment -%}
+  <section class="dibi-careers__openings">
+    <div class="dibi-careers__inner">
+      {%- if section.settings.openings_heading != blank -%}
+        <div class="dibi-careers__head dibi-reveal">
+          <h2 class="dibi-careers__openings-heading">{{ section.settings.openings_heading }}</h2>
+          {%- if section.settings.openings_subtitle != blank -%}
+            <p class="dibi-careers__openings-subtitle">{{ section.settings.openings_subtitle }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="dibi-careers__roles">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'role' -%}
+            {%- liquid
+              assign apply_href = block.settings.apply_link
+              if apply_href == blank and block.settings.apply_email != blank
+                assign apply_href = 'mailto:' | append: block.settings.apply_email
+              endif
+            -%}
+            <div class="dibi-career-card dibi-reveal" {{ block.shopify_attributes }}>
+              <div class="dibi-career-card__head">
+                <div>
+                  {%- if block.settings.title != blank -%}
+                    <h3 class="dibi-career-card__title">{{ block.settings.title }}</h3>
+                  {%- endif -%}
+                  {%- if block.settings.meta != blank -%}
+                    <p class="dibi-career-card__meta">{{ block.settings.meta }}</p>
+                  {%- endif -%}
+                </div>
+                {%- if apply_href != blank -%}
+                  <a href="{{ apply_href }}" class="dibi-career-card__apply">
+                    {{ block.settings.apply_label | default: 'Apply Now' }}
+                    {%- render 'dibi-icon-chevron' -%}
+                  </a>
+                {%- endif -%}
+              </div>
+              {%- if block.settings.description != blank -%}
+                <div class="dibi-career-card__desc">{{ block.settings.description }}</div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- comment -%} Open-application CTA {%- endcomment -%}
+      {%- if section.settings.cta_heading != blank or section.settings.cta_label != blank -%}
+        {%- liquid
+          assign cta_href = section.settings.cta_email
+          if cta_href != blank
+            assign cta_href = 'mailto:' | append: cta_href
+          endif
+        -%}
+        <div class="dibi-careers__cta dibi-reveal">
+          {%- render 'dibi-icon-mail' -%}
+          {%- if section.settings.cta_heading != blank -%}
+            <h3 class="dibi-careers__cta-heading">{{ section.settings.cta_heading }}</h3>
+          {%- endif -%}
+          {%- if section.settings.cta_body != blank -%}
+            <div class="dibi-careers__cta-body">{{ section.settings.cta_body }}</div>
+          {%- endif -%}
+          {%- if section.settings.cta_label != blank and cta_href != blank -%}
+            <a href="{{ cta_href }}" class="dibi-cta__button">{{ section.settings.cta_label }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Careers listing",
+  "tag": "section",
+  "class": "dibi-careers-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_heading",
+      "label": "Hero heading",
+      "default": "Join Our Team"
+    },
+    {
+      "type": "richtext",
+      "id": "hero_subheading",
+      "label": "Hero subheading",
+      "default": "<p>Build your career with the leaders in bespoke skin treatments and advanced aesthetics.</p>"
+    },
+    {
+      "type": "range",
+      "id": "hero_overlay_opacity",
+      "label": "Hero overlay opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Culture intro"
+    },
+    {
+      "type": "text",
+      "id": "intro_eyebrow",
+      "label": "Intro eyebrow",
+      "default": "Our Culture"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_body",
+      "label": "Intro body",
+      "default": "<p>At DIBI Milano Skin Center, we are passionate about transforming lives through skin health. We are always looking for dedicated, talented professionals who share our commitment to excellence, continuous learning, and providing an unparalleled client experience.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Openings"
+    },
+    {
+      "type": "text",
+      "id": "openings_heading",
+      "label": "Openings heading",
+      "default": "Current Openings"
+    },
+    {
+      "type": "richtext",
+      "id": "openings_subtitle",
+      "label": "Openings subtitle",
+      "default": "<p>We are currently accepting applications for the following roles.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Open-application CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_heading",
+      "label": "CTA heading",
+      "default": "Don't see your role?"
+    },
+    {
+      "type": "richtext",
+      "id": "cta_body",
+      "label": "CTA body",
+      "default": "<p>We are always open to meeting exceptional talent. Send us your CV and a cover letter detailing how you can contribute to the DIBI Milano team.</p>"
+    },
+    {
+      "type": "text",
+      "id": "cta_email",
+      "label": "CTA email address",
+      "default": "careers@dibimilano.com"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA button label",
+      "default": "Email Your CV"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "role",
+      "name": "Role",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Role title"
+        },
+        {
+          "type": "text",
+          "id": "meta",
+          "label": "Meta (type, location)"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "apply_email",
+          "label": "Apply email",
+          "info": "Builds a mailto: link. Used when no apply link is set."
+        },
+        {
+          "type": "url",
+          "id": "apply_link",
+          "label": "Apply link",
+          "info": "Optional. Overrides the apply email."
+        },
+        {
+          "type": "text",
+          "id": "apply_label",
+          "label": "Apply button label",
+          "default": "Apply Now"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Careers listing",
+      "blocks": [
+        {
+          "type": "role",
+          "settings": {
+            "title": "Senior Aesthetician",
+            "meta": "Full-Time • Colombo",
+            "description": "<p>Seeking an experienced aesthetician with a deep understanding of advanced skin treatments, chemical peels, and laser therapies. Minimum 3 years of clinical experience required.</p>",
+            "apply_email": "careers@dibimilano.com?subject=Application for Senior Aesthetician"
+          }
+        },
+        {
+          "type": "role",
+          "settings": {
+            "title": "Front Desk Coordinator",
+            "meta": "Full-Time • Colombo",
+            "description": "<p>The first point of contact for our clients. We are looking for a highly organized, impeccably presented individual with excellent communication skills and a passion for customer service.</p>",
+            "apply_email": "careers@dibimilano.com?subject=Application for Front Desk Coordinator"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

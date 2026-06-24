@@ -651,3 +651,92 @@ product-info .product__accordion summary {
 product-info .product__accordion .accordion {
   border-color: var(--dibi-line);
 }
+
+/* ==========================================================================
+   Collection grid (Task 2.2) — matches hydrogen products._index.tsx
+   Scoped to Dawn's <collection-component> so other product grids are unaffected.
+   ========================================================================== */
+/* Collection banner: quieter, light heading like the Hydrogen hero copy */
+.collection-hero__title {
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.collection-hero__description {
+  color: var(--dibi-muted);
+  line-height: 1.7;
+}
+
+/* Generous gap (reference: gap-8). Column count stays a Dawn theme setting —
+   set columns_desktop to 3 in the editor to match the reference 3-up grid. */
+collection-component .product-grid {
+  column-gap: 2rem;
+  row-gap: 2.5rem;
+}
+
+/* Card: flat white surface, square media, no border/radius */
+collection-component .card-wrapper .card,
+collection-component .card-wrapper .card__inner {
+  border-radius: var(--dibi-radius);
+  background: transparent;
+}
+
+collection-component .card__media,
+collection-component .card .media {
+  background: #f3f4f6;
+  border-radius: var(--dibi-radius);
+}
+
+/* Subtle zoom on hover, mirroring group-hover:scale-105 in the reference */
+collection-component .card__media img {
+  transition: transform 0.7s ease;
+}
+
+collection-component .card-wrapper:hover .card__media img {
+  transform: scale(1.05);
+}
+
+/* Card text block */
+collection-component .card__content {
+  padding-top: 1.25rem;
+}
+
+collection-component .card__heading,
+collection-component .card-information .card__heading {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+  color: var(--dibi-ink);
+}
+
+/* Vendor eyebrow above the title (when show_vendor enabled) */
+collection-component .card-information .caption-with-letter-spacing {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dibi-accent);
+}
+
+/* Price */
+collection-component .card-information .price,
+collection-component .price .price-item--regular {
+  color: var(--dibi-ink);
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+}
+
+/* Pagination / load-more buttons: bordered, accent on hover (reference style) */
+collection-component .pagination-wrapper .button,
+collection-component .pagination-wrapper a {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.75rem;
+}
+
+collection-component .pagination__item--current {
+  border-color: var(--dibi-accent);
+  color: var(--dibi-accent);
+}

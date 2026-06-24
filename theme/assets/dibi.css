@@ -426,6 +426,9 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .dibi-footer__blurb {
+  font-family: var(--dibi-font-serif);
+  text-transform: none;
+  letter-spacing: normal;
   font-size: 0.875rem;
   color: #4b5563;
   max-width: 28rem;
@@ -1002,7 +1005,7 @@ collection-component .pagination__item--current {
 }
 
 .dibi-hero__subheading {
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   font-style: italic;
   color: rgba(255, 255, 255, 0.9);
   max-width: 42rem;
@@ -1135,7 +1138,7 @@ collection-component .pagination__item--current {
 }
 
 .dibi-service-card__desc {
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   font-style: italic;
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.8);
@@ -1222,7 +1225,7 @@ collection-component .pagination__item--current {
 }
 
 .dibi-testimonial__quote {
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   font-style: italic;
   color: #1f2937;
   line-height: 1.6;
@@ -1364,7 +1367,7 @@ collection-component .pagination__item--current {
 }
 
 .dibi-cta__subtext {
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   color: var(--dibi-muted);
   line-height: 1.6;
   font-size: 1.125rem;
@@ -1485,7 +1488,7 @@ collection-component .pagination__item--current {
 }
 
 .dibi-bespoke__body {
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   color: #1f2937;
   line-height: 1.6;
   font-size: clamp(1.5rem, 3vw, 2.25rem);
@@ -1573,7 +1576,7 @@ collection-component .pagination__item--current {
 }
 
 .dibi-training__lead {
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   color: var(--dibi-ink);
   line-height: 1.6;
   font-size: clamp(1.25rem, 3vw, 1.875rem);
@@ -1609,7 +1612,7 @@ collection-component .pagination__item--current {
 }
 
 .dibi-training__group-subtitle {
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   color: var(--dibi-muted);
   font-size: 1.125rem;
   max-width: 42rem;
@@ -1657,7 +1660,7 @@ collection-component .pagination__item--current {
 }
 
 .dibi-training__course-desc {
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   font-style: italic;
   font-size: 0.875rem;
   color: var(--dibi-muted);
@@ -1749,7 +1752,7 @@ collection-component .pagination__item--current {
 
 .dibi-training__faq-a {
   padding-bottom: 1.25rem;
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   color: var(--dibi-muted);
   line-height: 1.6;
 }
@@ -1783,7 +1786,7 @@ collection-component .pagination__item--current {
 }
 
 .dibi-careers__lead {
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   color: var(--dibi-ink);
   line-height: 1.6;
   font-size: clamp(1.25rem, 3vw, 1.875rem);
@@ -1819,7 +1822,7 @@ collection-component .pagination__item--current {
 }
 
 .dibi-careers__openings-subtitle {
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   color: var(--dibi-muted);
   font-size: 1.125rem;
 }
@@ -1899,7 +1902,7 @@ collection-component .pagination__item--current {
 }
 
 .dibi-career-card__desc {
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   color: var(--dibi-muted);
   line-height: 1.6;
   margin-top: 1rem;
@@ -1932,7 +1935,7 @@ collection-component .pagination__item--current {
 }
 
 .dibi-careers__cta-body {
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   color: var(--dibi-muted);
   font-size: 1.125rem;
   line-height: 1.6;
@@ -1969,7 +1972,7 @@ collection-component .pagination__item--current {
 }
 
 .dibi-gallery__subheading {
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   font-style: italic;
   color: var(--dibi-muted);
   font-size: 1.125rem;
@@ -2026,7 +2029,7 @@ collection-component .pagination__item--current {
 
 .dibi-gallery__empty {
   text-align: center;
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   font-style: italic;
   color: var(--dibi-muted);
   padding-block: 6rem;
@@ -2090,7 +2093,7 @@ collection-component .pagination__item--current {
 }
 
 .dibi-service__hero-sub {
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   font-style: italic;
   color: rgba(255, 255, 255, 0.9);
   font-size: clamp(1.05rem, 2vw, 1.35rem);
@@ -2137,7 +2140,7 @@ collection-component .pagination__item--current {
 }
 
 .dibi-service-sec__subtitle {
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   color: var(--dibi-muted);
   font-size: 1.1rem;
   max-width: 42rem;
@@ -2154,7 +2157,7 @@ collection-component .pagination__item--current {
 }
 
 .dibi-service-sec__body {
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   color: var(--dibi-muted);
   font-size: 1.1rem;
   line-height: 1.7;
@@ -2236,7 +2239,7 @@ collection-component .pagination__item--current {
 }
 
 .dibi-price-menu__desc {
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   font-size: 0.85rem;
   color: #8a8a8a;
   margin: 0.25rem 0 0;
@@ -2328,7 +2331,7 @@ collection-component .pagination__item--current {
 
 .dibi-service-faq__a {
   padding-bottom: 1rem;
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   color: var(--dibi-muted);
   line-height: 1.7;
 }
@@ -2351,7 +2354,7 @@ collection-component .pagination__item--current {
 }
 
 .dibi-service-cta__text {
-  font-family: var(--dibi-font-heading);
+  font-family: var(--dibi-font-serif);
   color: var(--dibi-muted);
   font-size: 1.1rem;
   max-width: 42rem;

@@ -87,8 +87,9 @@ Products/collections already use native Shopify URLs.
 
 ## Cutover
 
-1. Build + QA the theme as an **unpublished** theme on the live store (or a
-   dev/duplicate store first).
+1. Build + QA the theme as an **unpublished theme on the live store**
+   (approved). Service pricing metaobjects are seeded from `services.ts` via a
+   one-time Admin API script.
 2. Populate metaobjects (services) and pages (training/careers/gallery) +
    theme settings (contact, colors, nav).
 3. Set up URL redirects.

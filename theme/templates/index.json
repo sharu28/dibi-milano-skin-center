@@ -1,75 +1,197 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hero": {
+      "type": "hero-carousel",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "slide-1": {
+          "type": "slide",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "alt": "Clinic interior"
           }
         },
-        "button": {
-          "type": "buttons",
+        "slide-2": {
+          "type": "slide",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "alt": "Treatment room"
+          }
+        },
+        "slide-3": {
+          "type": "slide",
+          "settings": {
+            "alt": "Skin treatment detail"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "slide-1",
+        "slide-2",
+        "slide-3"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "heading": "Elevate Your Natural Beauty",
+        "subheading": "<p>Bespoke skin treatments tailored to your unique needs in the heart of Colombo.</p>",
+        "cta_label": "Book Consultation",
+        "cta_link": "",
+        "overlay_opacity": 30,
+        "interval_ms": 5000
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "services": {
+      "type": "services-grid",
+      "blocks": {
+        "service-1": {
+          "type": "service_card",
+          "settings": {
+            "title": "Skin Conditions",
+            "description": "<p>Targeted treatments for acne, pigmentation, sensitivity, rosacea, and dermatitis.</p>",
+            "url": ""
+          }
+        },
+        "service-2": {
+          "type": "service_card",
+          "settings": {
+            "title": "Anti-Aging & Energy",
+            "description": "<p>Non-surgical treatments for facial rejuvenation, skin restoration, and total skin overhaul.</p>",
+            "url": ""
+          }
+        },
+        "service-3": {
+          "type": "service_card",
+          "settings": {
+            "title": "Peels & Refresh",
+            "description": "<p>Advanced clinical peels and refreshing clean-ups to target every skin concern.</p>",
+            "url": ""
+          }
+        },
+        "service-4": {
+          "type": "service_card",
+          "settings": {
+            "title": "Laser Hair Removal",
+            "description": "<p>Medical-grade laser hair removal for fast, safe, and permanent hair reduction.</p>",
+            "url": ""
+          }
+        },
+        "service-5": {
+          "type": "service_card",
+          "settings": {
+            "title": "Injectables & Skin Boosters",
+            "description": "<p>Non-surgical treatments performed by medical professionals for rejuvenation and volume restoration.</p>",
+            "url": ""
+          }
+        },
+        "service-6": {
+          "type": "service_card",
+          "settings": {
+            "title": "Eye & Body Enhancements",
+            "description": "<p>Targeted treatments for the delicate eye area and full body rejuvenation.</p>",
+            "url": ""
+          }
+        },
+        "service-7": {
+          "type": "service_card",
+          "settings": {
+            "title": "Specialized Laser",
+            "description": "<p>Advanced Q-Switch and Nd:YAG laser treatments for tattoos, fungus, and skin imperfections.</p>",
+            "url": ""
+          }
+        },
+        "service-8": {
+          "type": "service_card",
+          "settings": {
+            "title": "Semi-Permanent Makeup",
+            "description": "<p>Enhance your natural features with long-lasting results.</p>",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "service-1",
+        "service-2",
+        "service-3",
+        "service-4",
+        "service-5",
+        "service-6",
+        "service-7",
+        "service-8"
+      ],
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "heading": "Our Services"
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial-1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>The most incredible facial I've ever had. The team at DIBI Milano truly understands skin and tailors everything to your specific needs. My skin has never looked better!</p>",
+            "author": "Sarah J. — Google Review",
+            "stars": 5
+          }
+        }
+      },
+      "block_order": [
+        "testimonial-1"
+      ],
+      "settings": {
+        "heading": ""
+      }
+    },
+    "instagram": {
+      "type": "instagram-feed",
+      "blocks": {
+        "post-1": {
+          "type": "post",
+          "settings": {
+            "link": ""
+          }
+        },
+        "post-2": {
+          "type": "post",
+          "settings": {
+            "link": ""
+          }
+        },
+        "post-3": {
+          "type": "post",
+          "settings": {
+            "link": ""
+          }
+        },
+        "post-4": {
+          "type": "post",
+          "settings": {
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "post-1",
+        "post-2",
+        "post-3",
+        "post-4"
+      ],
+      "settings": {
+        "instagram_url": "https://www.instagram.com/dibimilano_skincentre",
+        "heading": "",
+        "follow_label": "Follow @dibimilano_skincentre"
+      }
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "heading": "The Gift of Glowing Skin",
+        "subtext": "<p>Treat someone special to a bespoke skin experience. Our beautifully packaged gift cards can be used towards any treatment or product in our clinic.</p>",
+        "cta_label": "Book Consultation",
+        "cta_link": ""
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "hero",
+    "services",
+    "testimonials",
+    "instagram",
+    "cta"
   ]
 }

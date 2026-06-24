@@ -1,0 +1,127 @@
+{
+  "sections": {
+    "training": {
+      "type": "training-courses",
+      "blocks": {
+        "course-1": {
+          "type": "course",
+          "settings": {
+            "title": "Foundation Skin Science Certification",
+            "description": "<p>A comprehensive grounding in skin anatomy, the science of skin health, and professional consultation. The essential starting point for advanced practice.</p>",
+            "duration": "6 weeks",
+            "price": "95,000+ LKR"
+          }
+        },
+        "course-2": {
+          "type": "course",
+          "settings": {
+            "title": "Laser Safety & Operation Certification",
+            "description": "<p>Certified training in laser physics, safety protocols, and supervised hands-on operation for hair removal and skin treatments.</p>",
+            "duration": "4 days",
+            "price": "75,000+ LKR"
+          }
+        },
+        "course-3": {
+          "type": "course",
+          "settings": {
+            "title": "Microblading & Semi-Permanent Makeup",
+            "description": "<p>Brow mapping, pigment theory, and microblading technique with live-model practice and aftercare protocols.</p>",
+            "duration": "5 days",
+            "price": "120,000+ LKR"
+          }
+        },
+        "course-4": {
+          "type": "course",
+          "settings": {
+            "title": "Advanced Chemical Peels Masterclass",
+            "description": "<p>Master the application of enzymatic, AHA/BHA, and clinical-grade peels for pigmentation, acne, and rejuvenation.</p>",
+            "duration": "3 days",
+            "price": "65,000+ LKR"
+          }
+        },
+        "course-5": {
+          "type": "course",
+          "settings": {
+            "title": "Dermaplaning & Microdermabrasion Workshop",
+            "description": "<p>Hands-on technique training in physical exfoliation methods for instant, visible results.</p>",
+            "duration": "2 days",
+            "price": "40,000+ LKR"
+          }
+        },
+        "course-6": {
+          "type": "course",
+          "settings": {
+            "title": "Injectables Fundamentals",
+            "description": "<p>For doctors and nurses: anti-wrinkle and dermal filler theory, facial anatomy, and supervised practical training. Medical qualification required.</p>",
+            "duration": "3 days",
+            "price": "150,000+ LKR"
+          }
+        },
+        "faq-1": {
+          "type": "faq",
+          "settings": {
+            "question": "Who are these courses for?",
+            "answer": "<p>Our certifications are designed for aspiring and practising aestheticians, beauty therapists, and medical professionals looking to expand their clinical skill set. Medical-only modules require a relevant qualification or licence.</p>"
+          }
+        },
+        "faq-2": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I receive a certificate?",
+            "answer": "<p>Yes. Every course concludes with a DIBI Milano Academy certificate of completion, awarded on successful assessment.</p>"
+          }
+        },
+        "faq-3": {
+          "type": "faq",
+          "settings": {
+            "question": "Are there prerequisites?",
+            "answer": "<p>Foundation courses have no prerequisites. Advanced and medical modules require prior certification or a relevant medical licence.</p>"
+          }
+        },
+        "faq-4": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I enrol?",
+            "answer": "<p>Message us on WhatsApp or call the centre to check upcoming intake dates and reserve your place. Class sizes are limited to ensure hands-on attention.</p>"
+          }
+        },
+        "faq-5": {
+          "type": "faq",
+          "settings": {
+            "question": "Important Information",
+            "answer": "<p>Course fees are subject to 18% VAT. Schedules and pricing may vary by intake.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "course-1",
+        "course-2",
+        "course-3",
+        "course-4",
+        "course-5",
+        "course-6",
+        "faq-1",
+        "faq-2",
+        "faq-3",
+        "faq-4",
+        "faq-5"
+      ],
+      "settings": {
+        "hero_heading": "DIBI Milano Academy",
+        "hero_subheading": "<p>Professional training in advanced skin science and aesthetics.</p>",
+        "hero_overlay_opacity": 40,
+        "intro_eyebrow": "Learn From the Best",
+        "intro_body": "<p>The DIBI Milano Academy brings the rigour of our clinic into the classroom. Our programmes pair the science of skin health with hands-on, mentor-led practice, so you graduate ready to deliver results with confidence and care.</p>",
+        "courses_heading": "Courses & Certifications",
+        "courses_subtitle": "<p>Structured, assessment-based programmes and focused masterclasses that build the clinical foundation for a career in advanced aesthetics.</p>",
+        "faqs_heading": "Enrolment Details",
+        "cta_heading": "Begin Your Career",
+        "cta_subtext": "<p>Reserve your place in an upcoming intake, or message us to find the course that's right for you.</p>",
+        "cta_label": "Enquire about Enrolment"
+      }
+    }
+  },
+  "order": [
+    "training"
+  ]
+}

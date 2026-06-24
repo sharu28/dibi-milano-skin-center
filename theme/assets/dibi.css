@@ -1487,3 +1487,213 @@ collection-component .pagination__item--current {
     display: none;
   }
 }
+
+/* ==========================================================================
+   Training page (Task 4.5) — matches hydrogen/app/routes/training.tsx.
+   ========================================================================== */
+.dibi-training__philosophy {
+  padding-block: 6rem;
+  padding-inline: 1rem;
+  background: #ffffff;
+}
+
+.dibi-training__philosophy-inner {
+  max-width: 56rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.dibi-training__eyebrow {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--dibi-muted);
+  margin: 0 0 2rem;
+}
+
+.dibi-training__lead {
+  font-family: var(--dibi-font-heading);
+  color: var(--dibi-ink);
+  line-height: 1.6;
+  font-size: clamp(1.25rem, 3vw, 1.875rem);
+}
+
+.dibi-training__lead p {
+  margin: 0;
+}
+
+.dibi-training__courses {
+  padding-block: 6rem;
+  background: var(--dibi-bg);
+}
+
+.dibi-training__inner {
+  max-width: 56rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.dibi-training__group-head {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.dibi-training__group-title {
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  font-size: clamp(1.875rem, 3vw, 2.25rem);
+  margin: 0 0 1.5rem;
+}
+
+.dibi-training__group-subtitle {
+  font-family: var(--dibi-font-heading);
+  color: var(--dibi-muted);
+  font-size: 1.125rem;
+  max-width: 42rem;
+  margin-inline: auto;
+}
+
+.dibi-training__course-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dibi-training__course {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--dibi-line);
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  .dibi-training__course {
+    flex-direction: row;
+    align-items: baseline;
+  }
+}
+
+.dibi-training__course-main {
+  flex: 1;
+  padding-right: 1rem;
+}
+
+.dibi-training__course-title {
+  font-size: clamp(1.125rem, 2vw, 1.25rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--dibi-ink);
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.dibi-training__course:hover .dibi-training__course-title {
+  color: var(--dibi-accent);
+}
+
+.dibi-training__course-desc {
+  font-family: var(--dibi-font-heading);
+  font-style: italic;
+  font-size: 0.875rem;
+  color: var(--dibi-muted);
+  margin-top: 0.25rem;
+}
+
+.dibi-training__course-desc p {
+  margin: 0;
+}
+
+.dibi-training__course-duration {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dibi-muted);
+  margin: 0.5rem 0 0;
+}
+
+.dibi-training__course-price {
+  white-space: nowrap;
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+  color: var(--dibi-ink);
+}
+
+.dibi-training__faqs {
+  padding-block: 6rem;
+  background: var(--dibi-bg);
+}
+
+.dibi-training__faqs-inner {
+  max-width: 48rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.dibi-training__faqs-heading {
+  text-align: center;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  margin: 0 0 3rem;
+}
+
+.dibi-training__faq-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.dibi-training__faq {
+  border-bottom: 1px solid var(--dibi-line);
+}
+
+.dibi-training__faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-block: 1.25rem;
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  transition: color 0.3s ease;
+}
+
+.dibi-training__faq-q::-webkit-details-marker {
+  display: none;
+}
+
+.dibi-training__faq-q:hover {
+  color: var(--dibi-accent);
+}
+
+.dibi-training__faq-q svg {
+  flex-shrink: 0;
+  color: var(--dibi-muted);
+  transition: transform 0.3s ease;
+}
+
+.dibi-training__faq[open] .dibi-training__faq-q svg {
+  transform: rotate(180deg);
+}
+
+.dibi-training__faq-a {
+  padding-bottom: 1.25rem;
+  font-family: var(--dibi-font-heading);
+  color: var(--dibi-muted);
+  line-height: 1.6;
+}
+
+.dibi-training__faq-a p {
+  margin: 0;
+}

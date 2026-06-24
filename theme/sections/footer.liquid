@@ -93,10 +93,49 @@
 
             {%- when 'text' -%}
               <div class="dibi-footer__blurb rte">{{ block.settings.content }}</div>
+
+            {%- when 'hours' -%}
+              {%- if block.settings.content != blank -%}
+                <div class="dibi-footer__hours rte">{{ block.settings.content }}</div>
+              {%- endif -%}
+
+              {%- if section.settings.social_instagram != blank or section.settings.social_facebook != blank -%}
+                <div class="dibi-footer__social">
+                  {%- if block.settings.social_heading != blank -%}
+                    <h3 class="dibi-footer__heading">{{ block.settings.social_heading }}</h3>
+                  {%- endif -%}
+                  <div class="dibi-footer__social-links">
+                    {%- if section.settings.social_instagram != blank -%}
+                      <a class="dibi-footer__social-link" href="{{ section.settings.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+                        {% render 'dibi-icon-instagram' %}
+                      </a>
+                    {%- endif -%}
+                    {%- if section.settings.social_facebook != blank -%}
+                      <a class="dibi-footer__social-link" href="{{ section.settings.social_facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+                        {% render 'dibi-icon-facebook' %}
+                      </a>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endif -%}
           {%- endcase -%}
         </div>
       {%- endfor -%}
     </div>
+
+    {%- if section.settings.map_embed_url != blank -%}
+      <div class="dibi-footer__map">
+        <iframe
+          src="{{ section.settings.map_embed_url }}"
+          width="100%"
+          height="100%"
+          style="border:0;"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="{{ section.settings.map_title | default: 'DIBI Milano Location' | escape }}"
+        ></iframe>
+      </div>
+    {%- endif -%}
 
     <div class="dibi-footer__bottom">
       <p>&copy; {{ 'now' | date: '%Y' }} {{ section.settings.brand_title | default: shop.name }}. All rights reserved.</p>
@@ -184,6 +223,35 @@
           "label": "Content"
         }
       ]
+    },
+    {
+      "type": "hours",
+      "name": "Opening Hours",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Opening Hours"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Hours",
+          "default": "<p>Monday - Sunday  9:00 AM - 6:30 PM</p><p>Open on Poya Days</p>"
+        },
+        {
+          "type": "header",
+          "content": "Follow Us"
+        },
+        {
+          "type": "text",
+          "id": "social_heading",
+          "label": "Social heading",
+          "default": "Follow Us"
+        }
+      ]
     }
   ],
   "settings": [
@@ -212,6 +280,38 @@
       "default": "No 10, 2nd Floor, Dasa Group Building, Rosmead Place, Colombo 7"
     },
     {
+      "type": "header",
+      "content": "Social"
+    },
+    {
+      "type": "text",
+      "id": "social_instagram",
+      "label": "Instagram URL",
+      "default": "https://www.instagram.com/dibimilano_skincentre"
+    },
+    {
+      "type": "text",
+      "id": "social_facebook",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "header",
+      "content": "Map"
+    },
+    {
+      "type": "textarea",
+      "id": "map_embed_url",
+      "label": "Google Maps embed URL",
+      "info": "Paste the src URL from a Google Maps embed iframe.",
+      "default": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.817578298918!2d79.86379531537456!3d6.912411995005934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2597022026115%3A0x633d1b8222a0335e!2s10%20Rosmead%20Pl%2C%20Colombo%2000700%2C%20Sri%20Lanka!5e0!3m2!1sen!2sus!4v1650000000000!5m2!1sen!2sus"
+    },
+    {
+      "type": "text",
+      "id": "map_title",
+      "label": "Map iframe title",
+      "default": "DIBI Milano Location"
+    },
+    {
       "type": "checkbox",
       "id": "show_policies",
       "label": "Show shop policy links",
@@ -220,7 +320,8 @@
   ],
   "default": {
     "blocks": [
-      { "type": "quick_links" }
+      { "type": "quick_links" },
+      { "type": "hours" }
     ]
   }
 }

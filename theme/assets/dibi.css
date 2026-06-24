@@ -1115,3 +1115,69 @@ collection-component .pagination__item--current {
   height: 1rem;
   margin-left: 0.5rem;
 }
+
+/* ==========================================================================
+   Homepage: Testimonials (Task 3.3) — matches _index.tsx star/quote block.
+   ========================================================================== */
+.dibi-testimonials {
+  padding-block: 6rem;
+  background: var(--dibi-bg);
+}
+
+.dibi-testimonials__inner {
+  max-width: 56rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  text-align: center;
+}
+
+.dibi-testimonials__heading {
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  margin: 0 0 3rem;
+}
+
+.dibi-testimonial {
+  margin: 0;
+}
+
+.dibi-testimonial + .dibi-testimonial {
+  margin-top: 4rem;
+}
+
+.dibi-testimonial__stars {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-bottom: 2rem;
+}
+
+.dibi-testimonial__star {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--dibi-accent);
+}
+
+.dibi-testimonial__quote {
+  font-family: var(--dibi-font-heading);
+  font-style: italic;
+  color: #1f2937;
+  line-height: 1.6;
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  margin: 0 0 3rem;
+}
+
+.dibi-testimonial__quote p {
+  margin: 0;
+}
+
+.dibi-testimonial__author {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dibi-muted);
+}

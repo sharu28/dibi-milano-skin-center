@@ -3,31 +3,9 @@
   hydrogen/app/routes/_index.tsx. Each card: image, name, short description,
   link.
 
-  Two data sources:
-    - "metaobject": loop `metaobjects.service.values` (each `service`
-      metaobject), linking to its storefront URL (`.system.url`).
-    - "blocks": the manual `service_card` blocks below.
-
-  When source is "auto" (default) the section uses metaobjects if any
-  `service` entries exist, otherwise falls back to the manual blocks. This
-  keeps the section working before the seed script has run.
+  Cards are editable `service_card` blocks. Each links to a service page at
+  /pages/<slug>. The 8 default services are baked into the preset below.
 {%- endcomment -%}
-
-{%- liquid
-  assign service_entries = metaobjects.service.values
-  assign has_metaobjects = false
-  if service_entries.size > 0
-    assign has_metaobjects = true
-  endif
-
-  assign use_metaobjects = false
-  assign source = section.settings.source | default: 'auto'
-  if source == 'metaobject'
-    assign use_metaobjects = true
-  elsif source == 'auto' and has_metaobjects
-    assign use_metaobjects = true
-  endif
--%}
 
 <section class="dibi-services" id="dibi-services-{{ section.id }}">
   <div class="dibi-services__inner dibi-container">
@@ -38,22 +16,29 @@
     {%- endif -%}
 
     <div class="dibi-services__grid">
-      {%- if use_metaobjects -%}
-        {%- for svc in service_entries -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'service_card' -%}
           {%- liquid
-            assign card_url = svc.system.url | default: '#'
+            assign card_url = block.settings.url
+            if card_url == blank
+              assign card_url = '#'
+            endif
           -%}
-          <a href="{{ card_url }}" class="dibi-service-card dibi-reveal">
+          <a
+            href="{{ card_url }}"
+            class="dibi-service-card dibi-reveal"
+            {{ block.shopify_attributes }}
+          >
             <div class="dibi-service-card__media">
-              {%- if svc.hero_image.value != blank -%}
+              {%- if block.settings.image != blank -%}
                 {{
-                  svc.hero_image.value
+                  block.settings.image
                   | image_url: width: 1000
                   | image_tag:
                     loading: 'lazy',
                     sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw',
                     widths: '400, 600, 800, 1000',
-                    alt: svc.name.value,
+                    alt: block.settings.title,
                     class: 'dibi-service-card__img'
                 }}
               {%- else -%}
@@ -62,11 +47,11 @@
             </div>
             <div class="dibi-service-card__overlay"></div>
             <div class="dibi-service-card__body">
-              {%- if svc.name.value != blank -%}
-                <h3 class="dibi-service-card__title">{{ svc.name.value }}</h3>
+              {%- if block.settings.title != blank -%}
+                <h3 class="dibi-service-card__title">{{ block.settings.title }}</h3>
               {%- endif -%}
-              {%- if svc.short_description.value != blank -%}
-                <div class="dibi-service-card__desc">{{ svc.short_description.value }}</div>
+              {%- if block.settings.description != blank -%}
+                <div class="dibi-service-card__desc">{{ block.settings.description }}</div>
               {%- endif -%}
               <span class="dibi-service-card__link">
                 Explore Treatment
@@ -74,54 +59,8 @@
               </span>
             </div>
           </a>
-        {%- endfor -%}
-      {%- else -%}
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'service_card' -%}
-            {%- liquid
-              assign card_url = block.settings.url
-              if card_url == blank
-                assign card_url = '#'
-              endif
-            -%}
-            <a
-              href="{{ card_url }}"
-              class="dibi-service-card dibi-reveal"
-              {{ block.shopify_attributes }}
-            >
-              <div class="dibi-service-card__media">
-                {%- if block.settings.image != blank -%}
-                  {{
-                    block.settings.image
-                    | image_url: width: 1000
-                    | image_tag:
-                      loading: 'lazy',
-                      sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw',
-                      widths: '400, 600, 800, 1000',
-                      alt: block.settings.title,
-                      class: 'dibi-service-card__img'
-                  }}
-                {%- else -%}
-                  {{ 'collection-apparel-1' | placeholder_svg_tag: 'dibi-service-card__img dibi-service-card__img--placeholder' }}
-                {%- endif -%}
-              </div>
-              <div class="dibi-service-card__overlay"></div>
-              <div class="dibi-service-card__body">
-                {%- if block.settings.title != blank -%}
-                  <h3 class="dibi-service-card__title">{{ block.settings.title }}</h3>
-                {%- endif -%}
-                {%- if block.settings.description != blank -%}
-                  <div class="dibi-service-card__desc">{{ block.settings.description }}</div>
-                {%- endif -%}
-                <span class="dibi-service-card__link">
-                  Explore Treatment
-                  <svg class="dibi-service-card__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                </span>
-              </div>
-            </a>
-          {%- endif -%}
-        {%- endfor -%}
-      {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
     </div>
   </div>
 </section>
@@ -137,18 +76,6 @@
       "id": "heading",
       "label": "Heading",
       "default": "Our Services"
-    },
-    {
-      "type": "select",
-      "id": "source",
-      "label": "Data source",
-      "info": "Auto: use Service metaobjects when present, otherwise the manual cards below.",
-      "options": [
-        { "value": "auto", "label": "Auto (metaobjects, fallback to cards)" },
-        { "value": "metaobject", "label": "Service metaobjects" },
-        { "value": "blocks", "label": "Manual cards" }
-      ],
-      "default": "auto"
     }
   ],
   "blocks": [
@@ -187,56 +114,64 @@
           "type": "service_card",
           "settings": {
             "title": "Skin Conditions",
-            "description": "<p>Targeted treatments for acne, pigmentation, sensitivity, rosacea, and dermatitis.</p>"
+            "description": "<p>Targeted treatments for acne, pigmentation, sensitivity, rosacea, and dermatitis.</p>",
+            "url": "/pages/skin-conditions"
           }
         },
         {
           "type": "service_card",
           "settings": {
             "title": "Anti-Aging & Energy",
-            "description": "<p>Non-surgical treatments for facial rejuvenation, skin restoration, and total skin overhaul.</p>"
+            "description": "<p>Non-surgical treatments for facial rejuvenation, skin restoration, and total skin overhaul.</p>",
+            "url": "/pages/anti-aging-energy"
           }
         },
         {
           "type": "service_card",
           "settings": {
             "title": "Peels & Refresh",
-            "description": "<p>Advanced clinical peels and refreshing clean-ups to target every skin concern.</p>"
+            "description": "<p>Advanced clinical peels and refreshing clean-ups to target every skin concern.</p>",
+            "url": "/pages/peels-refresh"
           }
         },
         {
           "type": "service_card",
           "settings": {
             "title": "Laser Hair Removal",
-            "description": "<p>Medical-grade laser hair removal for fast, safe, and permanent hair reduction.</p>"
+            "description": "<p>Medical-grade laser hair removal for fast, safe, and permanent hair reduction.</p>",
+            "url": "/pages/laser-hair-removal"
           }
         },
         {
           "type": "service_card",
           "settings": {
             "title": "Injectables & Skin Boosters",
-            "description": "<p>Non-surgical treatments performed by medical professionals for rejuvenation and volume restoration.</p>"
+            "description": "<p>Non-surgical treatments performed by medical professionals for rejuvenation and volume restoration.</p>",
+            "url": "/pages/injectables-boosters"
           }
         },
         {
           "type": "service_card",
           "settings": {
             "title": "Eye & Body Enhancements",
-            "description": "<p>Targeted treatments for the delicate eye area and full body rejuvenation.</p>"
+            "description": "<p>Targeted treatments for the delicate eye area and full body rejuvenation.</p>",
+            "url": "/pages/eye-body-enhancements"
           }
         },
         {
           "type": "service_card",
           "settings": {
             "title": "Specialized Laser",
-            "description": "<p>Advanced Q-Switch and Nd:YAG laser treatments for tattoos, fungus, and skin imperfections.</p>"
+            "description": "<p>Advanced Q-Switch and Nd:YAG laser treatments for tattoos, fungus, and skin imperfections.</p>",
+            "url": "/pages/specialized-laser"
           }
         },
         {
           "type": "service_card",
           "settings": {
             "title": "Semi-Permanent Makeup",
-            "description": "<p>Enhance your natural features with long-lasting results.</p>"
+            "description": "<p>Enhance your natural features with long-lasting results.</p>",
+            "url": "/pages/semi-permanent-makeup"
           }
         }
       ]

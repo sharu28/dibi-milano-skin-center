@@ -4,19 +4,30 @@
   Services dropdown, BOOK ONLINE plain-text CTA (WhatsApp), mobile drawer.
 {%- endcomment -%}
 
-{%- liquid
-  assign services_menu = section.settings.services_menu
-  # Prefer service metaobjects for the Services nav; fall back to the link list.
-  assign service_entries = metaobjects.service.values
-  assign use_service_metaobjects = false
-  if service_entries.size > 0
-    assign use_service_metaobjects = true
-  endif
-  assign has_services_nav = use_service_metaobjects
-  if has_services_nav == false and services_menu != blank and services_menu.links.size > 0
-    assign has_services_nav = true
-  endif
--%}
+{%- comment -%}
+  Services nav links directly to the 8 service pages (/pages/<slug>).
+  Defined inline so it works out of the box without metaobjects or a menu.
+{%- endcomment -%}
+{%- capture services_nav -%}
+  <a class="dibi-nav__services-link" href="{{ routes.root_url }}pages/skin-conditions">Skin Conditions</a>
+  <a class="dibi-nav__services-link" href="{{ routes.root_url }}pages/anti-aging-energy">Anti-Aging & Energy</a>
+  <a class="dibi-nav__services-link" href="{{ routes.root_url }}pages/peels-refresh">Peels & Refresh</a>
+  <a class="dibi-nav__services-link" href="{{ routes.root_url }}pages/laser-hair-removal">Laser Hair Removal</a>
+  <a class="dibi-nav__services-link" href="{{ routes.root_url }}pages/injectables-boosters">Injectables & Skin Boosters</a>
+  <a class="dibi-nav__services-link" href="{{ routes.root_url }}pages/eye-body-enhancements">Eye & Body Enhancements</a>
+  <a class="dibi-nav__services-link" href="{{ routes.root_url }}pages/specialized-laser">Specialized Laser</a>
+  <a class="dibi-nav__services-link" href="{{ routes.root_url }}pages/semi-permanent-makeup">Semi-Permanent Makeup</a>
+{%- endcapture -%}
+{%- capture services_nav_mobile -%}
+  <a class="dibi-mobile-menu__sublink" href="{{ routes.root_url }}pages/skin-conditions">Skin Conditions</a>
+  <a class="dibi-mobile-menu__sublink" href="{{ routes.root_url }}pages/anti-aging-energy">Anti-Aging & Energy</a>
+  <a class="dibi-mobile-menu__sublink" href="{{ routes.root_url }}pages/peels-refresh">Peels & Refresh</a>
+  <a class="dibi-mobile-menu__sublink" href="{{ routes.root_url }}pages/laser-hair-removal">Laser Hair Removal</a>
+  <a class="dibi-mobile-menu__sublink" href="{{ routes.root_url }}pages/injectables-boosters">Injectables & Skin Boosters</a>
+  <a class="dibi-mobile-menu__sublink" href="{{ routes.root_url }}pages/eye-body-enhancements">Eye & Body Enhancements</a>
+  <a class="dibi-mobile-menu__sublink" href="{{ routes.root_url }}pages/specialized-laser">Specialized Laser</a>
+  <a class="dibi-mobile-menu__sublink" href="{{ routes.root_url }}pages/semi-permanent-makeup">Semi-Permanent Makeup</a>
+{%- endcapture -%}
 
 <header
   class="dibi-header{% if section.settings.sticky %} dibi-header--sticky{% endif %}"
@@ -28,27 +39,17 @@
       <a class="dibi-nav__link" href="{{ routes.root_url }}">HOME</a>
       <a class="dibi-nav__link" href="{{ routes.all_products_collection_url }}">PRODUCTS</a>
 
-      {%- if has_services_nav -%}
-        <div class="dibi-nav__services">
-          <button type="button" class="dibi-nav__link dibi-nav__services-toggle" aria-haspopup="true">
-            SERVICES
-            {% render 'dibi-icon-chevron' %}
-          </button>
-          <div class="dibi-nav__services-menu">
-            <div class="dibi-nav__services-inner">
-              {%- if use_service_metaobjects -%}
-                {%- for svc in service_entries -%}
-                  <a class="dibi-nav__services-link" href="{{ svc.system.url | default: '#' }}">{{ svc.name.value }}</a>
-                {%- endfor -%}
-              {%- else -%}
-                {%- for link in services_menu.links -%}
-                  <a class="dibi-nav__services-link" href="{{ link.url }}">{{ link.title }}</a>
-                {%- endfor -%}
-              {%- endif -%}
-            </div>
+      <div class="dibi-nav__services">
+        <button type="button" class="dibi-nav__link dibi-nav__services-toggle" aria-haspopup="true">
+          SERVICES
+          {% render 'dibi-icon-chevron' %}
+        </button>
+        <div class="dibi-nav__services-menu">
+          <div class="dibi-nav__services-inner">
+            {{ services_nav }}
           </div>
         </div>
-      {%- endif -%}
+      </div>
 
       <a
         class="dibi-nav__cta"
@@ -106,30 +107,20 @@
       <a class="dibi-mobile-menu__link" href="{{ routes.all_products_collection_url }}">PRODUCTS</a>
       <a class="dibi-mobile-menu__link" href="{{ section.settings.gallery_url | default: '/pages/gallery' }}">GALLERY</a>
 
-      {%- if has_services_nav -%}
-        <div>
-          <button
-            type="button"
-            class="dibi-mobile-menu__services-toggle"
-            aria-expanded="false"
-            data-dibi-mobile-services-toggle
-          >
-            SERVICES
-            {% render 'dibi-icon-chevron' %}
-          </button>
-          <div class="dibi-mobile-menu__sublist" data-dibi-mobile-services>
-            {%- if use_service_metaobjects -%}
-              {%- for svc in service_entries -%}
-                <a class="dibi-mobile-menu__sublink" href="{{ svc.system.url | default: '#' }}">{{ svc.name.value }}</a>
-              {%- endfor -%}
-            {%- else -%}
-              {%- for link in services_menu.links -%}
-                <a class="dibi-mobile-menu__sublink" href="{{ link.url }}">{{ link.title }}</a>
-              {%- endfor -%}
-            {%- endif -%}
-          </div>
+      <div>
+        <button
+          type="button"
+          class="dibi-mobile-menu__services-toggle"
+          aria-expanded="false"
+          data-dibi-mobile-services-toggle
+        >
+          SERVICES
+          {% render 'dibi-icon-chevron' %}
+        </button>
+        <div class="dibi-mobile-menu__sublist" data-dibi-mobile-services>
+          {{ services_nav_mobile }}
         </div>
-      {%- endif -%}
+      </div>
 
       <a class="dibi-mobile-menu__link" href="{{ section.settings.training_url | default: '/pages/training' }}">TRAINING</a>
       <a class="dibi-mobile-menu__link" href="{{ section.settings.careers_url | default: '/pages/careers' }}">CAREERS</a>
@@ -203,11 +194,6 @@
       "id": "brand_subtitle",
       "label": "Brand subtitle",
       "default": "Skin Center"
-    },
-    {
-      "type": "link_list",
-      "id": "services_menu",
-      "label": "Services menu"
     },
     {
       "type": "header",

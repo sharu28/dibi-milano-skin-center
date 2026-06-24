@@ -867,3 +867,109 @@ collection-component .pagination__item--current {
 .search__button:hover {
   color: var(--dibi-accent);
 }
+
+/* ==========================================================================
+   Homepage: Hero carousel (Task 3.1) — matches _index.tsx hero section.
+   ========================================================================== */
+.dibi-hero {
+  position: relative;
+  height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dibi-hero__slides {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.dibi-hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.dibi-hero__slide.is-active {
+  opacity: 1;
+}
+
+.dibi-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.dibi-hero__img--placeholder {
+  background: var(--dibi-accent);
+}
+
+.dibi-hero__img--placeholder .dibi-hero__placeholder-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dibi-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, var(--dibi-hero-overlay, 0.3));
+}
+
+.dibi-hero__content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding-inline: 1rem;
+  max-width: 56rem;
+  margin-inline: auto;
+}
+
+.dibi-hero__heading {
+  font-family: var(--dibi-font-body);
+  font-weight: 300;
+  color: #ffffff;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0 0 1.5rem;
+  font-size: clamp(2.25rem, 5vw, 4.5rem);
+}
+
+.dibi-hero__subheading {
+  font-family: var(--dibi-font-heading);
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 42rem;
+  margin: 0 auto 2.5rem;
+  font-size: clamp(1.125rem, 2vw, 1.25rem);
+}
+
+.dibi-hero__subheading p {
+  margin: 0;
+}
+
+.dibi-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background: #ffffff;
+  color: #111827;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.dibi-hero__cta:hover {
+  background: var(--dibi-accent);
+  color: #ffffff;
+}

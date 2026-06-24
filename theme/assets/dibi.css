@@ -535,3 +535,119 @@ body {
 .dibi-footer__policies a:hover {
   color: #111827;
 }
+
+/* ==========================================================================
+   Product page (Task 2.1) — matches hydrogen products.$handle.tsx + ProductForm
+   Scoped to Dawn's <product-info>/.product so global Dawn styles stay intact.
+   ========================================================================== */
+.product-info .product,
+product-info .product {
+  gap: 3rem;
+}
+
+@media screen and (min-width: 990px) {
+  .product-info .product,
+  product-info .product {
+    gap: 5rem;
+  }
+}
+
+/* Gallery: square, neutral backdrop like the Hydrogen aspect-square frame */
+product-info .product__media-wrapper .media,
+product-info .product__media-item .media {
+  background: #f3f4f6;
+  border-radius: var(--dibi-radius);
+}
+
+/* Info column typography */
+product-info .product__title h1,
+product-info .product__title h2 {
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  color: var(--dibi-ink);
+}
+
+/* Eyebrow / vendor-style text blocks rendered via the "text" block */
+product-info .product__text.caption-with-letter-spacing {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #b8a99a;
+}
+
+/* Price — match ProductPrice.tsx (large, ink, restrained) */
+product-info .price .price-item--regular {
+  color: var(--dibi-ink);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+product-info .price--large .price-item--regular {
+  font-size: 1.5rem;
+}
+
+product-info .price .price-item--sale {
+  color: var(--dibi-ink);
+}
+
+product-info .price__regular .price-item,
+product-info .price__sale s .price-item--regular {
+  color: var(--dibi-muted);
+}
+
+/* Description body */
+product-info .product__description {
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+/* Add to cart button — match AddToCartButton.tsx in ProductForm:
+   solid ink, white text, uppercase, wide letter-spacing, no radius. */
+product-info .product-form__submit,
+product-info .product-form__buttons .button {
+  background: var(--dibi-ink);
+  color: #ffffff;
+  border-radius: var(--dibi-radius);
+  border: 1px solid var(--dibi-ink);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding-block: 1.1rem;
+  box-shadow: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+product-info .product-form__submit::after,
+product-info .product-form__buttons .button::after {
+  display: none;
+}
+
+product-info .product-form__submit:not([disabled]):hover,
+product-info .product-form__buttons .button:not([disabled]):hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+product-info .product-form__submit[disabled],
+product-info .product-form__buttons .button[disabled] {
+  opacity: 0.5;
+}
+
+/* Variant picker swatches/buttons: accent selected ring like the reference */
+product-info .product-form__input--swatch input:checked + label,
+product-info fieldset.product-form__input input:checked + label {
+  border-color: var(--dibi-accent);
+}
+
+/* Accordion (collapsible tabs) — quieter dividers matching the palette */
+product-info .product__accordion .accordion__title,
+product-info .product__accordion summary {
+  letter-spacing: 0.08em;
+}
+
+product-info .product__accordion .accordion {
+  border-color: var(--dibi-line);
+}

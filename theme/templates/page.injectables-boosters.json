@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "service-detail": {
+      "type": "service-detail",
+      "settings": {
+        "service_name": "Injectables & Skin Boosters",
+        "short_description": "<p>Non-surgical treatments performed by medical professionals for rejuvenation and volume restoration.</p>"
+      },
+      "blocks": {
+        "g1": { "type": "group", "settings": { "title": "Injectables & Anti-Wrinkle", "subtitle": "Restore volume, define contours, and smooth deep lines.", "layout": "menu" } },
+        "g1i1": { "type": "menu_item", "settings": { "name": "Botox (Anti-Wrinkle Injections)", "price": "2,000+ LKR", "description": "Per unit" } },
+        "g1i2": { "type": "menu_item", "settings": { "name": "Dermal Fillers", "price": "45,000+ LKR", "description": "Per ml" } },
+        "g1i3": { "type": "menu_item", "settings": { "name": "Under-Eye Fillers", "price": "POA", "description": "Specialized filler for tear troughs" } },
+        "g1i4": { "type": "menu_item", "settings": { "name": "Sculptra", "price": "50,000+ LKR", "description": "Per vial" } },
+        "g1i5": { "type": "menu_item", "settings": { "name": "Subcision (Acne Scar Treatment)", "price": "25,000+ LKR", "description": "Per session" } },
+        "g1i6": { "type": "menu_item", "settings": { "name": "Mono Threads (PDO Collagen Boosters)", "price": "From 4,000+ LKR" } },
+        "g2": { "type": "group", "settings": { "title": "Regenerative & Skin Boosters", "subtitle": "Advanced skin rejuvenation using growth factors, polynucleotides, and boosters.", "layout": "menu" } },
+        "g2i1": { "type": "menu_item", "settings": { "name": "Skin Boosters (GSH, PDRN, PN, Rejuran, HA Blends)", "price": "25,000 - 45,000+ LKR" } },
+        "g2i2": { "type": "menu_item", "settings": { "name": "Under-Eye Boosters (Dark Circles)", "price": "15,000 - 45,000+ LKR" } },
+        "g2i3": { "type": "menu_item", "settings": { "name": "PRP (Platelet-Rich Plasma) Face", "price": "25,000+ LKR" } },
+        "g2i4": { "type": "menu_item", "settings": { "name": "PRP (Platelet-Rich Plasma) Hair", "price": "35,000+ LKR" } },
+        "g2i5": { "type": "menu_item", "settings": { "name": "PRF (Platelet-Rich Fibrin)", "price": "25,000+ LKR" } },
+        "g2i6": { "type": "menu_item", "settings": { "name": "GFC (Growth Factor Concentrate) Face", "price": "25,000+ LKR" } },
+        "g2i7": { "type": "menu_item", "settings": { "name": "GFC (Growth Factor Concentrate) Hair", "price": "35,000+ LKR" } },
+        "faq1": { "type": "faq", "settings": { "question": "Important Information", "answer": "<p>Prices are subject to 18% VAT. All treatments are performed by medical professionals.</p>" } }
+      },
+      "block_order": ["g1","g1i1","g1i2","g1i3","g1i4","g1i5","g1i6","g2","g2i1","g2i2","g2i3","g2i4","g2i5","g2i6","g2i7","faq1"]
+    }
+  },
+  "order": ["service-detail"]
+}

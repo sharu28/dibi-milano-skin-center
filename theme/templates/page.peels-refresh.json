@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "service-detail": {
+      "type": "service-detail",
+      "settings": {
+        "service_name": "Peels & Refresh",
+        "short_description": "<p>Advanced clinical peels and refreshing clean-ups to target every skin concern.</p>"
+      },
+      "blocks": {
+        "g1": { "type": "group", "settings": { "title": "Peels", "subtitle": "The widest range of advanced clinical peels using transformative acids, enzymes, and botanicals.", "layout": "menu" } },
+        "g1i1": { "type": "menu_item", "settings": { "name": "Enzyme Peel", "price": "12,000+ LKR" } },
+        "g1i2": { "type": "menu_item", "settings": { "name": "Dermaplane", "price": "14,000+ LKR" } },
+        "g1i3": { "type": "menu_item", "settings": { "name": "Microdermabrasion", "price": "14,000+ LKR" } },
+        "g1i4": { "type": "menu_item", "settings": { "name": "Crystal Peel", "price": "14,000+ LKR" } },
+        "g1i5": { "type": "menu_item", "settings": { "name": "Bio Repeel", "price": "23,000+ LKR" } },
+        "g1i6": { "type": "menu_item", "settings": { "name": "Carbon Peel", "price": "19,500+ LKR" } },
+        "g1i7": { "type": "menu_item", "settings": { "name": "Acid Infusion", "price": "23,000+ LKR" } },
+        "g1i8": { "type": "menu_item", "settings": { "name": "Cosmelan", "price": "29,000+ LKR", "description": "Limited time" } },
+        "g2": { "type": "group", "settings": { "title": "Refresh", "subtitle": "Quick and effective treatments to refresh and revitalize your skin.", "layout": "menu" } },
+        "g2i1": { "type": "menu_item", "settings": { "name": "Face Perfection Clean Up", "price": "12,000+ LKR" } },
+        "g2i2": { "type": "menu_item", "settings": { "name": "De Tan (Face)", "price": "15,000+ LKR" } },
+        "g2i3": { "type": "menu_item", "settings": { "name": "Anti Oxidant", "price": "19,000+ LKR" } },
+        "g2i4": { "type": "menu_item", "settings": { "name": "Oxy Infusion with Super Serums", "price": "19,500+ LKR" } },
+        "faq1": { "type": "faq", "settings": { "question": "Important Information", "answer": "<p>Prices are subject to 18% VAT.</p>" } }
+      },
+      "block_order": ["g1","g1i1","g1i2","g1i3","g1i4","g1i5","g1i6","g1i7","g1i8","g2","g2i1","g2i2","g2i3","g2i4","faq1"]
+    }
+  },
+  "order": ["service-detail"]
+}

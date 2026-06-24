@@ -1,19 +1,46 @@
 :root {
   --dibi-bg: #F9F9F7;
-  --dibi-ink: #1A1A1A;
+  --dibi-ink: #1A1A1A;          /* clinic-dark: buttons, strong headings */
+  --dibi-text: #2D2D2D;         /* clinic-text: body copy */
   --dibi-muted: #6B6B6B;
   --dibi-accent: #D4C5B9;       /* warm beige used for icons, hover and cart badge in the Hydrogen reference */
   --dibi-line: rgba(0, 0, 0, 0.08);
   --dibi-maxw: 1200px;
   --dibi-radius: 0px;
-  --dibi-font-heading: var(--font-heading-family, serif);
-  --dibi-font-body: var(--font-body-family, sans-serif);
+  /* Exact fonts from hydrogen/app/styles/app.css */
+  --dibi-font-body: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --dibi-font-heading: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --dibi-font-serif: "Cormorant Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
+/* Match the Hydrogen reference typography globally (overrides Dawn fonts). */
 body {
   background: var(--dibi-bg);
-  color: var(--dibi-ink);
+  color: var(--dibi-text);
+  font-family: var(--dibi-font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+h1, h2, h3, h4, h5, h6,
+.h0, .h1, .h2, .h3, .h4, .h5 {
+  font-family: var(--dibi-font-heading);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.serif-text,
+.dibi-serif {
+  font-family: var(--dibi-font-serif);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--dibi-bg); }
+::-webkit-scrollbar-thumb { background: var(--dibi-accent); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #c3b2a4; }
 
 .dibi-container {
   max-width: var(--dibi-maxw);

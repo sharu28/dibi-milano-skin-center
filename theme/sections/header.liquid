@@ -38,6 +38,7 @@
     <nav class="dibi-nav dibi-nav--left" aria-label="Primary">
       <a class="dibi-nav__link" href="{{ routes.root_url }}">HOME</a>
       <a class="dibi-nav__link" href="{{ routes.all_products_collection_url }}">PRODUCTS</a>
+      <a class="dibi-nav__link" href="{{ section.settings.gallery_url | default: '/pages/gallery' }}">GALLERY</a>
 
       <div class="dibi-nav__services">
         <button type="button" class="dibi-nav__link dibi-nav__services-toggle" aria-haspopup="true">
@@ -82,9 +83,18 @@
 
     {%- comment -%} Right nav (desktop) {%- endcomment -%}
     <nav class="dibi-nav dibi-nav--right" aria-label="Secondary">
-      <a class="dibi-nav__link" href="{{ section.settings.gallery_url | default: '/pages/gallery' }}">GALLERY</a>
       <a class="dibi-nav__link" href="{{ section.settings.training_url | default: '/pages/training' }}">TRAINING</a>
       <a class="dibi-nav__link" href="{{ section.settings.careers_url | default: '/pages/careers' }}">CAREERS</a>
+      <a
+        class="dibi-nav__cart"
+        href="{{ routes.cart_url }}"
+        aria-label="Cart, {{ cart.item_count }} items"
+      >
+        <svg class="dibi-nav__cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        {%- if cart.item_count > 0 -%}
+          <span class="dibi-nav__cart-count">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
     </nav>
 
     {%- comment -%} Mobile toggle {%- endcomment -%}

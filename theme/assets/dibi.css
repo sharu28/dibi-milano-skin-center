@@ -105,6 +105,39 @@ body {
   color: #6b7280;
 }
 
+.dibi-nav__cart {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: #1f2937;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.dibi-nav__cart:hover {
+  color: #6b7280;
+}
+
+.dibi-nav__cart-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.dibi-nav__cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 9999px;
+  background: #d4c5b9;
+  color: #fff;
+  font-size: 10px;
+  line-height: 16px;
+  text-align: center;
+}
+
 /* Centered brand lockup */
 .dibi-header__brand {
   position: absolute;

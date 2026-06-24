@@ -454,3 +454,22 @@ body {
 .dibi-footer__bottom p {
   margin: 0;
 }
+
+.dibi-footer__policies {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.dibi-footer__policies a {
+  color: #6b7280;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.dibi-footer__policies a:hover {
+  color: #111827;
+}

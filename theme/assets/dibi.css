@@ -1,0 +1,456 @@
+:root {
+  --dibi-bg: #F9F9F7;
+  --dibi-ink: #1A1A1A;
+  --dibi-muted: #6B6B6B;
+  --dibi-accent: #D4C5B9;       /* warm beige used for icons, hover and cart badge in the Hydrogen reference */
+  --dibi-line: rgba(0, 0, 0, 0.08);
+  --dibi-maxw: 1200px;
+  --dibi-radius: 0px;
+  --dibi-font-heading: var(--font-heading-family, serif);
+  --dibi-font-body: var(--font-body-family, sans-serif);
+}
+
+body {
+  background: var(--dibi-bg);
+  color: var(--dibi-ink);
+}
+
+.dibi-container {
+  max-width: var(--dibi-maxw);
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.dibi-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.dibi-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dibi-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   Header (matches hydrogen/app/components/Navbar.tsx)
+   ========================================================================== */
+.dibi-header {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  z-index: 50;
+}
+
+.dibi-header--sticky {
+  position: sticky;
+  top: 0;
+}
+
+.dibi-header__inner {
+  max-width: var(--dibi-maxw);
+  margin-inline: auto;
+  padding: 1.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.dibi-nav {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1f2937;
+}
+
+.dibi-nav--right {
+  justify-content: flex-end;
+}
+
+@media (min-width: 768px) {
+  .dibi-nav {
+    display: flex;
+  }
+}
+
+.dibi-nav__link,
+.dibi-nav__cta {
+  color: #1f2937;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: uppercase;
+}
+
+.dibi-nav__link:hover,
+.dibi-nav__cta:hover {
+  color: #6b7280;
+}
+
+/* Centered brand lockup */
+.dibi-header__brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  text-decoration: none;
+}
+
+.dibi-header__brand-title {
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #111827;
+  font-size: 1.25rem;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.dibi-header__brand-sub {
+  font-size: 0.625rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin: 0.25rem 0 0;
+}
+
+@media (min-width: 768px) {
+  .dibi-header__brand-title {
+    font-size: 1.5rem;
+  }
+  .dibi-header__brand-sub {
+    font-size: 0.75rem;
+  }
+}
+
+.dibi-header__logo-img {
+  display: block;
+  height: auto;
+}
+
+/* Services dropdown (desktop) */
+.dibi-nav__services {
+  position: relative;
+}
+
+.dibi-nav__services-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.dibi-nav__services-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding-top: 1rem;
+  width: 16rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95);
+  transform-origin: top left;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+.dibi-nav__services:hover .dibi-nav__services-menu,
+.dibi-nav__services:focus-within .dibi-nav__services-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.dibi-nav__services-inner {
+  background: #ffffff;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f3f4f6;
+  padding: 0.5rem 0;
+}
+
+.dibi-nav__services-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  color: #4b5563;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dibi-nav__services-link:hover {
+  background: #f9fafb;
+  color: #111827;
+}
+
+/* Mobile toggle */
+.dibi-header__mobile-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #1f2937;
+  cursor: pointer;
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .dibi-header__mobile-toggle {
+    display: none;
+  }
+}
+
+.dibi-header__mobile-toggle svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Mobile drawer */
+.dibi-mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease;
+}
+
+.dibi-mobile-menu.is-open {
+  max-height: 100vh;
+  border-top: 1px solid #f3f4f6;
+}
+
+@media (min-width: 768px) {
+  .dibi-mobile-menu {
+    display: none;
+  }
+}
+
+.dibi-mobile-menu__list {
+  padding: 0.5rem 1rem 1.5rem;
+}
+
+.dibi-mobile-menu__link {
+  display: block;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1f2937;
+  text-decoration: none;
+  border-bottom: 1px solid #f9fafb;
+}
+
+.dibi-mobile-menu__services-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1f2937;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #f9fafb;
+  cursor: pointer;
+}
+
+.dibi-mobile-menu__services-toggle svg {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.dibi-mobile-menu__services-toggle[aria-expanded='true'] svg {
+  transform: rotate(180deg);
+}
+
+.dibi-mobile-menu__sublist {
+  background: #f9fafb;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease;
+}
+
+.dibi-mobile-menu__sublist.is-open {
+  max-height: 24rem;
+}
+
+.dibi-mobile-menu__sublink {
+  display: block;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: #4b5563;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Footer (matches hydrogen/app/components/Footer.tsx)
+   ========================================================================== */
+.dibi-footer {
+  background: var(--dibi-bg);
+  color: #111827;
+  padding: 5rem 0 2.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.dibi-footer__inner {
+  max-width: var(--dibi-maxw);
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.dibi-footer__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .dibi-footer__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.dibi-footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .dibi-footer__brand {
+    grid-column: span 2;
+  }
+}
+
+.dibi-footer__brand-title {
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+}
+
+.dibi-footer__brand-sub {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin: 0;
+}
+
+.dibi-footer__blurb {
+  font-size: 0.875rem;
+  color: #4b5563;
+  max-width: 28rem;
+  line-height: 1.7;
+}
+
+.dibi-footer__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.dibi-footer__contact-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dibi-footer__contact-row svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--dibi-accent);
+  flex-shrink: 0;
+}
+
+.dibi-footer__contact a {
+  color: #4b5563;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.dibi-footer__contact a:hover {
+  color: #111827;
+}
+
+.dibi-footer__heading {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+  color: #6b7280;
+}
+
+.dibi-footer__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.dibi-footer__links a {
+  color: #4b5563;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.dibi-footer__links a:hover {
+  color: var(--dibi-accent);
+}
+
+.dibi-footer__bottom {
+  padding-top: 2rem;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+@media (min-width: 768px) {
+  .dibi-footer__bottom {
+    flex-direction: row;
+  }
+}
+
+.dibi-footer__bottom p {
+  margin: 0;
+}

@@ -1,0 +1,189 @@
+{%- comment -%}
+  DIBI gallery grid — matches hydrogen/app/components/GalleryGrid.tsx.
+  Responsive CSS-columns masonry. Each item block is an image or a video
+  (poster shown before/while loading). Editor-driven; the client uploads
+  media later, so blocks render placeholders when empty.
+{%- endcomment -%}
+
+<div class="dibi-gallery" id="dibi-gallery-{{ section.id }}">
+  {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+    <header class="dibi-gallery__head dibi-reveal">
+      {%- if section.settings.heading != blank -%}
+        <h1 class="dibi-gallery__heading">{{ section.settings.heading }}</h1>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <div class="dibi-gallery__subheading">{{ section.settings.subheading }}</div>
+      {%- endif -%}
+    </header>
+  {%- endif -%}
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="dibi-gallery__grid">
+      {%- for block in section.blocks -%}
+        <div class="dibi-gallery__item dibi-reveal" {{ block.shopify_attributes }}>
+          {%- if block.type == 'item' -%}
+            {%- if block.settings.media_type == 'video' -%}
+              {%- if block.settings.video != blank -%}
+                {{
+                  block.settings.video
+                  | video_tag:
+                    image_size: '1100x',
+                    autoplay: true,
+                    loop: true,
+                    controls: false,
+                    muted: true,
+                    playsinline: true,
+                    poster: block.settings.poster,
+                    preload: 'none',
+                    class: 'dibi-gallery__media'
+                }}
+              {%- elsif block.settings.video_url != blank -%}
+                <video
+                  class="dibi-gallery__media"
+                  src="{{ block.settings.video_url }}"
+                  {% if block.settings.poster != blank %}poster="{{ block.settings.poster | image_url: width: 1100 }}"{% endif %}
+                  muted
+                  loop
+                  playsinline
+                  autoplay
+                  preload="none"
+                  aria-label="{{ block.settings.alt | escape }}"
+                ></video>
+              {%- elsif block.settings.poster != blank -%}
+                {{
+                  block.settings.poster
+                  | image_url: width: 1100
+                  | image_tag: loading: 'lazy', alt: block.settings.alt, class: 'dibi-gallery__media'
+                }}
+              {%- else -%}
+                <div class="dibi-gallery__media dibi-gallery__media--placeholder">
+                  {{ 'lifestyle-1' | placeholder_svg_tag: 'dibi-gallery__placeholder-svg' }}
+                </div>
+              {%- endif -%}
+            {%- else -%}
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 1100
+                  | image_tag:
+                    loading: 'lazy',
+                    sizes: '(min-width: 990px) 33vw, (min-width: 640px) 50vw, 100vw',
+                    widths: '400, 600, 800, 1100',
+                    alt: block.settings.alt,
+                    class: 'dibi-gallery__media'
+                }}
+              {%- else -%}
+                <div class="dibi-gallery__media dibi-gallery__media--placeholder">
+                  {{ 'lifestyle-2' | placeholder_svg_tag: 'dibi-gallery__placeholder-svg' }}
+                </div>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    <p class="dibi-gallery__empty">Gallery coming soon.</p>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Gallery grid",
+  "tag": "section",
+  "class": "dibi-gallery-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Gallery"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Moments from our studio.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Media item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "media_type",
+          "label": "Media type",
+          "options": [
+            { "value": "image", "label": "Image" },
+            { "value": "video", "label": "Video" }
+          ],
+          "default": "image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Used when media type is Image."
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video (Shopify-hosted)",
+          "info": "Used when media type is Video. Autoplays muted, loops."
+        },
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "label": "Video URL (fallback)",
+          "accept": ["youtube", "vimeo"],
+          "info": "Used when no Shopify-hosted video is set."
+        },
+        {
+          "type": "image_picker",
+          "id": "poster",
+          "label": "Video poster",
+          "info": "First-frame image shown before/while the video loads."
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Alt / description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gallery grid",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": { "media_type": "image", "alt": "DIBI Milano studio interior" }
+        },
+        {
+          "type": "item",
+          "settings": { "media_type": "image", "alt": "Treatment in progress" }
+        },
+        {
+          "type": "item",
+          "settings": { "media_type": "video", "alt": "DIBI Milano treatment reel" }
+        },
+        {
+          "type": "item",
+          "settings": { "media_type": "image", "alt": "Product close-up" }
+        },
+        {
+          "type": "item",
+          "settings": { "media_type": "image", "alt": "Facial treatment detail" }
+        },
+        {
+          "type": "item",
+          "settings": { "media_type": "video", "alt": "Behind the scenes at the studio" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

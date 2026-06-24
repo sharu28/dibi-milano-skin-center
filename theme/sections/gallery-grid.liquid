@@ -72,6 +72,15 @@
                     alt: block.settings.alt,
                     class: 'dibi-gallery__media'
                 }}
+              {%- elsif block.settings.image_url != blank -%}
+                <img
+                  src="{{ block.settings.image_url }}"
+                  alt="{{ block.settings.alt | escape }}"
+                  class="dibi-gallery__media"
+                  loading="lazy"
+                  width="1100"
+                  height="1100"
+                >
               {%- else -%}
                 <div class="dibi-gallery__media dibi-gallery__media--placeholder">
                   {{ 'lifestyle-2' | placeholder_svg_tag: 'dibi-gallery__placeholder-svg' }}
@@ -126,6 +135,12 @@
           "id": "image",
           "label": "Image",
           "info": "Used when media type is Image."
+        },
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "Image URL (fallback)",
+          "info": "External image URL used when no image is uploaded above (image items)."
         },
         {
           "type": "video",

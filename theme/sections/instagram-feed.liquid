@@ -43,6 +43,15 @@
                 alt: 'Instagram post',
                 class: 'dibi-instagram__img'
             }}
+          {%- elsif block.settings.image_url != blank -%}
+            <img
+              src="{{ block.settings.image_url }}"
+              alt="Instagram post"
+              class="dibi-instagram__img"
+              loading="lazy"
+              width="800"
+              height="800"
+            >
           {%- else -%}
             {{ 'image' | placeholder_svg_tag: 'dibi-instagram__img dibi-instagram__img--placeholder' }}
           {%- endif -%}
@@ -94,6 +103,12 @@
           "type": "image_picker",
           "id": "image",
           "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "Image URL (fallback)",
+          "info": "External image URL used when no image is uploaded above."
         },
         {
           "type": "url",

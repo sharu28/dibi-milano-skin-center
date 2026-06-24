@@ -6,18 +6,21 @@
         "slide-1": {
           "type": "slide",
           "settings": {
+            "image_url": "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=2070&auto=format&fit=crop",
             "alt": "Clinic interior"
           }
         },
         "slide-2": {
           "type": "slide",
           "settings": {
+            "image_url": "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070&auto=format&fit=crop",
             "alt": "Treatment room"
           }
         },
         "slide-3": {
           "type": "slide",
           "settings": {
+            "image_url": "https://images.unsplash.com/photo-1552693673-1bf958298935?q=80&w=2073&auto=format&fit=crop",
             "alt": "Skin treatment detail"
           }
         }
@@ -49,65 +52,73 @@
         "service-1": {
           "type": "service_card",
           "settings": {
+            "image_url": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop",
             "title": "Skin Conditions",
             "description": "<p>Targeted treatments for acne, pigmentation, sensitivity, rosacea, and dermatitis.</p>",
-            "url": ""
+            "url": "/pages/skin-conditions"
           }
         },
         "service-2": {
           "type": "service_card",
           "settings": {
+            "image_url": "https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=2070&auto=format&fit=crop",
             "title": "Anti-Aging & Energy",
             "description": "<p>Non-surgical treatments for facial rejuvenation, skin restoration, and total skin overhaul.</p>",
-            "url": ""
+            "url": "/pages/anti-aging-energy"
           }
         },
         "service-3": {
           "type": "service_card",
           "settings": {
+            "image_url": "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=2070&auto=format&fit=crop",
             "title": "Peels & Refresh",
             "description": "<p>Advanced clinical peels and refreshing clean-ups to target every skin concern.</p>",
-            "url": ""
+            "url": "/pages/peels-refresh"
           }
         },
         "service-4": {
           "type": "service_card",
           "settings": {
+            "image_url": "https://images.unsplash.com/photo-1552693673-1bf958298935?q=80&w=2073&auto=format&fit=crop",
             "title": "Laser Hair Removal",
             "description": "<p>Medical-grade laser hair removal for fast, safe, and permanent hair reduction.</p>",
-            "url": ""
+            "url": "/pages/laser-hair-removal"
           }
         },
         "service-5": {
           "type": "service_card",
           "settings": {
+            "image_url": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1974&auto=format&fit=crop",
             "title": "Injectables & Skin Boosters",
             "description": "<p>Non-surgical treatments performed by medical professionals for rejuvenation and volume restoration.</p>",
-            "url": ""
+            "url": "/pages/injectables-boosters"
           }
         },
         "service-6": {
           "type": "service_card",
           "settings": {
+            "image_url": "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070&auto=format&fit=crop",
             "title": "Eye & Body Enhancements",
             "description": "<p>Targeted treatments for the delicate eye area and full body rejuvenation.</p>",
-            "url": ""
+            "url": "/pages/eye-body-enhancements"
           }
         },
         "service-7": {
           "type": "service_card",
           "settings": {
+            "image_url": "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=2070&auto=format&fit=crop",
             "title": "Specialized Laser",
             "description": "<p>Advanced Q-Switch and Nd:YAG laser treatments for tattoos, fungus, and skin imperfections.</p>",
-            "url": ""
+            "url": "/pages/specialized-laser"
           }
         },
         "service-8": {
           "type": "service_card",
           "settings": {
+            "image_url": "https://images.unsplash.com/photo-1595959183082-7b570b7e08e2?q=80&w=2071&auto=format&fit=crop",
             "title": "Semi-Permanent Makeup",
             "description": "<p>Enhance your natural features with long-lasting results.</p>",
-            "url": ""
+            "url": "/pages/semi-permanent-makeup"
           }
         }
       },
@@ -174,24 +185,28 @@
         "post-1": {
           "type": "post",
           "settings": {
+            "image_url": "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=2070&auto=format&fit=crop",
             "link": ""
           }
         },
         "post-2": {
           "type": "post",
           "settings": {
+            "image_url": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=1974&auto=format&fit=crop",
             "link": ""
           }
         },
         "post-3": {
           "type": "post",
           "settings": {
+            "image_url": "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=2070&auto=format&fit=crop",
             "link": ""
           }
         },
         "post-4": {
           "type": "post",
           "settings": {
+            "image_url": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop",
             "link": ""
           }
         }
@@ -215,6 +230,7 @@
         "subtext": "<p>Treat someone special to a bespoke skin experience. Our beautifully packaged gift cards can be used towards any treatment or product in our clinic.</p>",
         "cta_label": "Buy Gift Card",
         "cta_link": "",
+        "image_url": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=80&w=2053&auto=format&fit=crop",
         "image_position": "right"
       }
     }

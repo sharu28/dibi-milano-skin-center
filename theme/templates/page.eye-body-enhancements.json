@@ -4,7 +4,8 @@
       "type": "service-detail",
       "settings": {
         "service_name": "Eye & Body Enhancements",
-        "short_description": "<p>Targeted treatments for the delicate eye area and full body rejuvenation.</p>"
+        "short_description": "<p>Targeted treatments for the delicate eye area and full body rejuvenation.</p>",
+        "hero_image_url": "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070&auto=format&fit=crop"
       },
       "blocks": {
         "g1": { "type": "group", "settings": { "title": "Eye Treatments", "subtitle": "Utilises deep radio frequency technology & products to treat fine lines, darkness and minor skin laxity.", "layout": "menu" } },

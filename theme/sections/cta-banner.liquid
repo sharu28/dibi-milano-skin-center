@@ -19,7 +19,7 @@
   endif
 
   assign has_image = false
-  if section.settings.image != blank
+  if section.settings.image != blank or section.settings.image_url != blank
     assign has_image = true
   endif
 -%}
@@ -48,16 +48,27 @@
         {%- endif -%}
       </div>
       <div class="dibi-cta__media">
-        {{
-          section.settings.image
-          | image_url: width: 1200
-          | image_tag:
-            loading: 'lazy',
-            sizes: '(min-width: 990px) 50vw, 100vw',
-            widths: '400, 600, 800, 1000, 1200',
-            class: 'dibi-cta__img',
-            alt: section.settings.heading
-        }}
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'lazy',
+              sizes: '(min-width: 990px) 50vw, 100vw',
+              widths: '400, 600, 800, 1000, 1200',
+              class: 'dibi-cta__img',
+              alt: section.settings.heading
+          }}
+        {%- elsif section.settings.image_url != blank -%}
+          <img
+            src="{{ section.settings.image_url }}"
+            alt="{{ section.settings.heading | escape }}"
+            class="dibi-cta__img"
+            loading="lazy"
+            width="1200"
+            height="900"
+          >
+        {%- endif -%}
       </div>
     </div>
   </section>
@@ -118,6 +129,12 @@
       "id": "image",
       "label": "Image",
       "info": "When set, the banner uses a side-image layout. Leave blank for centered text."
+    },
+    {
+      "type": "text",
+      "id": "image_url",
+      "label": "Image URL (fallback)",
+      "info": "External image URL used when no image is uploaded above."
     },
     {
       "type": "select",

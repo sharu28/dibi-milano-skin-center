@@ -4,7 +4,8 @@
       "type": "service-detail",
       "settings": {
         "service_name": "Anti-Aging & Energy",
-        "short_description": "<p>Non-surgical treatments for facial rejuvenation, skin restoration, and total skin overhaul.</p>"
+        "short_description": "<p>Non-surgical treatments for facial rejuvenation, skin restoration, and total skin overhaul.</p>",
+        "hero_image_url": "https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=2070&auto=format&fit=crop"
       },
       "blocks": {
         "g1": { "type": "group", "settings": { "title": "Anti Aging", "subtitle": "Non-surgical treatments designed to improve skin elasticity, boost collagen production, and restore youthful plumpness.", "layout": "menu" } },

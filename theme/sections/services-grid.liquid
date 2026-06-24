@@ -41,6 +41,15 @@
                     alt: block.settings.title,
                     class: 'dibi-service-card__img'
                 }}
+              {%- elsif block.settings.image_url != blank -%}
+                <img
+                  src="{{ block.settings.image_url }}"
+                  alt="{{ block.settings.title | escape }}"
+                  class="dibi-service-card__img"
+                  loading="lazy"
+                  width="800"
+                  height="1000"
+                >
               {%- else -%}
                 {{ 'collection-apparel-1' | placeholder_svg_tag: 'dibi-service-card__img dibi-service-card__img--placeholder' }}
               {%- endif -%}
@@ -87,6 +96,12 @@
           "type": "image_picker",
           "id": "image",
           "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "Image URL (fallback)",
+          "info": "External image URL used when no image is uploaded above."
         },
         {
           "type": "text",

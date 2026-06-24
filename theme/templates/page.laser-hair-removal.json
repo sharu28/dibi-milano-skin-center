@@ -4,7 +4,8 @@
       "type": "service-detail",
       "settings": {
         "service_name": "Laser Hair Removal",
-        "short_description": "<p>Medical-grade laser hair removal for fast, safe, and permanent hair reduction.</p>"
+        "short_description": "<p>Medical-grade laser hair removal for fast, safe, and permanent hair reduction.</p>",
+        "hero_image_url": "https://images.unsplash.com/photo-1552693673-1bf958298935?q=80&w=2073&auto=format&fit=crop"
       },
       "blocks": {
         "g1": { "type": "group", "settings": { "title": "Ladies Laser Hair Removal", "subtitle": "Tailored laser hair removal for all skin types and tones.", "layout": "menu" } },

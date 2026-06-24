@@ -4,7 +4,8 @@
       "type": "service-detail",
       "settings": {
         "service_name": "Injectables & Skin Boosters",
-        "short_description": "<p>Non-surgical treatments performed by medical professionals for rejuvenation and volume restoration.</p>"
+        "short_description": "<p>Non-surgical treatments performed by medical professionals for rejuvenation and volume restoration.</p>",
+        "hero_image_url": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1974&auto=format&fit=crop"
       },
       "blocks": {
         "g1": { "type": "group", "settings": { "title": "Injectables & Anti-Wrinkle", "subtitle": "Restore volume, define contours, and smooth deep lines.", "layout": "menu" } },

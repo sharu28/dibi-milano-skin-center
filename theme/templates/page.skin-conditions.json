@@ -4,7 +4,8 @@
       "type": "service-detail",
       "settings": {
         "service_name": "Skin Conditions",
-        "short_description": "<p>Targeted treatments for acne, pigmentation, sensitivity, rosacea, and dermatitis.</p>"
+        "short_description": "<p>Targeted treatments for acne, pigmentation, sensitivity, rosacea, and dermatitis.</p>",
+        "hero_image_url": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop"
       },
       "blocks": {
         "g1": { "type": "group", "settings": { "title": "Acne / Congestion", "subtitle": "Effective treatment of acne targets all of the steps of the cases of acne and combination therapy is essential.", "layout": "menu" } },

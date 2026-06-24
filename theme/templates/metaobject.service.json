@@ -1,8 +1,0 @@
-{
-  "sections": {
-    "service_detail": {
-      "type": "service-detail"
-    }
-  },
-  "order": ["service_detail"]
-}

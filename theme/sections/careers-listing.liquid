@@ -23,6 +23,15 @@
             alt: section.settings.hero_heading,
             class: 'dibi-hero__img'
         }}
+      {%- elsif section.settings.hero_image_url != blank -%}
+        <img
+          src="{{ section.settings.hero_image_url }}"
+          alt="{{ section.settings.hero_heading | escape }}"
+          class="dibi-hero__img"
+          loading="eager"
+          width="2200"
+          height="1238"
+        >
       {%- else -%}
         <div class="dibi-hero__img dibi-hero__img--placeholder">
           {{ 'hero-apparel-2' | placeholder_svg_tag: 'dibi-hero__placeholder-svg' }}
@@ -139,6 +148,12 @@
       "type": "image_picker",
       "id": "hero_image",
       "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_url",
+      "label": "Hero image URL (fallback)",
+      "info": "External image URL used when no image is uploaded above."
     },
     {
       "type": "text",

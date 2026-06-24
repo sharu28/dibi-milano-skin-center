@@ -28,6 +28,7 @@
       ],
       "settings": {
         "hero_heading": "Join Our Team",
+        "hero_image_url": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=1974&auto=format&fit=crop",
         "hero_subheading": "<p>Build your career with the leaders in bespoke skin treatments and advanced aesthetics.</p>",
         "hero_overlay_opacity": 40,
         "intro_eyebrow": "Our Culture",

@@ -4,7 +4,19 @@
   Services dropdown, BOOK ONLINE plain-text CTA (WhatsApp), mobile drawer.
 {%- endcomment -%}
 
-{%- assign services_menu = section.settings.services_menu -%}
+{%- liquid
+  assign services_menu = section.settings.services_menu
+  # Prefer service metaobjects for the Services nav; fall back to the link list.
+  assign service_entries = metaobjects.service.values
+  assign use_service_metaobjects = false
+  if service_entries.size > 0
+    assign use_service_metaobjects = true
+  endif
+  assign has_services_nav = use_service_metaobjects
+  if has_services_nav == false and services_menu != blank and services_menu.links.size > 0
+    assign has_services_nav = true
+  endif
+-%}
 
 <header
   class="dibi-header{% if section.settings.sticky %} dibi-header--sticky{% endif %}"
@@ -16,7 +28,7 @@
       <a class="dibi-nav__link" href="{{ routes.root_url }}">HOME</a>
       <a class="dibi-nav__link" href="{{ routes.all_products_collection_url }}">PRODUCTS</a>
 
-      {%- if services_menu != blank and services_menu.links.size > 0 -%}
+      {%- if has_services_nav -%}
         <div class="dibi-nav__services">
           <button type="button" class="dibi-nav__link dibi-nav__services-toggle" aria-haspopup="true">
             SERVICES
@@ -24,9 +36,15 @@
           </button>
           <div class="dibi-nav__services-menu">
             <div class="dibi-nav__services-inner">
-              {%- for link in services_menu.links -%}
-                <a class="dibi-nav__services-link" href="{{ link.url }}">{{ link.title }}</a>
-              {%- endfor -%}
+              {%- if use_service_metaobjects -%}
+                {%- for svc in service_entries -%}
+                  <a class="dibi-nav__services-link" href="{{ svc.system.url | default: '#' }}">{{ svc.name.value }}</a>
+                {%- endfor -%}
+              {%- else -%}
+                {%- for link in services_menu.links -%}
+                  <a class="dibi-nav__services-link" href="{{ link.url }}">{{ link.title }}</a>
+                {%- endfor -%}
+              {%- endif -%}
             </div>
           </div>
         </div>
@@ -88,7 +106,7 @@
       <a class="dibi-mobile-menu__link" href="{{ routes.all_products_collection_url }}">PRODUCTS</a>
       <a class="dibi-mobile-menu__link" href="{{ section.settings.gallery_url | default: '/pages/gallery' }}">GALLERY</a>
 
-      {%- if services_menu != blank and services_menu.links.size > 0 -%}
+      {%- if has_services_nav -%}
         <div>
           <button
             type="button"
@@ -100,9 +118,15 @@
             {% render 'dibi-icon-chevron' %}
           </button>
           <div class="dibi-mobile-menu__sublist" data-dibi-mobile-services>
-            {%- for link in services_menu.links -%}
-              <a class="dibi-mobile-menu__sublink" href="{{ link.url }}">{{ link.title }}</a>
-            {%- endfor -%}
+            {%- if use_service_metaobjects -%}
+              {%- for svc in service_entries -%}
+                <a class="dibi-mobile-menu__sublink" href="{{ svc.system.url | default: '#' }}">{{ svc.name.value }}</a>
+              {%- endfor -%}
+            {%- else -%}
+              {%- for link in services_menu.links -%}
+                <a class="dibi-mobile-menu__sublink" href="{{ link.url }}">{{ link.title }}</a>
+              {%- endfor -%}
+            {%- endif -%}
           </div>
         </div>
       {%- endif -%}

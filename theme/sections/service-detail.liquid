@@ -1,0 +1,189 @@
+{%- comment -%}
+  service-detail.liquid
+
+  Renders a single `service` metaobject as a full service detail page.
+  Mirrors hydrogen/app/routes/service.$slug.tsx: hero, sections switched by
+  `layout`, FAQ accordion, booking CTA.
+
+  Used by templates/metaobject.service.json. Inside a metaobject template the
+  current entry is exposed as the global `metaobject` drop
+  (https://shopify.dev/docs/api/liquid/objects/metaobject). Field values are
+  read with `.value`; list.metaobject_reference fields return an array of the
+  referenced drops via `.value`. file_reference fields return an image/file
+  drop via `.value`.
+{%- endcomment -%}
+
+{%- liquid
+  assign svc = metaobject
+  assign sections = svc.sections.value
+  assign faqs = svc.faqs.value
+  assign booking_link = svc.booking_link.value
+-%}
+
+<div class="dibi-service">
+  {%- comment -%} Hero {%- endcomment -%}
+  <section class="dibi-service__hero">
+    <div class="dibi-service__hero-media">
+      {%- if svc.hero_image.value != blank -%}
+        {{
+          svc.hero_image.value
+          | image_url: width: 2070
+          | image_tag:
+            loading: 'eager',
+            sizes: '100vw',
+            widths: '600, 900, 1200, 1600, 2070',
+            alt: svc.name.value,
+            class: 'dibi-service__hero-img'
+        }}
+      {%- endif -%}
+      <div class="dibi-service__hero-scrim"></div>
+    </div>
+    <div class="dibi-service__hero-content dibi-reveal">
+      <h1 class="dibi-service__hero-title">{{ svc.name.value }}</h1>
+      {%- if svc.short_description.value != blank -%}
+        <p class="dibi-service__hero-sub">{{ svc.short_description.value }}</p>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} Sections {%- endcomment -%}
+  {%- if sections and sections.size > 0 -%}
+    <div class="dibi-service__sections">
+      {%- for section_obj in sections -%}
+        {%- liquid
+          assign layout = section_obj.layout.value
+          assign idx = forloop.index0
+          assign is_alt = false
+          assign mod = idx | modulo: 2
+          if mod != 0
+            assign is_alt = true
+          endif
+        -%}
+
+        {%- case layout -%}
+          {%- when 'menu' -%}
+            <section class="dibi-service-sec dibi-service-sec--menu dibi-reveal{% if is_alt %} dibi-service-sec--alt{% endif %}">
+              <div class="dibi-service-sec__inner dibi-service-sec__inner--narrow">
+                <div class="dibi-service-sec__head dibi-service-sec__head--center">
+                  <h2 class="dibi-service-sec__title">{{ section_obj.title.value }}</h2>
+                  {%- if section_obj.subtitle.value != blank -%}
+                    <p class="dibi-service-sec__subtitle">{{ section_obj.subtitle.value }}</p>
+                  {%- endif -%}
+                </div>
+                {% render 'price-menu', section_obj: section_obj %}
+              </div>
+            </section>
+
+          {%- when 'split-left-image', 'split-right-image' -%}
+            {%- assign left_image = false -%}
+            {%- if layout == 'split-left-image' -%}{%- assign left_image = true -%}{%- endif -%}
+            <section class="dibi-service-sec dibi-service-sec--split dibi-reveal{% if is_alt %} dibi-service-sec--alt{% endif %}">
+              <div class="dibi-service-sec__inner">
+                <div class="dibi-service-sec__split{% unless left_image %} dibi-service-sec__split--reverse{% endunless %}">
+                  <div class="dibi-service-sec__split-media">
+                    {%- if section_obj.image.value != blank -%}
+                      {{
+                        section_obj.image.value
+                        | image_url: width: 1200
+                        | image_tag:
+                          loading: 'lazy',
+                          sizes: '(min-width: 990px) 50vw, 100vw',
+                          widths: '500, 800, 1000, 1200',
+                          alt: section_obj.title.value,
+                          class: 'dibi-service-sec__split-img'
+                      }}
+                    {%- endif -%}
+                  </div>
+                  <div class="dibi-service-sec__split-text">
+                    {%- if section_obj.subtitle.value != blank -%}
+                      <h3 class="dibi-service-sec__eyebrow">{{ section_obj.subtitle.value }}</h3>
+                    {%- endif -%}
+                    <h2 class="dibi-service-sec__title">{{ section_obj.title.value }}</h2>
+                    {%- if section_obj.content.value != blank -%}
+                      <div class="dibi-service-sec__body">{{ section_obj.content.value | newline_to_br }}</div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          {%- when 'split-text' -%}
+            <section class="dibi-service-sec dibi-service-sec--split-text dibi-reveal{% if is_alt %} dibi-service-sec--alt{% endif %}">
+              <div class="dibi-service-sec__inner">
+                <div class="dibi-service-sec__split">
+                  <div class="dibi-service-sec__split-text">
+                    <h2 class="dibi-service-sec__title">{{ section_obj.title.value }}</h2>
+                  </div>
+                  <div class="dibi-service-sec__split-text">
+                    {%- if section_obj.subtitle.value != blank -%}
+                      <h3 class="dibi-service-sec__eyebrow">{{ section_obj.subtitle.value }}</h3>
+                    {%- endif -%}
+                    {%- if section_obj.content.value != blank -%}
+                      <div class="dibi-service-sec__body">{{ section_obj.content.value | newline_to_br }}</div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          {%- else -%}
+            {%- comment -%} layout == 'full' (default) {%- endcomment -%}
+            <section class="dibi-service-sec dibi-service-sec--full dibi-reveal{% if is_alt %} dibi-service-sec--alt{% endif %}">
+              <div class="dibi-service-sec__inner dibi-service-sec__inner--narrow dibi-service-sec__head--center">
+                <h2 class="dibi-service-sec__title">{{ section_obj.title.value }}</h2>
+                {%- if section_obj.content.value != blank -%}
+                  <div class="dibi-service-sec__body">{{ section_obj.content.value | newline_to_br }}</div>
+                {%- endif -%}
+              </div>
+            </section>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} FAQs accordion {%- endcomment -%}
+  {%- if faqs and faqs.size > 0 -%}
+    <section class="dibi-service-faqs dibi-reveal">
+      <div class="dibi-service-faqs__inner">
+        <h2 class="dibi-service-faqs__heading">Treatment Details</h2>
+        <div class="dibi-service-faqs__list">
+          {%- for faq in faqs -%}
+            <details class="dibi-service-faq">
+              <summary class="dibi-service-faq__q">
+                <span>{{ faq.question.value }}</span>
+                <span class="dibi-service-faq__icon" aria-hidden="true">{% render 'dibi-icon-chevron' %}</span>
+              </summary>
+              <div class="dibi-service-faq__a">{{ faq.answer.value | newline_to_br }}</div>
+            </details>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Booking CTA {%- endcomment -%}
+  <section class="dibi-service-cta dibi-reveal">
+    <h2 class="dibi-service-cta__title">Ready for Radiant Skin?</h2>
+    <p class="dibi-service-cta__text">
+      Book your {{ svc.name.value }} treatment today and take the first step towards your skin goals.
+    </p>
+    <a
+      class="dibi-service-cta__btn"
+      href="{% if booking_link != blank %}{{ booking_link }}{% else %}{% render 'booking-url' %}{% endif %}"
+      target="_blank"
+      rel="noopener"
+    >Book Now</a>
+    <div class="dibi-service-cta__back">
+      <a class="dibi-service-cta__back-link" href="{{ routes.root_url }}">← Back to Home</a>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Service detail",
+  "tag": "section",
+  "class": "dibi-service-detail-section",
+  "settings": []
+}
+{% endschema %}

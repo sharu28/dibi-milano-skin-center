@@ -1,23 +1,20 @@
-<style type="text/css">
-  .template-404 .title + * {
-    margin-top: 1rem;
-  }
-
-  @media screen and (min-width: 750px) {
-    .template-404 .title + * {
-      margin-top: 2rem;
-    }
-  }
-</style>
-
-<div class="template-404 page-width page-margin center">
-  <p>
-    {{ 'templates.404.subtext' | t }}
-  </p>
-  <h1 class="title">
-    {{ 'templates.404.title' | t }}
-  </h1>
-  <a href="{{ routes.all_products_collection_url }}" class="button">
-    {{ 'general.continue_shopping' | t }}
-  </a>
+<div class="dibi-404">
+  <div class="dibi-404__inner dibi-reveal">
+    <p class="dibi-404__eyebrow">{{ 'templates.404.title' | t }}</p>
+    <h1 class="dibi-404__title">{{ 'templates.404.subtext' | t }}</h1>
+    <p class="dibi-404__text">
+      The page you’re looking for can’t be found. It may have moved, or the link may be incorrect.
+    </p>
+    <div class="dibi-404__actions">
+      <a href="{{ routes.root_url }}" class="dibi-404__btn dibi-404__btn--primary">Back to Home</a>
+      <a href="{{ routes.all_products_collection_url }}" class="dibi-404__btn">Shop Products</a>
+    </div>
+  </div>
 </div>
+
+{% schema %}
+{
+  "name": "404 page",
+  "settings": []
+}
+{% endschema %}

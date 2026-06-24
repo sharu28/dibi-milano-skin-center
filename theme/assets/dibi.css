@@ -2334,3 +2334,78 @@ collection-component .pagination__item--current {
 .dibi-service-cta__back-link:hover {
   color: var(--dibi-accent);
 }
+
+/* ---------- 404 ---------- */
+.dibi-404 {
+  background: var(--dibi-bg);
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 1rem;
+}
+
+.dibi-404__inner {
+  max-width: 640px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.dibi-404__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  color: var(--dibi-accent);
+  margin: 0 0 1.25rem;
+}
+
+.dibi-404__title {
+  font-family: var(--dibi-font-heading);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--dibi-ink);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  margin: 0 0 1.5rem;
+}
+
+.dibi-404__text {
+  color: var(--dibi-muted);
+  line-height: 1.7;
+  margin: 0 0 2.5rem;
+}
+
+.dibi-404__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.dibi-404__btn {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  text-decoration: none;
+  border: 1px solid var(--dibi-ink);
+  color: var(--dibi-ink);
+  background: transparent;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dibi-404__btn:hover {
+  background: var(--dibi-ink);
+  color: #fff;
+}
+
+.dibi-404__btn--primary {
+  background: var(--dibi-ink);
+  color: #fff;
+}
+
+.dibi-404__btn--primary:hover {
+  background: var(--dibi-accent);
+  border-color: var(--dibi-accent);
+}

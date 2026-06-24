@@ -1334,3 +1334,156 @@ collection-component .pagination__item--current {
 .dibi-cta__button:hover {
   background: var(--dibi-accent);
 }
+
+/* CTA split (side-image) layout — matches "Gift of Glowing Skin" in _index.tsx */
+.dibi-cta--split {
+  padding-block: 6rem;
+}
+
+.dibi-cta__split {
+  max-width: var(--dibi-maxw);
+  margin-inline: auto;
+  padding-inline: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (min-width: 990px) {
+  .dibi-cta__split {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.dibi-cta--split .dibi-cta__heading,
+.dibi-cta--split .dibi-cta__subtext {
+  text-align: left;
+  margin-left: 0;
+}
+
+.dibi-cta--split .dibi-cta__subtext {
+  font-size: 1.125rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Text left / image right (default) — image second in DOM */
+.dibi-cta__media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f3f4f6;
+  order: -1;
+}
+
+@media (min-width: 990px) {
+  .dibi-cta--image-right .dibi-cta__media {
+    order: 0;
+  }
+  .dibi-cta--image-left .dibi-cta__text {
+    order: 0;
+  }
+  .dibi-cta--image-left .dibi-cta__media {
+    order: -1;
+  }
+}
+
+.dibi-cta__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ==========================================================================
+   Homepage: Bespoke intro — matches _index.tsx "Your Bespoke Experience".
+   ========================================================================== */
+.dibi-bespoke {
+  padding-block: 6rem;
+  background: #ffffff;
+}
+
+@media (min-width: 750px) {
+  .dibi-bespoke {
+    padding-block: 8rem;
+  }
+}
+
+.dibi-bespoke__inner {
+  max-width: 56rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  text-align: center;
+}
+
+.dibi-bespoke__eyebrow {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin: 0 0 2rem;
+}
+
+.dibi-bespoke__body {
+  font-family: var(--dibi-font-heading);
+  color: #1f2937;
+  line-height: 1.6;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.dibi-bespoke__body p {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Homepage: Marquee bar — matches _index.tsx beige scrolling bar.
+   ========================================================================== */
+.dibi-marquee {
+  background: var(--dibi-accent);
+  color: var(--dibi-ink);
+  padding-block: 1rem;
+  overflow: hidden;
+}
+
+.dibi-marquee__track {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  animation: dibi-marquee-scroll var(--dibi-marquee-speed, 20s) linear infinite;
+}
+
+.dibi-marquee__group {
+  display: flex;
+  align-items: center;
+}
+
+.dibi-marquee__item,
+.dibi-marquee__sep {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-inline: 1rem;
+}
+
+@keyframes dibi-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dibi-marquee__track {
+    animation: none;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+  .dibi-marquee__group[aria-hidden='true'] {
+    display: none;
+  }
+}

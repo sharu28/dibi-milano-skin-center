@@ -1,0 +1,74 @@
+{%- comment -%}
+  DIBI marquee bar — matches the beige scrolling bar in
+  hydrogen/app/routes/_index.tsx. Repeating phrases on the accent background.
+  Horizontal scroll via CSS keyframes, static under prefers-reduced-motion.
+{%- endcomment -%}
+
+<section class="dibi-marquee" id="dibi-marquee-{{ section.id }}" aria-label="Announcements" style="--dibi-marquee-speed: {{ section.settings.speed }}s;">
+  <div class="dibi-marquee__track">
+    {%- comment -%} Render the items twice for a seamless loop. {%- endcomment -%}
+    {%- for pass in (1..2) -%}
+      <div class="dibi-marquee__group" {% if pass == 2 %}aria-hidden="true"{% endif %}>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'item' and block.settings.text != blank -%}
+            <span class="dibi-marquee__item" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+            <span class="dibi-marquee__sep" aria-hidden="true">&bull;</span>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marquee bar",
+  "tag": "section",
+  "class": "dibi-marquee-section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Scroll duration (seconds)",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Phrase",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Deluxe samples or free gift with purchase. Order online or in store. T&Cs apply."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee bar",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "text": "DELUXE SAMPLES OR FREE GIFT WITH PURCHASE. ORDER ONLINE OR IN STORE. T&CS APPLY."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "COMPLIMENTARY SKIN CONSULTATION WITH EVERY FIRST VISIT."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

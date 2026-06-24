@@ -1,5 +1,8 @@
 {%- comment -%}
-  DIBI CTA banner — closing call to action. Heading + subtext + button.
+  DIBI CTA banner — closing call to action.
+  No image: centered heading + subtext + button.
+  Image set: side-image layout matching the "Gift of Glowing Skin" block in
+  hydrogen/app/routes/_index.tsx (text column + image column).
   Button falls back to the booking WhatsApp link when no link is set.
 {%- endcomment -%}
 
@@ -14,27 +17,71 @@
     assign cta_href = cta_href | strip
     assign cta_target = 'blank'
   endif
+
+  assign has_image = false
+  if section.settings.image != blank
+    assign has_image = true
+  endif
 -%}
 
-<section class="dibi-cta" id="dibi-cta-{{ section.id }}">
-  <div class="dibi-cta__inner dibi-reveal">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="dibi-cta__heading">{{ section.settings.heading }}</h2>
-    {%- endif -%}
-    {%- if section.settings.subtext != blank -%}
-      <div class="dibi-cta__subtext">{{ section.settings.subtext }}</div>
-    {%- endif -%}
-    {%- if section.settings.cta_label != blank -%}
-      <a
-        href="{{ cta_href }}"
-        class="dibi-cta__button"
-        {% if cta_target == 'blank' %}target="_blank" rel="noopener"{% endif %}
-      >
-        {{ section.settings.cta_label }}
-      </a>
-    {%- endif -%}
-  </div>
-</section>
+{%- if has_image -%}
+  <section
+    class="dibi-cta dibi-cta--split dibi-cta--image-{{ section.settings.image_position }}"
+    id="dibi-cta-{{ section.id }}"
+  >
+    <div class="dibi-cta__split dibi-reveal">
+      <div class="dibi-cta__text">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="dibi-cta__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subtext != blank -%}
+          <div class="dibi-cta__subtext">{{ section.settings.subtext }}</div>
+        {%- endif -%}
+        {%- if section.settings.cta_label != blank -%}
+          <a
+            href="{{ cta_href }}"
+            class="dibi-cta__button"
+            {% if cta_target == 'blank' %}target="_blank" rel="noopener"{% endif %}
+          >
+            {{ section.settings.cta_label }}
+          </a>
+        {%- endif -%}
+      </div>
+      <div class="dibi-cta__media">
+        {{
+          section.settings.image
+          | image_url: width: 1200
+          | image_tag:
+            loading: 'lazy',
+            sizes: '(min-width: 990px) 50vw, 100vw',
+            widths: '400, 600, 800, 1000, 1200',
+            class: 'dibi-cta__img',
+            alt: section.settings.heading
+        }}
+      </div>
+    </div>
+  </section>
+{%- else -%}
+  <section class="dibi-cta" id="dibi-cta-{{ section.id }}">
+    <div class="dibi-cta__inner dibi-reveal">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="dibi-cta__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subtext != blank -%}
+        <div class="dibi-cta__subtext">{{ section.settings.subtext }}</div>
+      {%- endif -%}
+      {%- if section.settings.cta_label != blank -%}
+        <a
+          href="{{ cta_href }}"
+          class="dibi-cta__button"
+          {% if cta_target == 'blank' %}target="_blank" rel="noopener"{% endif %}
+        >
+          {{ section.settings.cta_label }}
+        </a>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
 
 {% schema %}
 {
@@ -65,6 +112,23 @@
       "id": "cta_link",
       "label": "Button link",
       "info": "Leave blank to use the WhatsApp booking link."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "When set, the banner uses a side-image layout. Leave blank for centered text."
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "info": "Only used when an image is set.",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "right"
     }
   ],
   "presets": [

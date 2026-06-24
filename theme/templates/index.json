@@ -36,6 +36,13 @@
         "interval_ms": 5000
       }
     },
+    "bespoke-intro": {
+      "type": "bespoke-intro",
+      "settings": {
+        "heading": "Your Bespoke Experience",
+        "body": "<p>At DIBI Milano Skin Center, we believe that healthy skin is the foundation of true beauty. Our expert clinicians combine advanced technology with personalized care to deliver transformative results.</p>"
+      }
+    },
     "services": {
       "type": "services-grid",
       "blocks": {
@@ -118,6 +125,30 @@
         "heading": "Our Services"
       }
     },
+    "marquee": {
+      "type": "marquee-bar",
+      "blocks": {
+        "item-1": {
+          "type": "item",
+          "settings": {
+            "text": "DELUXE SAMPLES OR FREE GIFT WITH PURCHASE. ORDER ONLINE OR IN STORE. T&CS APPLY."
+          }
+        },
+        "item-2": {
+          "type": "item",
+          "settings": {
+            "text": "COMPLIMENTARY SKIN CONSULTATION WITH EVERY FIRST VISIT."
+          }
+        }
+      },
+      "block_order": [
+        "item-1",
+        "item-2"
+      ],
+      "settings": {
+        "speed": 20
+      }
+    },
     "testimonials": {
       "type": "testimonials",
       "blocks": {
@@ -182,16 +213,19 @@
       "settings": {
         "heading": "The Gift of Glowing Skin",
         "subtext": "<p>Treat someone special to a bespoke skin experience. Our beautifully packaged gift cards can be used towards any treatment or product in our clinic.</p>",
-        "cta_label": "Book Consultation",
-        "cta_link": ""
+        "cta_label": "Buy Gift Card",
+        "cta_link": "",
+        "image_position": "right"
       }
     }
   },
   "order": [
     "hero",
+    "bespoke-intro",
     "services",
+    "marquee",
+    "cta",
     "testimonials",
-    "instagram",
-    "cta"
+    "instagram"
   ]
 }

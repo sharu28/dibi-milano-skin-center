@@ -1,0 +1,76 @@
+{%- comment -%}
+  DIBI CTA banner — closing call to action. Heading + subtext + button.
+  Button falls back to the booking WhatsApp link when no link is set.
+{%- endcomment -%}
+
+{%- liquid
+  if section.settings.cta_link != blank
+    assign cta_href = section.settings.cta_link
+    assign cta_target = ''
+  else
+    capture cta_href
+      render 'booking-url'
+    endcapture
+    assign cta_href = cta_href | strip
+    assign cta_target = 'blank'
+  endif
+-%}
+
+<section class="dibi-cta" id="dibi-cta-{{ section.id }}">
+  <div class="dibi-cta__inner dibi-reveal">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="dibi-cta__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subtext != blank -%}
+      <div class="dibi-cta__subtext">{{ section.settings.subtext }}</div>
+    {%- endif -%}
+    {%- if section.settings.cta_label != blank -%}
+      <a
+        href="{{ cta_href }}"
+        class="dibi-cta__button"
+        {% if cta_target == 'blank' %}target="_blank" rel="noopener"{% endif %}
+      >
+        {{ section.settings.cta_label }}
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "CTA banner",
+  "tag": "section",
+  "class": "dibi-cta-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Gift of Glowing Skin"
+    },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "<p>Treat someone special to a bespoke skin experience. Our beautifully packaged gift cards can be used towards any treatment or product in our clinic.</p>"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Book Consultation"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link",
+      "info": "Leave blank to use the WhatsApp booking link."
+    }
+  ],
+  "presets": [
+    {
+      "name": "CTA banner"
+    }
+  ]
+}
+{% endschema %}

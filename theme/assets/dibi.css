@@ -740,3 +740,130 @@ collection-component .pagination__item--current {
   border-color: var(--dibi-accent);
   color: var(--dibi-accent);
 }
+
+/* ==========================================================================
+   Cart drawer + /cart page (Task 2.3) — matches hydrogen cart.tsx / CartMain /
+   CartLineItem / CartSummary. Scoped to cart contexts.
+   ========================================================================== */
+/* Drawer surface + heading */
+.cart-drawer .drawer__inner {
+  background: #ffffff;
+}
+
+.cart-drawer .drawer__heading,
+.cart__items-title,
+#main-cart-items .title-wrapper-with-link h1 {
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Line item: product title + price like CartLineItem.tsx */
+.cart-item__name {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--dibi-ink);
+}
+
+.cart-item__name:hover {
+  color: var(--dibi-accent);
+}
+
+.cart-item__media,
+.cart-item__image {
+  border-radius: var(--dibi-radius);
+  background: #f3f4f6;
+}
+
+.cart-item .product-option,
+.cart-item__price-wrapper .price-item {
+  color: var(--dibi-muted);
+}
+
+.cart-item__price-wrapper .price .price-item--regular {
+  color: var(--dibi-ink);
+}
+
+/* Totals (CartSummary "Totals" / Subtotal) */
+.totals__total {
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--dibi-muted);
+}
+
+.totals__total-value {
+  color: var(--dibi-ink);
+  font-weight: 400;
+}
+
+/* Checkout button — ink, white, uppercase wide tracking (Continue to Checkout) */
+.cart__checkout-button.button,
+#cart .cart__checkout-button {
+  background: var(--dibi-ink);
+  color: #ffffff;
+  border: 1px solid var(--dibi-ink);
+  border-radius: var(--dibi-radius);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.cart__checkout-button.button::after {
+  display: none;
+}
+
+.cart__checkout-button.button:not([disabled]):hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+.cart__checkout-button.button[disabled] {
+  opacity: 0.5;
+}
+
+/* Empty-state continue-shopping + drawer footer secondary buttons */
+.cart-drawer .button.button--tertiary {
+  color: var(--dibi-muted);
+}
+
+/* Cart page table dividers stay quiet */
+.cart-items th,
+.cart-items td {
+  border-color: var(--dibi-line);
+}
+
+/* ==========================================================================
+   Search results page (Task 2.3) — light alignment with the DIBI palette.
+   Reuses the collection card rules above via shared .card classes.
+   ========================================================================== */
+.template-search__header h1.h2 {
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.template-search__results .card__heading {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--dibi-ink);
+}
+
+.template-search__results .card__media,
+.template-search__results .card .media {
+  background: #f3f4f6;
+  border-radius: var(--dibi-radius);
+}
+
+.search__input.field__input:focus,
+.search .field__input:focus {
+  border-color: var(--dibi-accent);
+}
+
+.search__button:hover {
+  color: var(--dibi-accent);
+}

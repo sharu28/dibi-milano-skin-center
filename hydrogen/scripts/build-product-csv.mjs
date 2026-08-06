@@ -1,5 +1,5 @@
 // Generate a Shopify-importable products.csv from products-detailed.json.
-// Status: draft. Placeholder price: 1.00. No images (uploaded separately).
+// Status: active. Price: price_lkr from JSON (fallback 1.00). No images (uploaded separately).
 //
 // Run: node scripts/build-product-csv.mjs
 
@@ -321,11 +321,11 @@ for (const p of products) {
       'Default Title', // Option1 Value
       h.toUpperCase().slice(0, 32), // SKU
       '50', // Grams
-      '', // Inventory Tracker (untracked = always sellable)
-      '0', // Inventory Qty (ignored when untracked)
-      'continue', // Inventory Policy (allow overselling as belt-and-braces)
+      'shopify', // Inventory Tracker
+      String(p.quantity ?? 100), // Inventory Qty (quantity from products-detailed.json)
+      'continue', // Inventory Policy (keep selling at 0 stock — never shows sold out)
       'manual', // Fulfillment Service
-      '1.00', // Price
+      p.price_lkr ? `${p.price_lkr}.00` : '1.00', // Price (LKR, from price_lkr in products-detailed.json)
       'TRUE', // Requires Shipping
       'TRUE', // Taxable
       firstImg, // Image Src

@@ -33,6 +33,12 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: normal;
 }
 
+/* Announcement banner marquee — content is duplicated, so -50% loops seamlessly */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }

@@ -25,3 +25,8 @@ export const bookingWhatsAppUrl = whatsappUrl(
 export const trainingWhatsAppUrl = whatsappUrl(
   "Hi DIBI Milano Academy, I'd like to enquire about course enrolment.",
 );
+
+/** Gift card purchase enquiry used by the home page CTA. */
+export const giftCardWhatsAppUrl = whatsappUrl(
+  "Hi DIBI Milano, I'd like to purchase a gift card.",
+);

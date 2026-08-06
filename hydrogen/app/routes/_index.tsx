@@ -4,7 +4,6 @@ import type {Route} from './+types/_index';
 import {motion} from 'motion/react';
 import {ArrowRight, Star, Instagram} from 'lucide-react';
 import {services} from '~/data/services';
-import {giftCardWhatsAppUrl} from '~/data/contact';
 
 export const meta: Route.MetaFunction = () => {
   return [
@@ -181,14 +180,12 @@ export default function Home() {
                 Treat someone special to a bespoke skin experience. Our beautifully packaged gift
                 cards can be used towards any treatment or product in our clinic.
               </p>
-              <a
-                href={giftCardWhatsAppUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/products/gift-card"
                 className="inline-flex items-center justify-center px-8 py-4 bg-[#1A1A1A] text-white text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#D4C5B9] transition-all duration-300"
               >
                 Buy Gift Card
-              </a>
+              </Link>
             </div>
             <div className="order-1 lg:order-2 relative">
               <div className="aspect-[4/3] overflow-hidden bg-gray-100">

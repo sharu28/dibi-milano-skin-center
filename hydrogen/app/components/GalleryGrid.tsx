@@ -16,7 +16,7 @@ export function GalleryGrid({items}: {items: GalleryItem[]}) {
     <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 [column-fill:_balance]">
       {sorted.map((item, index) => (
         <motion.div
-          key={item.src}
+          key={item.type === 'instagram' ? item.code : item.src}
           initial={{opacity: 0, y: 16}}
           whileInView={{opacity: 1, y: 0}}
           viewport={{once: true, margin: '-50px'}}
@@ -27,7 +27,18 @@ export function GalleryGrid({items}: {items: GalleryItem[]}) {
           }}
           className="mb-4 break-inside-avoid overflow-hidden rounded-sm bg-gray-100"
         >
-          {item.type === 'video' ? (
+          {item.type === 'instagram' ? (
+            <div className="relative w-full aspect-[9/16]">
+              <iframe
+                src={`https://www.instagram.com/reel/${item.code}/embed/`}
+                title={item.alt}
+                loading="lazy"
+                allowFullScreen
+                scrolling="no"
+                className="absolute inset-0 w-full h-full border-0"
+              />
+            </div>
+          ) : item.type === 'video' ? (
             <video
               src={item.src}
               poster={item.poster}

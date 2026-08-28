@@ -1,0 +1,2486 @@
+:root {
+  --dibi-bg: #F9F9F7;
+  --dibi-ink: #1A1A1A;          /* clinic-dark: buttons, strong headings */
+  --dibi-text: #2D2D2D;         /* clinic-text: body copy */
+  --dibi-muted: #6B6B6B;
+  --dibi-accent: #D4C5B9;       /* warm beige used for icons, hover and cart badge in the Hydrogen reference */
+  --dibi-line: rgba(0, 0, 0, 0.08);
+  --dibi-maxw: 80rem;           /* matches reference max-w-7xl (header/footer/services/CTA) */
+  --dibi-radius: 0px;
+  /* Exact fonts from hydrogen/app/styles/app.css */
+  --dibi-font-body: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --dibi-font-heading: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --dibi-font-serif: "Cormorant Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+/* Match the Hydrogen reference typography globally (overrides Dawn fonts). */
+body {
+  background: var(--dibi-bg);
+  color: var(--dibi-text);
+  font-family: var(--dibi-font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h0, .h1, .h2, .h3, .h4, .h5 {
+  font-family: var(--dibi-font-heading);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.serif-text,
+.dibi-serif {
+  font-family: var(--dibi-font-serif);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--dibi-bg); }
+::-webkit-scrollbar-thumb { background: var(--dibi-accent); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #c3b2a4; }
+
+.dibi-container {
+  max-width: var(--dibi-maxw);
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+  .dibi-container {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dibi-container {
+    padding-inline: 2rem;
+  }
+}
+
+.dibi-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.dibi-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dibi-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   Header (matches hydrogen/app/components/Navbar.tsx)
+   ========================================================================== */
+.dibi-header {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  z-index: 50;
+}
+
+.dibi-header--sticky {
+  position: sticky;
+  top: 0;
+}
+
+.dibi-header__inner {
+  max-width: var(--dibi-maxw);
+  margin-inline: auto;
+  padding: 1.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.dibi-nav {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1f2937;
+}
+
+.dibi-nav--right {
+  justify-content: flex-end;
+}
+
+@media (min-width: 768px) {
+  .dibi-nav {
+    display: flex;
+  }
+}
+
+.dibi-nav__link,
+.dibi-nav__cta {
+  color: #1f2937;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: uppercase;
+}
+
+.dibi-nav__link:hover,
+.dibi-nav__cta:hover {
+  color: #6b7280;
+}
+
+.dibi-nav__cart {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: #1f2937;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.dibi-nav__cart:hover {
+  color: #6b7280;
+}
+
+.dibi-nav__cart-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.dibi-nav__cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 9999px;
+  background: #d4c5b9;
+  color: #fff;
+  font-size: 10px;
+  line-height: 16px;
+  text-align: center;
+}
+
+/* Centered brand lockup */
+.dibi-header__brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  text-decoration: none;
+}
+
+.dibi-header__brand-title {
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #111827;
+  font-size: 1.25rem;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.dibi-header__brand-sub {
+  font-size: 0.625rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin: 0.25rem 0 0;
+}
+
+@media (min-width: 768px) {
+  .dibi-header__brand-title {
+    font-size: 1.5rem;
+  }
+  .dibi-header__brand-sub {
+    font-size: 0.75rem;
+  }
+}
+
+.dibi-header__logo-img {
+  display: block;
+  height: auto;
+}
+
+/* Services dropdown (desktop) */
+.dibi-nav__services {
+  position: relative;
+}
+
+.dibi-nav__services-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.dibi-nav__services-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding-top: 1rem;
+  width: 16rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95);
+  transform-origin: top left;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+.dibi-nav__services:hover .dibi-nav__services-menu,
+.dibi-nav__services:focus-within .dibi-nav__services-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.dibi-nav__services-inner {
+  background: #ffffff;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f3f4f6;
+  padding: 0.5rem 0;
+}
+
+.dibi-nav__services-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  color: #4b5563;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dibi-nav__services-link:hover {
+  background: #f9fafb;
+  color: #111827;
+}
+
+/* Mobile toggle */
+.dibi-header__mobile-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #1f2937;
+  cursor: pointer;
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .dibi-header__mobile-toggle {
+    display: none;
+  }
+}
+
+.dibi-header__mobile-toggle svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Mobile drawer */
+.dibi-mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease;
+}
+
+.dibi-mobile-menu.is-open {
+  max-height: 100vh;
+  border-top: 1px solid #f3f4f6;
+}
+
+@media (min-width: 768px) {
+  .dibi-mobile-menu {
+    display: none;
+  }
+}
+
+.dibi-mobile-menu__list {
+  padding: 0.5rem 1rem 1.5rem;
+}
+
+.dibi-mobile-menu__link {
+  display: block;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1f2937;
+  text-decoration: none;
+  border-bottom: 1px solid #f9fafb;
+}
+
+.dibi-mobile-menu__services-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1f2937;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #f9fafb;
+  cursor: pointer;
+}
+
+.dibi-mobile-menu__services-toggle svg {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.dibi-mobile-menu__services-toggle[aria-expanded='true'] svg {
+  transform: rotate(180deg);
+}
+
+.dibi-mobile-menu__sublist {
+  background: #f9fafb;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease;
+}
+
+.dibi-mobile-menu__sublist.is-open {
+  max-height: 24rem;
+}
+
+.dibi-mobile-menu__sublink {
+  display: block;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: #4b5563;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Footer (matches hydrogen/app/components/Footer.tsx)
+   ========================================================================== */
+.dibi-footer {
+  background: var(--dibi-bg);
+  color: #111827;
+  padding: 5rem 0 2.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.dibi-footer__inner {
+  max-width: var(--dibi-maxw);
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.dibi-footer__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .dibi-footer__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.dibi-footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .dibi-footer__brand {
+    grid-column: span 2;
+  }
+}
+
+.dibi-footer__brand-title {
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+}
+
+.dibi-footer__brand-sub {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin: 0;
+}
+
+.dibi-footer__blurb {
+  font-family: var(--dibi-font-serif);
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 0.875rem;
+  color: #4b5563;
+  max-width: 28rem;
+  line-height: 1.7;
+}
+
+.dibi-footer__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.dibi-footer__contact-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dibi-footer__contact-row svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--dibi-accent);
+  flex-shrink: 0;
+}
+
+.dibi-footer__contact a {
+  color: #4b5563;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.dibi-footer__contact a:hover {
+  color: #111827;
+}
+
+.dibi-footer__heading {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+  color: #6b7280;
+}
+
+.dibi-footer__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.dibi-footer__links a {
+  color: #4b5563;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.dibi-footer__links a:hover {
+  color: var(--dibi-accent);
+}
+
+.dibi-footer__hours {
+  font-size: 0.875rem;
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+.dibi-footer__hours p {
+  margin: 0 0 1rem;
+}
+
+.dibi-footer__social {
+  margin-top: 2rem;
+}
+
+.dibi-footer__social .dibi-footer__heading {
+  margin-bottom: 1rem;
+}
+
+.dibi-footer__social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.dibi-footer__social-link {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  border: 1px solid #d1d5db;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #4b5563;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.dibi-footer__social-link svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.dibi-footer__social-link:hover {
+  background: var(--dibi-accent);
+  border-color: var(--dibi-accent);
+  color: #fff;
+}
+
+.dibi-footer__map {
+  width: 100%;
+  height: 512px;
+  background: #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 4rem;
+}
+
+.dibi-footer__map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.dibi-footer__bottom {
+  padding-top: 2rem;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+@media (min-width: 768px) {
+  .dibi-footer__bottom {
+    flex-direction: row;
+  }
+}
+
+.dibi-footer__bottom p {
+  margin: 0;
+}
+
+.dibi-footer__policies {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.dibi-footer__policies a {
+  color: #6b7280;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.dibi-footer__policies a:hover {
+  color: #111827;
+}
+
+/* ==========================================================================
+   Product page (Task 2.1) — matches hydrogen products.$handle.tsx + ProductForm
+   Scoped to Dawn's <product-info>/.product so global Dawn styles stay intact.
+   ========================================================================== */
+.product-info .product,
+product-info .product {
+  gap: 3rem;
+}
+
+@media screen and (min-width: 990px) {
+  .product-info .product,
+  product-info .product {
+    gap: 5rem;
+  }
+}
+
+/* Gallery: square, neutral backdrop like the Hydrogen aspect-square frame */
+product-info .product__media-wrapper .media,
+product-info .product__media-item .media {
+  background: #f3f4f6;
+  border-radius: var(--dibi-radius);
+}
+
+/* Info column typography */
+product-info .product__title h1,
+product-info .product__title h2 {
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  color: var(--dibi-ink);
+}
+
+/* Eyebrow / vendor-style text blocks rendered via the "text" block */
+product-info .product__text.caption-with-letter-spacing {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #b8a99a;
+}
+
+/* Price — match ProductPrice.tsx (large, ink, restrained) */
+product-info .price .price-item--regular {
+  color: var(--dibi-ink);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+product-info .price--large .price-item--regular {
+  font-size: 1.5rem;
+}
+
+product-info .price .price-item--sale {
+  color: var(--dibi-ink);
+}
+
+product-info .price__regular .price-item,
+product-info .price__sale s .price-item--regular {
+  color: var(--dibi-muted);
+}
+
+/* Description body */
+product-info .product__description {
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+/* Add to cart button — match AddToCartButton.tsx in ProductForm:
+   solid ink, white text, uppercase, wide letter-spacing, no radius. */
+product-info .product-form__submit,
+product-info .product-form__buttons .button {
+  background: var(--dibi-ink);
+  color: #ffffff;
+  border-radius: var(--dibi-radius);
+  border: 1px solid var(--dibi-ink);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding-block: 1.1rem;
+  box-shadow: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+product-info .product-form__submit::after,
+product-info .product-form__buttons .button::after {
+  display: none;
+}
+
+product-info .product-form__submit:not([disabled]):hover,
+product-info .product-form__buttons .button:not([disabled]):hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+product-info .product-form__submit[disabled],
+product-info .product-form__buttons .button[disabled] {
+  opacity: 0.5;
+}
+
+/* Variant picker swatches/buttons: accent selected ring like the reference */
+product-info .product-form__input--swatch input:checked + label,
+product-info fieldset.product-form__input input:checked + label {
+  border-color: var(--dibi-accent);
+}
+
+/* Accordion (collapsible tabs) — quieter dividers matching the palette */
+product-info .product__accordion .accordion__title,
+product-info .product__accordion summary {
+  letter-spacing: 0.08em;
+}
+
+product-info .product__accordion .accordion {
+  border-color: var(--dibi-line);
+}
+
+/* ==========================================================================
+   Collection grid (Task 2.2) — matches hydrogen products._index.tsx
+   Scoped to Dawn's <collection-component> so other product grids are unaffected.
+   ========================================================================== */
+/* Collection banner: quieter, light heading like the Hydrogen hero copy */
+.collection-hero__title {
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.collection-hero__description {
+  color: var(--dibi-muted);
+  line-height: 1.7;
+}
+
+/* Generous gap (reference: gap-8). Column count stays a Dawn theme setting —
+   set columns_desktop to 3 in the editor to match the reference 3-up grid. */
+collection-component .product-grid {
+  column-gap: 2rem;
+  row-gap: 2.5rem;
+}
+
+/* Card: flat white surface, square media, no border/radius */
+collection-component .card-wrapper .card,
+collection-component .card-wrapper .card__inner {
+  border-radius: var(--dibi-radius);
+  background: transparent;
+}
+
+collection-component .card__media,
+collection-component .card .media {
+  background: #f3f4f6;
+  border-radius: var(--dibi-radius);
+}
+
+/* Subtle zoom on hover, mirroring group-hover:scale-105 in the reference */
+collection-component .card__media img {
+  transition: transform 0.7s ease;
+}
+
+collection-component .card-wrapper:hover .card__media img {
+  transform: scale(1.05);
+}
+
+/* Card text block */
+collection-component .card__content {
+  padding-top: 1.25rem;
+}
+
+collection-component .card__heading,
+collection-component .card-information .card__heading {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+  color: var(--dibi-ink);
+}
+
+/* Vendor eyebrow above the title (when show_vendor enabled) */
+collection-component .card-information .caption-with-letter-spacing {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dibi-accent);
+}
+
+/* Price */
+collection-component .card-information .price,
+collection-component .price .price-item--regular {
+  color: var(--dibi-ink);
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+}
+
+/* Pagination / load-more buttons: bordered, accent on hover (reference style) */
+collection-component .pagination-wrapper .button,
+collection-component .pagination-wrapper a {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.75rem;
+}
+
+collection-component .pagination__item--current {
+  border-color: var(--dibi-accent);
+  color: var(--dibi-accent);
+}
+
+/* ==========================================================================
+   Cart drawer + /cart page (Task 2.3) — matches hydrogen cart.tsx / CartMain /
+   CartLineItem / CartSummary. Scoped to cart contexts.
+   ========================================================================== */
+/* Drawer surface + heading */
+.cart-drawer .drawer__inner {
+  background: #ffffff;
+}
+
+.cart-drawer .drawer__heading,
+.cart__items-title,
+#main-cart-items .title-wrapper-with-link h1 {
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Line item: product title + price like CartLineItem.tsx */
+.cart-item__name {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--dibi-ink);
+}
+
+.cart-item__name:hover {
+  color: var(--dibi-accent);
+}
+
+.cart-item__media,
+.cart-item__image {
+  border-radius: var(--dibi-radius);
+  background: #f3f4f6;
+}
+
+.cart-item .product-option,
+.cart-item__price-wrapper .price-item {
+  color: var(--dibi-muted);
+}
+
+.cart-item__price-wrapper .price .price-item--regular {
+  color: var(--dibi-ink);
+}
+
+/* Totals (CartSummary "Totals" / Subtotal) */
+.totals__total {
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--dibi-muted);
+}
+
+.totals__total-value {
+  color: var(--dibi-ink);
+  font-weight: 400;
+}
+
+/* Checkout button — ink, white, uppercase wide tracking (Continue to Checkout) */
+.cart__checkout-button.button,
+#cart .cart__checkout-button {
+  background: var(--dibi-ink);
+  color: #ffffff;
+  border: 1px solid var(--dibi-ink);
+  border-radius: var(--dibi-radius);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.cart__checkout-button.button::after {
+  display: none;
+}
+
+.cart__checkout-button.button:not([disabled]):hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+.cart__checkout-button.button[disabled] {
+  opacity: 0.5;
+}
+
+/* Empty-state continue-shopping + drawer footer secondary buttons */
+.cart-drawer .button.button--tertiary {
+  color: var(--dibi-muted);
+}
+
+/* Cart page table dividers stay quiet */
+.cart-items th,
+.cart-items td {
+  border-color: var(--dibi-line);
+}
+
+/* ==========================================================================
+   Search results page (Task 2.3) — light alignment with the DIBI palette.
+   Reuses the collection card rules above via shared .card classes.
+   ========================================================================== */
+.template-search__header h1.h2 {
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.template-search__results .card__heading {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--dibi-ink);
+}
+
+.template-search__results .card__media,
+.template-search__results .card .media {
+  background: #f3f4f6;
+  border-radius: var(--dibi-radius);
+}
+
+.search__input.field__input:focus,
+.search .field__input:focus {
+  border-color: var(--dibi-accent);
+}
+
+.search__button:hover {
+  color: var(--dibi-accent);
+}
+
+/* ==========================================================================
+   Homepage: Hero carousel (Task 3.1) — matches _index.tsx hero section.
+   ========================================================================== */
+.dibi-hero {
+  position: relative;
+  height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dibi-hero__slides {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.dibi-hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.dibi-hero__slide.is-active {
+  opacity: 1;
+}
+
+.dibi-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.dibi-hero__img--placeholder {
+  background: var(--dibi-accent);
+}
+
+.dibi-hero__img--placeholder .dibi-hero__placeholder-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dibi-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, var(--dibi-hero-overlay, 0.3));
+}
+
+.dibi-hero__content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding-inline: 1rem;
+  max-width: 56rem;
+  margin-inline: auto;
+}
+
+.dibi-hero__heading {
+  font-family: var(--dibi-font-body);
+  font-weight: 300;
+  color: #ffffff;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0 0 1.5rem;
+  font-size: clamp(2.25rem, 5vw, 4.5rem);
+}
+
+.dibi-hero__subheading {
+  font-family: var(--dibi-font-serif);
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 42rem;
+  margin: 0 auto 2.5rem;
+  font-size: clamp(1.125rem, 2vw, 1.25rem);
+}
+
+.dibi-hero__subheading p {
+  margin: 0;
+}
+
+.dibi-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background: #ffffff;
+  color: #111827;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.dibi-hero__cta:hover {
+  background: var(--dibi-accent);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Homepage: Services grid (Task 3.2) — matches _index.tsx services section.
+   ========================================================================== */
+.dibi-services {
+  padding-block: 6rem;
+  background: var(--dibi-bg);
+}
+
+.dibi-services__head {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.dibi-services__heading {
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  font-size: clamp(1.875rem, 3vw, 2.25rem);
+  margin: 0;
+}
+
+.dibi-services__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 750px) {
+  .dibi-services__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 990px) {
+  .dibi-services__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.dibi-service-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: #f3f4f6;
+  text-decoration: none;
+}
+
+.dibi-service-card__media,
+.dibi-service-card__media .dibi-service-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.dibi-service-card__img {
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.dibi-service-card__img--placeholder {
+  background: var(--dibi-accent);
+}
+
+.dibi-service-card:hover .dibi-service-card__img {
+  transform: scale(1.05);
+}
+
+.dibi-service-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2) 50%, transparent);
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.dibi-service-card:hover .dibi-service-card__overlay {
+  opacity: 0.9;
+}
+
+.dibi-service-card__body {
+  position: absolute;
+  inset: 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.dibi-service-card__title {
+  font-weight: 300;
+  color: #ffffff;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  margin: 0 0 0.75rem;
+}
+
+.dibi-service-card__desc {
+  font-family: var(--dibi-font-serif);
+  font-style: italic;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+  transform: translateY(2rem);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.dibi-service-card__desc p {
+  margin: 0;
+}
+
+.dibi-service-card:hover .dibi-service-card__desc {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.dibi-service-card__link {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.1s;
+}
+
+.dibi-service-card:hover .dibi-service-card__link {
+  opacity: 1;
+}
+
+.dibi-service-card__arrow {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+}
+
+/* ==========================================================================
+   Homepage: Testimonials (Task 3.3) — matches _index.tsx star/quote block.
+   ========================================================================== */
+.dibi-testimonials {
+  padding-block: 6rem;
+  background: var(--dibi-bg);
+}
+
+.dibi-testimonials__inner {
+  max-width: 56rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  text-align: center;
+}
+
+.dibi-testimonials__heading {
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  margin: 0 0 3rem;
+}
+
+.dibi-testimonial {
+  margin: 0;
+}
+
+.dibi-testimonial + .dibi-testimonial {
+  margin-top: 4rem;
+}
+
+.dibi-testimonial__stars {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-bottom: 2rem;
+}
+
+.dibi-testimonial__star {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--dibi-accent);
+}
+
+.dibi-testimonial__quote {
+  font-family: var(--dibi-font-serif);
+  font-style: italic;
+  color: #1f2937;
+  line-height: 1.6;
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  margin: 0 0 3rem;
+}
+
+.dibi-testimonial__quote p {
+  margin: 0;
+}
+
+.dibi-testimonial__author {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dibi-muted);
+}
+
+/* ==========================================================================
+   Homepage: Instagram feed (Task 3.4) — matches _index.tsx Instagram grid.
+   ========================================================================== */
+.dibi-instagram__heading {
+  text-align: center;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  margin: 0 0 2rem;
+  padding-top: 2rem;
+}
+
+.dibi-instagram__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.25rem;
+}
+
+@media (min-width: 750px) {
+  .dibi-instagram__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.dibi-instagram__post {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.dibi-instagram__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.dibi-instagram__img--placeholder {
+  background: var(--dibi-accent);
+}
+
+.dibi-instagram__post:hover .dibi-instagram__img {
+  transform: scale(1.1);
+}
+
+.dibi-instagram__hover {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dibi-instagram__post:hover .dibi-instagram__hover {
+  opacity: 1;
+}
+
+.dibi-instagram__icon {
+  width: 2rem;
+  height: 2rem;
+  color: #ffffff;
+}
+
+.dibi-instagram__footer {
+  text-align: center;
+  padding-block: 3rem;
+  background: #ffffff;
+}
+
+.dibi-instagram__follow {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.dibi-instagram__follow:hover {
+  color: var(--dibi-accent);
+}
+
+.dibi-instagram__arrow {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+}
+
+/* ==========================================================================
+   Homepage: CTA banner (Task 3.4) — closing call to action.
+   ========================================================================== */
+.dibi-cta {
+  padding-block: 6rem;
+  background: #ffffff;
+}
+
+.dibi-cta__inner {
+  max-width: 56rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  text-align: center;
+}
+
+.dibi-cta__heading {
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  font-size: clamp(1.875rem, 3vw, 2.25rem);
+  margin: 0 0 1.5rem;
+}
+
+.dibi-cta__subtext {
+  font-family: var(--dibi-font-serif);
+  color: var(--dibi-muted);
+  line-height: 1.6;
+  font-size: 1.125rem;
+  margin: 0 auto 2.5rem;
+  max-width: 42rem;
+}
+
+.dibi-cta__subtext p {
+  margin: 0;
+}
+
+.dibi-cta__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background: var(--dibi-ink);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.dibi-cta__button:hover {
+  background: var(--dibi-accent);
+}
+
+/* CTA split (side-image) layout — matches "Gift of Glowing Skin" in _index.tsx */
+.dibi-cta--split {
+  padding-block: 6rem;
+}
+
+.dibi-cta__split {
+  max-width: var(--dibi-maxw);
+  margin-inline: auto;
+  padding-inline: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (min-width: 990px) {
+  .dibi-cta__split {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.dibi-cta--split .dibi-cta__heading,
+.dibi-cta--split .dibi-cta__subtext {
+  text-align: left;
+  margin-left: 0;
+}
+
+.dibi-cta--split .dibi-cta__subtext {
+  font-size: 1.125rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Text left / image right (default) — image second in DOM */
+.dibi-cta__media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f3f4f6;
+  order: -1;
+}
+
+@media (min-width: 990px) {
+  .dibi-cta--image-right .dibi-cta__media {
+    order: 0;
+  }
+  .dibi-cta--image-left .dibi-cta__text {
+    order: 0;
+  }
+  .dibi-cta--image-left .dibi-cta__media {
+    order: -1;
+  }
+}
+
+.dibi-cta__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ==========================================================================
+   Homepage: Bespoke intro — matches _index.tsx "Your Bespoke Experience".
+   ========================================================================== */
+.dibi-bespoke {
+  padding-block: 6rem;
+  background: #ffffff;
+}
+
+@media (min-width: 750px) {
+  .dibi-bespoke {
+    padding-block: 8rem;
+  }
+}
+
+.dibi-bespoke__inner {
+  max-width: 56rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  text-align: center;
+}
+
+.dibi-bespoke__eyebrow {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin: 0 0 2rem;
+}
+
+.dibi-bespoke__body {
+  font-family: var(--dibi-font-serif);
+  color: #1f2937;
+  line-height: 1.6;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.dibi-bespoke__body p {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Homepage: Marquee bar — matches _index.tsx beige scrolling bar.
+   ========================================================================== */
+.dibi-marquee {
+  background: var(--dibi-accent);
+  color: var(--dibi-ink);
+  padding-block: 1rem;
+  overflow: hidden;
+}
+
+.dibi-marquee__track {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  animation: dibi-marquee-scroll var(--dibi-marquee-speed, 20s) linear infinite;
+}
+
+.dibi-marquee__group {
+  display: flex;
+  align-items: center;
+}
+
+.dibi-marquee__item,
+.dibi-marquee__sep {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-inline: 1rem;
+}
+
+@keyframes dibi-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dibi-marquee__track {
+    animation: none;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+  .dibi-marquee__group[aria-hidden='true'] {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Training page (Task 4.5) — matches hydrogen/app/routes/training.tsx.
+   ========================================================================== */
+.dibi-training__philosophy {
+  padding-block: 6rem;
+  padding-inline: 1rem;
+  background: #ffffff;
+}
+
+.dibi-training__philosophy-inner {
+  max-width: 56rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.dibi-training__eyebrow {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--dibi-muted);
+  margin: 0 0 2rem;
+}
+
+.dibi-training__lead {
+  font-family: var(--dibi-font-serif);
+  color: var(--dibi-ink);
+  line-height: 1.6;
+  font-size: clamp(1.25rem, 3vw, 1.875rem);
+}
+
+.dibi-training__lead p {
+  margin: 0;
+}
+
+.dibi-training__courses {
+  padding-block: 6rem;
+  background: var(--dibi-bg);
+}
+
+.dibi-training__inner {
+  max-width: 56rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.dibi-training__group-head {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.dibi-training__group-title {
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  font-size: clamp(1.875rem, 3vw, 2.25rem);
+  margin: 0 0 1.5rem;
+}
+
+.dibi-training__group-subtitle {
+  font-family: var(--dibi-font-serif);
+  color: var(--dibi-muted);
+  font-size: 1.125rem;
+  max-width: 42rem;
+  margin-inline: auto;
+}
+
+.dibi-training__course-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dibi-training__course {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--dibi-line);
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  .dibi-training__course {
+    flex-direction: row;
+    align-items: baseline;
+  }
+}
+
+.dibi-training__course-main {
+  flex: 1;
+  padding-right: 1rem;
+}
+
+.dibi-training__course-title {
+  font-size: clamp(1.125rem, 2vw, 1.25rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--dibi-ink);
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.dibi-training__course:hover .dibi-training__course-title {
+  color: var(--dibi-accent);
+}
+
+.dibi-training__course-desc {
+  font-family: var(--dibi-font-serif);
+  font-style: italic;
+  font-size: 0.875rem;
+  color: var(--dibi-muted);
+  margin-top: 0.25rem;
+}
+
+.dibi-training__course-desc p {
+  margin: 0;
+}
+
+.dibi-training__course-duration {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dibi-muted);
+  margin: 0.5rem 0 0;
+}
+
+.dibi-training__course-price {
+  white-space: nowrap;
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+  color: var(--dibi-ink);
+}
+
+.dibi-training__faqs {
+  padding-block: 6rem;
+  background: var(--dibi-bg);
+}
+
+.dibi-training__faqs-inner {
+  max-width: 48rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.dibi-training__faqs-heading {
+  text-align: center;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  margin: 0 0 3rem;
+}
+
+.dibi-training__faq-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.dibi-training__faq {
+  border-bottom: 1px solid var(--dibi-line);
+}
+
+.dibi-training__faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-block: 1.25rem;
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  transition: color 0.3s ease;
+}
+
+.dibi-training__faq-q::-webkit-details-marker {
+  display: none;
+}
+
+.dibi-training__faq-q:hover {
+  color: var(--dibi-accent);
+}
+
+.dibi-training__faq-q svg {
+  flex-shrink: 0;
+  color: var(--dibi-muted);
+  transition: transform 0.3s ease;
+}
+
+.dibi-training__faq[open] .dibi-training__faq-q svg {
+  transform: rotate(180deg);
+}
+
+.dibi-training__faq-a {
+  padding-bottom: 1.25rem;
+  font-family: var(--dibi-font-serif);
+  color: var(--dibi-muted);
+  line-height: 1.6;
+}
+
+.dibi-training__faq-a p {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Careers page (Task 4.6) — matches hydrogen/app/routes/careers.tsx.
+   ========================================================================== */
+.dibi-careers__culture {
+  padding-block: 6rem;
+  padding-inline: 1rem;
+  background: #ffffff;
+}
+
+.dibi-careers__culture-inner {
+  max-width: 56rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.dibi-careers__eyebrow {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--dibi-muted);
+  margin: 0 0 2rem;
+}
+
+.dibi-careers__lead {
+  font-family: var(--dibi-font-serif);
+  color: var(--dibi-ink);
+  line-height: 1.6;
+  font-size: clamp(1.25rem, 3vw, 1.875rem);
+}
+
+.dibi-careers__lead p {
+  margin: 0;
+}
+
+.dibi-careers__openings {
+  padding-block: 6rem;
+  background: var(--dibi-bg);
+}
+
+.dibi-careers__inner {
+  max-width: 56rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.dibi-careers__head {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.dibi-careers__openings-heading {
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  font-size: clamp(1.875rem, 3vw, 2.25rem);
+  margin: 0 0 1.5rem;
+}
+
+.dibi-careers__openings-subtitle {
+  font-family: var(--dibi-font-serif);
+  color: var(--dibi-muted);
+  font-size: 1.125rem;
+}
+
+.dibi-careers__roles {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dibi-career-card {
+  background: #ffffff;
+  padding: 2rem;
+  border: 1px solid var(--dibi-line);
+  transition: border-color 0.3s ease;
+}
+
+.dibi-career-card:hover {
+  border-color: var(--dibi-accent);
+}
+
+.dibi-career-card__head {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .dibi-career-card__head {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.dibi-career-card__title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--dibi-ink);
+  margin: 0 0 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.dibi-career-card:hover .dibi-career-card__title {
+  color: var(--dibi-accent);
+}
+
+.dibi-career-card__meta {
+  font-size: 0.875rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dibi-muted);
+  margin: 0;
+}
+
+.dibi-career-card__apply {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.dibi-career-card__apply:hover {
+  color: var(--dibi-accent);
+}
+
+.dibi-career-card__apply svg {
+  transform: rotate(-90deg);
+}
+
+.dibi-career-card__desc {
+  font-family: var(--dibi-font-serif);
+  color: var(--dibi-muted);
+  line-height: 1.6;
+  margin-top: 1rem;
+}
+
+.dibi-career-card__desc p {
+  margin: 0;
+}
+
+.dibi-careers__cta {
+  margin-top: 5rem;
+  text-align: center;
+  background: #ffffff;
+  padding: 3rem;
+  border: 1px solid var(--dibi-line);
+}
+
+.dibi-careers__cta svg {
+  color: var(--dibi-accent);
+  margin: 0 auto 1.5rem;
+}
+
+.dibi-careers__cta-heading {
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  font-size: 1.5rem;
+  margin: 0 0 1rem;
+}
+
+.dibi-careers__cta-body {
+  font-family: var(--dibi-font-serif);
+  color: var(--dibi-muted);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  max-width: 42rem;
+  margin: 0 auto 2rem;
+}
+
+.dibi-careers__cta-body p {
+  margin: 0;
+}
+
+/* ==========================================================================
+   Gallery page (Task 4.7) — matches hydrogen/app/components/GalleryGrid.tsx.
+   CSS-columns masonry, 1 / 2 / 3 columns.
+   ========================================================================== */
+.dibi-gallery {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding: 10rem 1.5rem 6rem;
+}
+
+.dibi-gallery__head {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.dibi-gallery__heading {
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  margin: 0 0 1.5rem;
+}
+
+.dibi-gallery__subheading {
+  font-family: var(--dibi-font-serif);
+  font-style: italic;
+  color: var(--dibi-muted);
+  font-size: 1.125rem;
+  max-width: 42rem;
+  margin-inline: auto;
+}
+
+.dibi-gallery__subheading p {
+  margin: 0;
+}
+
+.dibi-gallery__grid {
+  column-count: 1;
+  column-gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .dibi-gallery__grid {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 990px) {
+  .dibi-gallery__grid {
+    column-count: 3;
+  }
+}
+
+.dibi-gallery__item {
+  margin-bottom: 1rem;
+  break-inside: avoid;
+  overflow: hidden;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.dibi-gallery__media {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.dibi-gallery__media--placeholder {
+  aspect-ratio: 4 / 5;
+  background: var(--dibi-accent);
+}
+
+.dibi-gallery__placeholder-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dibi-gallery__empty {
+  text-align: center;
+  font-family: var(--dibi-font-serif);
+  font-style: italic;
+  color: var(--dibi-muted);
+  padding-block: 6rem;
+}
+
+/* ===========================================================================
+   Service detail (metaobject.service template) — mirrors service.$slug.tsx
+   =========================================================================== */
+
+.dibi-service {
+  background: #fff;
+  color: var(--dibi-ink);
+}
+
+/* Hero */
+.dibi-service__hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dibi-service__hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.dibi-service__hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.dibi-service__hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dibi-service__hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 5rem 1.5rem 0;
+  max-width: 56rem;
+  margin-inline: auto;
+}
+
+.dibi-service__hero-title {
+  font-family: var(--dibi-font-heading);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #fff;
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
+  margin: 0 0 1.5rem;
+}
+
+.dibi-service__hero-sub {
+  font-family: var(--dibi-font-serif);
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  max-width: 42rem;
+  margin-inline: auto;
+}
+
+/* Generic section shell */
+.dibi-service-sec {
+  background: #fff;
+  padding-block: clamp(4rem, 8vw, 6rem);
+}
+
+.dibi-service-sec--alt {
+  background: var(--dibi-bg);
+}
+
+.dibi-service-sec__inner {
+  max-width: var(--dibi-maxw);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.dibi-service-sec__inner--narrow {
+  max-width: 56rem;
+}
+
+.dibi-service-sec__head {
+  margin-bottom: 4rem;
+}
+
+.dibi-service-sec__head--center {
+  text-align: center;
+}
+
+.dibi-service-sec__title {
+  font-family: var(--dibi-font-heading);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  color: var(--dibi-ink);
+  margin: 0 0 1.5rem;
+}
+
+.dibi-service-sec__subtitle {
+  font-family: var(--dibi-font-serif);
+  color: var(--dibi-muted);
+  font-size: 1.1rem;
+  max-width: 42rem;
+  margin-inline: auto;
+}
+
+.dibi-service-sec__eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #9a9a9a;
+  margin: 0 0 1rem;
+}
+
+.dibi-service-sec__body {
+  font-family: var(--dibi-font-serif);
+  color: var(--dibi-muted);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.dibi-service-sec__body p {
+  margin: 0 0 1rem;
+}
+
+/* Split layouts */
+.dibi-service-sec__split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 990px) {
+  .dibi-service-sec__split {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .dibi-service-sec__split--reverse .dibi-service-sec__split-media {
+    order: 2;
+  }
+
+  .dibi-service-sec__split--reverse .dibi-service-sec__split-text {
+    order: 1;
+  }
+}
+
+.dibi-service-sec__split-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  background: #f0f0f0;
+}
+
+/* Price menu rows */
+.dibi-price-menu__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dibi-price-menu__row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--dibi-line);
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 600px) {
+  .dibi-price-menu__row {
+    flex-direction: row;
+    align-items: baseline;
+  }
+}
+
+.dibi-price-menu__info {
+  flex: 1;
+  padding-right: 1rem;
+}
+
+.dibi-price-menu__name {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--dibi-ink);
+  margin: 0;
+  transition: color 0.2s ease;
+}
+
+.dibi-price-menu__row:hover .dibi-price-menu__name {
+  color: var(--dibi-accent);
+}
+
+.dibi-price-menu__desc {
+  font-family: var(--dibi-font-serif);
+  font-size: 0.85rem;
+  color: #8a8a8a;
+  margin: 0.25rem 0 0;
+}
+
+.dibi-price-menu__price-wrap {
+  margin-top: 0.5rem;
+  white-space: nowrap;
+}
+
+@media (min-width: 600px) {
+  .dibi-price-menu__price-wrap {
+    margin-top: 0;
+  }
+}
+
+.dibi-price-menu__price {
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  color: var(--dibi-ink);
+}
+
+/* FAQ accordion */
+.dibi-service-faqs {
+  background: var(--dibi-bg);
+  padding-block: clamp(4rem, 8vw, 6rem);
+}
+
+.dibi-service-faqs__inner {
+  max-width: 48rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.dibi-service-faqs__heading {
+  font-family: var(--dibi-font-heading);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  text-align: center;
+  margin: 0 0 3rem;
+}
+
+.dibi-service-faqs__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dibi-service-faq {
+  border-bottom: 1px solid var(--dibi-line);
+  padding-bottom: 1rem;
+}
+
+.dibi-service-faq__q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  list-style: none;
+  padding-block: 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dibi-ink);
+  transition: color 0.2s ease;
+}
+
+.dibi-service-faq__q::-webkit-details-marker {
+  display: none;
+}
+
+.dibi-service-faq__q:hover {
+  color: var(--dibi-accent);
+}
+
+.dibi-service-faq__icon {
+  flex-shrink: 0;
+  color: #9a9a9a;
+  transition: transform 0.3s ease;
+}
+
+.dibi-service-faq[open] .dibi-service-faq__icon {
+  transform: rotate(180deg);
+}
+
+.dibi-service-faq__a {
+  padding-bottom: 1rem;
+  font-family: var(--dibi-font-serif);
+  color: var(--dibi-muted);
+  line-height: 1.7;
+}
+
+/* Booking CTA */
+.dibi-service-cta {
+  background: #fff;
+  text-align: center;
+  padding-block: clamp(5rem, 10vw, 8rem);
+  padding-inline: 1.5rem;
+}
+
+.dibi-service-cta__title {
+  font-family: var(--dibi-font-heading);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  margin: 0 0 1.5rem;
+}
+
+.dibi-service-cta__text {
+  font-family: var(--dibi-font-serif);
+  color: var(--dibi-muted);
+  font-size: 1.1rem;
+  max-width: 42rem;
+  margin: 0 auto 2.5rem;
+}
+
+.dibi-service-cta__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem 2.5rem;
+  background: var(--dibi-ink);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.dibi-service-cta__btn:hover {
+  background: var(--dibi-accent);
+}
+
+.dibi-service-cta__back {
+  margin-top: 2rem;
+}
+
+.dibi-service-cta__back-link {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dibi-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.dibi-service-cta__back-link:hover {
+  color: var(--dibi-accent);
+}
+
+/* ---------- 404 ---------- */
+.dibi-404 {
+  background: var(--dibi-bg);
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 1rem;
+}
+
+.dibi-404__inner {
+  max-width: 640px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.dibi-404__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  color: var(--dibi-accent);
+  margin: 0 0 1.25rem;
+}
+
+.dibi-404__title {
+  font-family: var(--dibi-font-heading);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--dibi-ink);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  margin: 0 0 1.5rem;
+}
+
+.dibi-404__text {
+  color: var(--dibi-muted);
+  line-height: 1.7;
+  margin: 0 0 2.5rem;
+}
+
+.dibi-404__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.dibi-404__btn {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  text-decoration: none;
+  border: 1px solid var(--dibi-ink);
+  color: var(--dibi-ink);
+  background: transparent;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dibi-404__btn:hover {
+  background: var(--dibi-ink);
+  color: #fff;
+}
+
+.dibi-404__btn--primary {
+  background: var(--dibi-ink);
+  color: #fff;
+}
+
+.dibi-404__btn--primary:hover {
+  background: var(--dibi-accent);
+  border-color: var(--dibi-accent);
+}

@@ -1,0 +1,32 @@
+{
+  "sections": {
+    "service-detail": {
+      "type": "service-detail",
+      "settings": {
+        "service_name": "Anti-Aging & Energy",
+        "short_description": "<p>Non-surgical treatments for facial rejuvenation, skin restoration, and total skin overhaul.</p>",
+        "hero_image_url": "https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=2070&auto=format&fit=crop"
+      },
+      "blocks": {
+        "g1": { "type": "group", "settings": { "title": "Anti Aging", "subtitle": "Non-surgical treatments designed to improve skin elasticity, boost collagen production, and restore youthful plumpness.", "layout": "menu" } },
+        "g1i1": { "type": "menu_item", "settings": { "name": "Agemethod", "price": "25,000+ LKR" } },
+        "g1i2": { "type": "menu_item", "settings": { "name": "Filler Code", "price": "25,000+ LKR" } },
+        "g1i3": { "type": "menu_item", "settings": { "name": "Lift Creator", "price": "17,000+ LKR" } },
+        "g1i4": { "type": "menu_item", "settings": { "name": "Lift Creator with Collagen Veil", "price": "25,000+ LKR" } },
+        "g1i5": { "type": "menu_item", "settings": { "name": "Gold", "price": "39,000+ LKR" } },
+        "g1i6": { "type": "menu_item", "settings": { "name": "Acid Infusion", "price": "23,000+ LKR" } },
+        "g1i7": { "type": "menu_item", "settings": { "name": "HIFU", "price": "23,000+ LKR per area" } },
+        "g1i8": { "type": "menu_item", "settings": { "name": "PDRN", "price": "19,500+ LKR" } },
+        "g2": { "type": "group", "settings": { "title": "Energy", "subtitle": "Combining the full sciton technology to deliver the most impressive results and a total skin overhaul.", "layout": "menu" } },
+        "g2i1": { "type": "menu_item", "settings": { "name": "Dr Skin", "price": "19,000+ LKR" } },
+        "g2i2": { "type": "menu_item", "settings": { "name": "RF", "price": "19,500+ LKR" } },
+        "g2i3": { "type": "menu_item", "settings": { "name": "LED Light", "price": "10,000+ LKR" } },
+        "g2i4": { "type": "menu_item", "settings": { "name": "Oxy Infusion with Super Serums", "price": "19,500+ LKR" } },
+        "g2i5": { "type": "menu_item", "settings": { "name": "EPN", "price": "19,500+ LKR" } },
+        "faq1": { "type": "faq", "settings": { "question": "Important Information", "answer": "<p>Prices are subject to 18% VAT.</p>" } }
+      },
+      "block_order": ["g1","g1i1","g1i2","g1i3","g1i4","g1i5","g1i6","g1i7","g1i8","g2","g2i1","g2i2","g2i3","g2i4","g2i5","faq1"]
+    }
+  },
+  "order": ["service-detail"]
+}

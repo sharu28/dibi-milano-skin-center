@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "service-detail": {
+      "type": "service-detail",
+      "settings": {
+        "service_name": "Eye & Body Enhancements",
+        "short_description": "<p>Targeted treatments for the delicate eye area and full body rejuvenation.</p>",
+        "hero_image_url": "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070&auto=format&fit=crop"
+      },
+      "blocks": {
+        "g1": { "type": "group", "settings": { "title": "Eye Treatments", "subtitle": "Utilises deep radio frequency technology & products to treat fine lines, darkness and minor skin laxity.", "layout": "menu" } },
+        "g1i1": { "type": "menu_item", "settings": { "name": "Agemethod", "price": "10,000+ LKR" } },
+        "g1i2": { "type": "menu_item", "settings": { "name": "Filler Code", "price": "10,000+ LKR" } },
+        "g1i3": { "type": "menu_item", "settings": { "name": "Advanced Boosters", "price": "15,000+ LKR" } },
+        "g1i4": { "type": "menu_item", "settings": { "name": "Acid Infusion", "price": "15,000+ LKR" } },
+        "g1i5": { "type": "menu_item", "settings": { "name": "PDRN", "price": "15,000+ LKR" } },
+        "g2": { "type": "group", "settings": { "title": "Body", "subtitle": "Address imperfections and promote cell renewal with a deeply relaxing full-body massage.", "layout": "menu" } },
+        "g2i1": { "type": "menu_item", "settings": { "name": "Microdermabrasion", "price": "35,000+ LKR" } },
+        "g2i2": { "type": "menu_item", "settings": { "name": "De Tan Polish", "price": "45,000+ LKR" } },
+        "faq1": { "type": "faq", "settings": { "question": "Important Information", "answer": "<p>Prices are subject to 18% VAT.</p>" } }
+      },
+      "block_order": ["g1","g1i1","g1i2","g1i3","g1i4","g1i5","g2","g2i1","g2i2","faq1"]
+    }
+  },
+  "order": ["service-detail"]
+}

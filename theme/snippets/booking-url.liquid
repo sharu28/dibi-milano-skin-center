@@ -1,0 +1,7 @@
+{%- comment -%}
+  Renders a wa.me booking deep link.
+  Usage: {% render 'booking-url', message: settings.dibi_booking_message %}
+  Defaults to the global booking message when no message is passed.
+{%- endcomment -%}
+{%- assign msg = message | default: settings.dibi_booking_message -%}
+https://wa.me/{{ settings.dibi_whatsapp_number }}?text={{ msg | url_encode }}

@@ -1,0 +1,413 @@
+{%- comment -%}
+  service-detail.liquid
+
+  Renders a single service as a full detail page from SECTION SETTINGS +
+  BLOCKS (no metaobjects). Mirrors hydrogen/app/routes/service.$slug.tsx:
+  hero, grouped menu/prose/image sections, FAQ accordion, booking CTA.
+
+  Used by templates/page.<slug>.json (one per service). Each page bakes the
+  service data into editable blocks so merchants can edit copy in the theme
+  editor and upload the hero image directly.
+
+  Section settings:
+    service_name      (text)         - hero title
+    short_description (richtext)      - hero subtitle
+    hero_image        (image_picker)  - hero background (left blank for upload)
+    booking_link      (url, optional) - falls back to {% render 'booking-url' %}
+
+  Block types (rendered in order):
+    group     - title, subtitle, layout (menu/full/split-left-image/
+                split-right-image/split-text). Group heading + subtitle.
+    menu_item - name, price, description (optional). Price row under a group.
+    text      - content (richtext) for full/split prose.
+    image     - image (image_picker) for split layouts.
+    faq       - question, answer (richtext). Collected into an accordion.
+{%- endcomment -%}
+
+{%- liquid
+  assign booking_link = section.settings.booking_link
+  assign service_name = section.settings.service_name | default: 'Service'
+
+  assign has_faqs = false
+  for block in section.blocks
+    if block.type == 'faq'
+      assign has_faqs = true
+      break
+    endif
+  endfor
+-%}
+
+<div class="dibi-service">
+  {%- comment -%} Hero {%- endcomment -%}
+  <section class="dibi-service__hero">
+    <div class="dibi-service__hero-media">
+      {%- if section.settings.hero_image != blank -%}
+        {{
+          section.settings.hero_image
+          | image_url: width: 2070
+          | image_tag:
+            loading: 'eager',
+            sizes: '100vw',
+            widths: '600, 900, 1200, 1600, 2070',
+            alt: service_name,
+            class: 'dibi-service__hero-img'
+        }}
+      {%- elsif section.settings.hero_image_url != blank -%}
+        <img
+          src="{{ section.settings.hero_image_url }}"
+          alt="{{ service_name | escape }}"
+          class="dibi-service__hero-img"
+          loading="eager"
+          width="2070"
+          height="1380"
+        >
+      {%- endif -%}
+      <div class="dibi-service__hero-scrim"></div>
+    </div>
+    <div class="dibi-service__hero-content dibi-reveal">
+      <h1 class="dibi-service__hero-title">{{ service_name }}</h1>
+      {%- if section.settings.short_description != blank -%}
+        <div class="dibi-service__hero-sub">{{ section.settings.short_description }}</div>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%}
+    Sections built from group/menu_item/text/image blocks.
+
+    Each `group` block opens a section; the menu_item/text/image blocks that
+    follow it (up to the next group) belong to that group. We render one
+    self-contained <section> per group with balanced HTML, looking ahead at
+    the flat block list to find the items that belong to it.
+  {%- endcomment -%}
+  <div class="dibi-service__sections">
+    {%- assign all_blocks = section.blocks -%}
+    {%- assign group_index = 0 -%}
+    {%- for block in all_blocks -%}
+      {%- if block.type != 'group' -%}{%- continue -%}{%- endif -%}
+
+      {%- liquid
+        assign start = forloop.index0
+        assign idx = group_index
+        assign group_index = group_index | plus: 1
+        assign is_alt = false
+        assign mod = idx | modulo: 2
+        if mod != 0
+          assign is_alt = true
+        endif
+        assign layout = block.settings.layout | default: 'menu'
+      -%}
+
+      {%- case layout -%}
+        {%- when 'split-left-image', 'split-right-image' -%}
+          {%- assign left_image = true -%}
+          {%- if layout == 'split-right-image' -%}{%- assign left_image = false -%}{%- endif -%}
+          <section class="dibi-service-sec dibi-service-sec--split dibi-reveal{% if is_alt %} dibi-service-sec--alt{% endif %}" {{ block.shopify_attributes }}>
+            <div class="dibi-service-sec__inner">
+              <div class="dibi-service-sec__split{% unless left_image %} dibi-service-sec__split--reverse{% endunless %}">
+                <div class="dibi-service-sec__split-media">
+                  {%- for item in all_blocks offset: start -%}
+                    {%- if forloop.first -%}{%- continue -%}{%- endif -%}
+                    {%- if item.type == 'group' -%}{%- break -%}{%- endif -%}
+                    {%- if item.type == 'image' and item.settings.image != blank -%}
+                      {{
+                        item.settings.image
+                        | image_url: width: 1200
+                        | image_tag:
+                          loading: 'lazy',
+                          sizes: '(min-width: 990px) 50vw, 100vw',
+                          widths: '500, 800, 1000, 1200',
+                          alt: block.settings.title,
+                          class: 'dibi-service-sec__split-img'
+                      }}
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+                <div class="dibi-service-sec__split-text">
+                  {%- if block.settings.subtitle != blank -%}
+                    <h3 class="dibi-service-sec__eyebrow">{{ block.settings.subtitle }}</h3>
+                  {%- endif -%}
+                  <h2 class="dibi-service-sec__title">{{ block.settings.title }}</h2>
+                  {%- for item in all_blocks offset: start -%}
+                    {%- if forloop.first -%}{%- continue -%}{%- endif -%}
+                    {%- if item.type == 'group' -%}{%- break -%}{%- endif -%}
+                    {%- if item.type == 'text' and item.settings.content != blank -%}
+                      <div class="dibi-service-sec__body" {{ item.shopify_attributes }}>{{ item.settings.content }}</div>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              </div>
+            </div>
+          </section>
+
+        {%- when 'split-text' -%}
+          <section class="dibi-service-sec dibi-service-sec--split-text dibi-reveal{% if is_alt %} dibi-service-sec--alt{% endif %}" {{ block.shopify_attributes }}>
+            <div class="dibi-service-sec__inner">
+              <div class="dibi-service-sec__split">
+                <div class="dibi-service-sec__split-text">
+                  <h2 class="dibi-service-sec__title">{{ block.settings.title }}</h2>
+                </div>
+                <div class="dibi-service-sec__split-text">
+                  {%- if block.settings.subtitle != blank -%}
+                    <h3 class="dibi-service-sec__eyebrow">{{ block.settings.subtitle }}</h3>
+                  {%- endif -%}
+                  {%- for item in all_blocks offset: start -%}
+                    {%- if forloop.first -%}{%- continue -%}{%- endif -%}
+                    {%- if item.type == 'group' -%}{%- break -%}{%- endif -%}
+                    {%- if item.type == 'text' and item.settings.content != blank -%}
+                      <div class="dibi-service-sec__body" {{ item.shopify_attributes }}>{{ item.settings.content }}</div>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              </div>
+            </div>
+          </section>
+
+        {%- when 'full' -%}
+          <section class="dibi-service-sec dibi-service-sec--full dibi-reveal{% if is_alt %} dibi-service-sec--alt{% endif %}" {{ block.shopify_attributes }}>
+            <div class="dibi-service-sec__inner dibi-service-sec__inner--narrow dibi-service-sec__head--center">
+              <h2 class="dibi-service-sec__title">{{ block.settings.title }}</h2>
+              {%- if block.settings.subtitle != blank -%}
+                <p class="dibi-service-sec__subtitle">{{ block.settings.subtitle }}</p>
+              {%- endif -%}
+              {%- for item in all_blocks offset: start -%}
+                {%- if forloop.first -%}{%- continue -%}{%- endif -%}
+                {%- if item.type == 'group' -%}{%- break -%}{%- endif -%}
+                {%- if item.type == 'text' and item.settings.content != blank -%}
+                  <div class="dibi-service-sec__body" {{ item.shopify_attributes }}>{{ item.settings.content }}</div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </section>
+
+        {%- else -%}
+          {%- comment -%} menu (default) {%- endcomment -%}
+          <section class="dibi-service-sec dibi-service-sec--menu dibi-reveal{% if is_alt %} dibi-service-sec--alt{% endif %}" {{ block.shopify_attributes }}>
+            <div class="dibi-service-sec__inner dibi-service-sec__inner--narrow">
+              <div class="dibi-service-sec__head dibi-service-sec__head--center">
+                <h2 class="dibi-service-sec__title">{{ block.settings.title }}</h2>
+                {%- if block.settings.subtitle != blank -%}
+                  <p class="dibi-service-sec__subtitle">{{ block.settings.subtitle }}</p>
+                {%- endif -%}
+              </div>
+              <div class="dibi-price-menu__list">
+                {%- for item in all_blocks offset: start -%}
+                  {%- if forloop.first -%}{%- continue -%}{%- endif -%}
+                  {%- if item.type == 'group' -%}{%- break -%}{%- endif -%}
+                  {%- if item.type == 'menu_item' -%}
+                    <div class="dibi-price-menu__row" {{ item.shopify_attributes }}>
+                      <div class="dibi-price-menu__info">
+                        <h4 class="dibi-price-menu__name">{{ item.settings.name }}</h4>
+                        {%- if item.settings.description != blank -%}
+                          <p class="dibi-price-menu__desc"><em>{{ item.settings.description }}</em></p>
+                        {%- endif -%}
+                      </div>
+                      <div class="dibi-price-menu__price-wrap">
+                        <span class="dibi-price-menu__price">{{ item.settings.price }}</span>
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          </section>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+
+  {%- comment -%} FAQs accordion {%- endcomment -%}
+  {%- if has_faqs -%}
+    <section class="dibi-service-faqs dibi-reveal">
+      <div class="dibi-service-faqs__inner">
+        <h2 class="dibi-service-faqs__heading">Treatment Details</h2>
+        <div class="dibi-service-faqs__list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'faq' -%}
+              <details class="dibi-service-faq" {{ block.shopify_attributes }}>
+                <summary class="dibi-service-faq__q">
+                  <span>{{ block.settings.question }}</span>
+                  <span class="dibi-service-faq__icon" aria-hidden="true">{% render 'dibi-icon-chevron' %}</span>
+                </summary>
+                <div class="dibi-service-faq__a">{{ block.settings.answer }}</div>
+              </details>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Booking CTA {%- endcomment -%}
+  <section class="dibi-service-cta dibi-reveal">
+    <h2 class="dibi-service-cta__title">Ready for Radiant Skin?</h2>
+    <p class="dibi-service-cta__text">
+      Book your {{ service_name }} treatment today and take the first step towards your skin goals.
+    </p>
+    <a
+      class="dibi-service-cta__btn"
+      href="{% if booking_link != blank %}{{ booking_link }}{% else %}{% render 'booking-url' %}{% endif %}"
+      target="_blank"
+      rel="noopener"
+    >Book Now</a>
+    <div class="dibi-service-cta__back">
+      <a class="dibi-service-cta__back-link" href="{{ routes.root_url }}">&larr; Back to Home</a>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Service detail",
+  "tag": "section",
+  "class": "dibi-service-detail-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "service_name",
+      "label": "Service name",
+      "default": "Service"
+    },
+    {
+      "type": "richtext",
+      "id": "short_description",
+      "label": "Short description"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_url",
+      "label": "Hero image URL (fallback)",
+      "info": "External image URL used when no hero image is uploaded above."
+    },
+    {
+      "type": "url",
+      "id": "booking_link",
+      "label": "Booking link",
+      "info": "Optional. Falls back to the global WhatsApp booking link."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "group",
+      "name": "Group heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "subtitle",
+          "label": "Subtitle"
+        },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Layout",
+          "options": [
+            { "value": "menu", "label": "Menu (price list)" },
+            { "value": "full", "label": "Full width prose" },
+            { "value": "split-left-image", "label": "Split (image left)" },
+            { "value": "split-right-image", "label": "Split (image right)" },
+            { "value": "split-text", "label": "Split (text)" }
+          ],
+          "default": "menu"
+        }
+      ]
+    },
+    {
+      "type": "menu_item",
+      "name": "Menu item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Prose text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Service detail",
+      "blocks": [
+        {
+          "type": "group",
+          "settings": {
+            "title": "Treatments",
+            "subtitle": "Add menu items below this group.",
+            "layout": "menu"
+          }
+        },
+        {
+          "type": "menu_item",
+          "settings": {
+            "name": "Sample treatment",
+            "price": "0+ LKR"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Important Information",
+            "answer": "<p>Prices are subject to 18% VAT.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

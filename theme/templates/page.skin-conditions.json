@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "service-detail": {
+      "type": "service-detail",
+      "settings": {
+        "service_name": "Skin Conditions",
+        "short_description": "<p>Targeted treatments for acne, pigmentation, sensitivity, rosacea, and dermatitis.</p>",
+        "hero_image_url": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop"
+      },
+      "blocks": {
+        "g1": { "type": "group", "settings": { "title": "Acne / Congestion", "subtitle": "Effective treatment of acne targets all of the steps of the cases of acne and combination therapy is essential.", "layout": "menu" } },
+        "g1i1": { "type": "menu_item", "settings": { "name": "Pure Equalizer - Purifying Treatment", "price": "14,000+ LKR" } },
+        "g1i2": { "type": "menu_item", "settings": { "name": "Pure Equalizer - Sebum Balance", "price": "14,500+ LKR" } },
+        "g1i3": { "type": "menu_item", "settings": { "name": "Pro Cellular Pro Recovery", "price": "28,000+ LKR" } },
+        "g1i4": { "type": "menu_item", "settings": { "name": "Meso System Lab", "price": "19,500+ LKR" } },
+        "g2": { "type": "group", "settings": { "title": "Pigmentation", "subtitle": "Treatments focus on preventing the occurrence of new pigmentation by avoiding and removing the triggers.", "layout": "menu" } },
+        "g2i1": { "type": "menu_item", "settings": { "name": "White Science - Melanin Control", "price": "29,500+ LKR" } },
+        "g2i2": { "type": "menu_item", "settings": { "name": "Acid Infusion", "price": "23,000+ LKR" } },
+        "g2i3": { "type": "menu_item", "settings": { "name": "Bio Repeel", "price": "23,000+ LKR" } },
+        "g2i4": { "type": "menu_item", "settings": { "name": "Laser - QSwitch", "price": "20,000+ LKR" } },
+        "g2i5": { "type": "menu_item", "settings": { "name": "Meso System Lab", "price": "19,500+ LKR" } },
+        "g3": { "type": "group", "settings": { "title": "Sensitive / Sensitized & Rosacea", "subtitle": "In-clinic treatments aimed at managing the condition and preventing exacerbations.", "layout": "menu" } },
+        "g3i1": { "type": "menu_item", "settings": { "name": "Defense Solution", "price": "19,500+ LKR" } },
+        "g3i2": { "type": "menu_item", "settings": { "name": "Procellular - Pro Recovery", "price": "28,000+ LKR" } },
+        "g3i3": { "type": "menu_item", "settings": { "name": "Enzyme Peel", "price": "12,000+ LKR" } },
+        "g3i4": { "type": "menu_item", "settings": { "name": "Meso System Lab", "price": "19,500+ LKR" } },
+        "g4": { "type": "group", "settings": { "title": "Dermatitis", "subtitle": "Encourages natural cellular repair and supports an optimal skin response.", "layout": "menu" } },
+        "g4i1": { "type": "menu_item", "settings": { "name": "Hydra Perfection", "price": "19,500+ LKR" } },
+        "g4i2": { "type": "menu_item", "settings": { "name": "Oxy Infusion with Super Serums", "price": "19,500+ LKR" } },
+        "g4i3": { "type": "menu_item", "settings": { "name": "Meso System Lab", "price": "19,500+ LKR" } },
+        "faq1": { "type": "faq", "settings": { "question": "Important Information", "answer": "<p>Prices are subject to 18% VAT.</p>" } }
+      },
+      "block_order": ["g1","g1i1","g1i2","g1i3","g1i4","g2","g2i1","g2i2","g2i3","g2i4","g2i5","g3","g3i1","g3i2","g3i3","g3i4","g4","g4i1","g4i2","g4i3","faq1"]
+    }
+  },
+  "order": ["service-detail"]
+}

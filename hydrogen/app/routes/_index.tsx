@@ -148,19 +148,24 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="bg-[#D4C5B9] text-[#1A1A1A] py-4 overflow-hidden whitespace-nowrap">
-        <div className="animate-[marquee_20s_linear_infinite] inline-block">
-          <span className="text-xs font-semibold tracking-[0.2em] uppercase mx-4">
-            DELUXE SAMPLES OR FREE GIFT WITH PURCHASE. ORDER ONLINE OR IN STORE. T&CS APPLY.
-          </span>
-          <span className="text-xs font-semibold tracking-[0.2em] uppercase mx-4">•</span>
-          <span className="text-xs font-semibold tracking-[0.2em] uppercase mx-4">
-            COMPLIMENTARY SKIN CONSULTATION WITH EVERY FIRST VISIT.
-          </span>
-          <span className="text-xs font-semibold tracking-[0.2em] uppercase mx-4">•</span>
-          <span className="text-xs font-semibold tracking-[0.2em] uppercase mx-4">
-            DELUXE SAMPLES OR FREE GIFT WITH PURCHASE. ORDER ONLINE OR IN STORE. T&CS APPLY.
-          </span>
+      <div className="bg-[#D4C5B9] text-[#1A1A1A] py-4 overflow-hidden">
+        <div className="flex w-max animate-[marquee_30s_linear_infinite]">
+          {[0, 1].map((copy) => (
+            <div
+              key={copy}
+              aria-hidden={copy === 1}
+              className="flex shrink-0 items-center whitespace-nowrap"
+            >
+              <span className="text-xs font-semibold tracking-[0.2em] uppercase mx-4">
+                DELUXE SAMPLES OR FREE GIFT WITH PURCHASE. ORDER ONLINE OR IN STORE. T&CS APPLY.
+              </span>
+              <span className="text-xs font-semibold tracking-[0.2em] uppercase mx-4">•</span>
+              <span className="text-xs font-semibold tracking-[0.2em] uppercase mx-4">
+                COMPLIMENTARY SKIN CONSULTATION WITH EVERY FIRST VISIT.
+              </span>
+              <span className="text-xs font-semibold tracking-[0.2em] uppercase mx-4">•</span>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -175,12 +180,12 @@ export default function Home() {
                 Treat someone special to a bespoke skin experience. Our beautifully packaged gift
                 cards can be used towards any treatment or product in our clinic.
               </p>
-              <a
-                href="#"
+              <Link
+                to="/products/gift-card"
                 className="inline-flex items-center justify-center px-8 py-4 bg-[#1A1A1A] text-white text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#D4C5B9] transition-all duration-300"
               >
                 Buy Gift Card
-              </a>
+              </Link>
             </div>
             <div className="order-1 lg:order-2 relative">
               <div className="aspect-[4/3] overflow-hidden bg-gray-100">

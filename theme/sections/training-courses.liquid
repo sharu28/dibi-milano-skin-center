@@ -1,0 +1,405 @@
+{%- comment -%}
+  DIBI training courses — matches hydrogen/app/routes/training.tsx.
+  Hero (heading + intro), course list blocks (title, description, optional
+  price), FAQ accordion blocks (question + answer), and an enrolment CTA that
+  uses the TRAINING WhatsApp booking message.
+{%- endcomment -%}
+
+{%- liquid
+  assign overlay = section.settings.hero_overlay_opacity | divided_by: 100.0
+  capture enrol_href
+    render 'booking-url', message: settings.dibi_training_message
+  endcapture
+  assign enrol_href = enrol_href | strip
+-%}
+
+<div class="dibi-training" id="dibi-training-{{ section.id }}">
+  {%- comment -%} Hero {%- endcomment -%}
+  <section class="dibi-hero" style="--dibi-hero-overlay: {{ overlay }};">
+    <div class="dibi-hero__slides">
+      {%- if section.settings.hero_image != blank -%}
+        {{
+          section.settings.hero_image
+          | image_url: width: 2200
+          | image_tag:
+            loading: 'eager',
+            sizes: '100vw',
+            widths: '750, 1100, 1500, 2200',
+            alt: section.settings.hero_heading,
+            class: 'dibi-hero__img'
+        }}
+      {%- elsif section.settings.hero_image_url != blank -%}
+        <img
+          src="{{ section.settings.hero_image_url }}"
+          alt="{{ section.settings.hero_heading | escape }}"
+          class="dibi-hero__img"
+          loading="eager"
+          width="2200"
+          height="1238"
+        >
+      {%- else -%}
+        <div class="dibi-hero__img dibi-hero__img--placeholder">
+          {{ 'hero-apparel-1' | placeholder_svg_tag: 'dibi-hero__placeholder-svg' }}
+        </div>
+      {%- endif -%}
+      <div class="dibi-hero__overlay"></div>
+    </div>
+    <div class="dibi-hero__content dibi-reveal">
+      {%- if section.settings.hero_heading != blank -%}
+        <h1 class="dibi-hero__heading">{{ section.settings.hero_heading }}</h1>
+      {%- endif -%}
+      {%- if section.settings.hero_subheading != blank -%}
+        <div class="dibi-hero__subheading">{{ section.settings.hero_subheading }}</div>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} Philosophy / intro {%- endcomment -%}
+  {%- if section.settings.intro_eyebrow != blank or section.settings.intro_body != blank -%}
+    <section class="dibi-training__philosophy">
+      <div class="dibi-training__philosophy-inner dibi-reveal">
+        {%- if section.settings.intro_eyebrow != blank -%}
+          <h2 class="dibi-training__eyebrow">{{ section.settings.intro_eyebrow }}</h2>
+        {%- endif -%}
+        {%- if section.settings.intro_body != blank -%}
+          <div class="dibi-training__lead">{{ section.settings.intro_body }}</div>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Courses {%- endcomment -%}
+  {%- assign course_blocks = section.blocks | where: 'type', 'course' -%}
+  {%- if course_blocks.size > 0 -%}
+    <section class="dibi-training__courses">
+      <div class="dibi-training__inner">
+        {%- if section.settings.courses_heading != blank -%}
+          <div class="dibi-training__group-head dibi-reveal">
+            <h2 class="dibi-training__group-title">{{ section.settings.courses_heading }}</h2>
+            {%- if section.settings.courses_subtitle != blank -%}
+              <p class="dibi-training__group-subtitle">{{ section.settings.courses_subtitle }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+        <div class="dibi-training__course-list">
+          {%- for block in course_blocks -%}
+            <div class="dibi-training__course dibi-reveal" {{ block.shopify_attributes }}>
+              <div class="dibi-training__course-main">
+                {%- if block.settings.title != blank -%}
+                  <h3 class="dibi-training__course-title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+                {%- if block.settings.description != blank -%}
+                  <div class="dibi-training__course-desc">{{ block.settings.description }}</div>
+                {%- endif -%}
+                {%- if block.settings.duration != blank -%}
+                  <p class="dibi-training__course-duration">{{ block.settings.duration }}</p>
+                {%- endif -%}
+              </div>
+              {%- if block.settings.price != blank -%}
+                <div class="dibi-training__course-price">
+                  <span>{{ block.settings.price }}</span>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} FAQ accordion {%- endcomment -%}
+  {%- assign faq_blocks = section.blocks | where: 'type', 'faq' -%}
+  {%- if faq_blocks.size > 0 -%}
+    <section class="dibi-training__faqs">
+      <div class="dibi-training__faqs-inner">
+        {%- if section.settings.faqs_heading != blank -%}
+          <h2 class="dibi-training__faqs-heading dibi-reveal">{{ section.settings.faqs_heading }}</h2>
+        {%- endif -%}
+        <div class="dibi-training__faq-list dibi-reveal">
+          {%- for block in faq_blocks -%}
+            <details class="dibi-training__faq" {{ block.shopify_attributes }}>
+              <summary class="dibi-training__faq-q">
+                <span>{{ block.settings.question }}</span>
+                {%- render 'dibi-icon-chevron' -%}
+              </summary>
+              {%- if block.settings.answer != blank -%}
+                <div class="dibi-training__faq-a">{{ block.settings.answer }}</div>
+              {%- endif -%}
+            </details>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Enrolment CTA {%- endcomment -%}
+  {%- if section.settings.cta_heading != blank or section.settings.cta_label != blank -%}
+    <section class="dibi-cta">
+      <div class="dibi-cta__inner dibi-reveal">
+        {%- if section.settings.cta_heading != blank -%}
+          <h2 class="dibi-cta__heading">{{ section.settings.cta_heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.cta_subtext != blank -%}
+          <div class="dibi-cta__subtext">{{ section.settings.cta_subtext }}</div>
+        {%- endif -%}
+        {%- if section.settings.cta_label != blank -%}
+          <a href="{{ enrol_href }}" class="dibi-cta__button" target="_blank" rel="noopener">
+            {{ section.settings.cta_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Training courses",
+  "tag": "section",
+  "class": "dibi-training-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_url",
+      "label": "Hero image URL (fallback)",
+      "info": "External image URL used when no image is uploaded above."
+    },
+    {
+      "type": "text",
+      "id": "hero_heading",
+      "label": "Hero heading",
+      "default": "DIBI Milano Academy"
+    },
+    {
+      "type": "richtext",
+      "id": "hero_subheading",
+      "label": "Hero subheading",
+      "default": "<p>Professional training in advanced skin science and aesthetics.</p>"
+    },
+    {
+      "type": "range",
+      "id": "hero_overlay_opacity",
+      "label": "Hero overlay opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Intro"
+    },
+    {
+      "type": "text",
+      "id": "intro_eyebrow",
+      "label": "Intro eyebrow",
+      "default": "Learn From the Best"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_body",
+      "label": "Intro body",
+      "default": "<p>The DIBI Milano Academy brings the rigour of our clinic into the classroom. Our programmes pair the science of skin health with hands-on, mentor-led practice, so you graduate ready to deliver results with confidence and care.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Courses"
+    },
+    {
+      "type": "text",
+      "id": "courses_heading",
+      "label": "Courses heading",
+      "default": "Courses & Certifications"
+    },
+    {
+      "type": "richtext",
+      "id": "courses_subtitle",
+      "label": "Courses subtitle",
+      "default": "<p>Structured, assessment-based programmes and focused masterclasses that build the clinical foundation for a career in advanced aesthetics.</p>"
+    },
+    {
+      "type": "header",
+      "content": "FAQs"
+    },
+    {
+      "type": "text",
+      "id": "faqs_heading",
+      "label": "FAQ heading",
+      "default": "Enrolment Details"
+    },
+    {
+      "type": "header",
+      "content": "Enrolment CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_heading",
+      "label": "CTA heading",
+      "default": "Begin Your Career"
+    },
+    {
+      "type": "richtext",
+      "id": "cta_subtext",
+      "label": "CTA subtext",
+      "default": "<p>Reserve your place in an upcoming intake, or message us to find the course that's right for you.</p>"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA button label",
+      "info": "Links to WhatsApp using the training enrolment message.",
+      "default": "Enquire about Enrolment"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "course",
+      "name": "Course",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Course title"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "duration",
+          "label": "Duration"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price (optional)"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Training courses",
+      "blocks": [
+        {
+          "type": "course",
+          "settings": {
+            "title": "Foundation Skin Science Certification",
+            "description": "<p>A comprehensive grounding in skin anatomy, the science of skin health, and professional consultation. The essential starting point for advanced practice.</p>",
+            "duration": "6 weeks",
+            "price": "95,000+ LKR"
+          }
+        },
+        {
+          "type": "course",
+          "settings": {
+            "title": "Laser Safety & Operation Certification",
+            "description": "<p>Certified training in laser physics, safety protocols, and supervised hands-on operation for hair removal and skin treatments.</p>",
+            "duration": "4 days",
+            "price": "75,000+ LKR"
+          }
+        },
+        {
+          "type": "course",
+          "settings": {
+            "title": "Microblading & Semi-Permanent Makeup",
+            "description": "<p>Brow mapping, pigment theory, and microblading technique with live-model practice and aftercare protocols.</p>",
+            "duration": "5 days",
+            "price": "120,000+ LKR"
+          }
+        },
+        {
+          "type": "course",
+          "settings": {
+            "title": "Advanced Chemical Peels Masterclass",
+            "description": "<p>Master the application of enzymatic, AHA/BHA, and clinical-grade peels for pigmentation, acne, and rejuvenation.</p>",
+            "duration": "3 days",
+            "price": "65,000+ LKR"
+          }
+        },
+        {
+          "type": "course",
+          "settings": {
+            "title": "Dermaplaning & Microdermabrasion Workshop",
+            "description": "<p>Hands-on technique training in physical exfoliation methods for instant, visible results.</p>",
+            "duration": "2 days",
+            "price": "40,000+ LKR"
+          }
+        },
+        {
+          "type": "course",
+          "settings": {
+            "title": "Injectables Fundamentals",
+            "description": "<p>For doctors and nurses: anti-wrinkle and dermal filler theory, facial anatomy, and supervised practical training. Medical qualification required.</p>",
+            "duration": "3 days",
+            "price": "150,000+ LKR"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Who are these courses for?",
+            "answer": "<p>Our certifications are designed for aspiring and practising aestheticians, beauty therapists, and medical professionals looking to expand their clinical skill set. Medical-only modules require a relevant qualification or licence.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Do I receive a certificate?",
+            "answer": "<p>Yes. Every course concludes with a DIBI Milano Academy certificate of completion, awarded on successful assessment.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Are there prerequisites?",
+            "answer": "<p>Foundation courses have no prerequisites. Advanced and medical modules require prior certification or a relevant medical licence.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How do I enrol?",
+            "answer": "<p>Message us on WhatsApp or call the centre to check upcoming intake dates and reserve your place. Class sizes are limited to ensure hands-on attention.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Important Information",
+            "answer": "<p>Course fees are subject to 18% VAT. Schedules and pricing may vary by intake.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,17 @@
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {
+        "brand_title": "DIBI Milano",
+        "brand_subtitle": "Skin Center",
+        "sticky": true
+      }
+    }
+  },
+  "order": [
+    "header"
+  ]
+}

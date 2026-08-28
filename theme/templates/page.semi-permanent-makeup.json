@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "service-detail": {
+      "type": "service-detail",
+      "settings": {
+        "service_name": "Semi-Permanent Makeup",
+        "short_description": "<p>Enhance your natural features with long-lasting results.</p>",
+        "hero_image_url": "https://images.unsplash.com/photo-1595959183082-7b570b7e08e2?q=80&w=2071&auto=format&fit=crop"
+      },
+      "blocks": {
+        "g1": { "type": "group", "settings": { "title": "Semi-Permanent Makeup & Beauty Enhancements", "subtitle": "Enhance your natural features with long-lasting results.", "layout": "menu" } },
+        "g1i1": { "type": "menu_item", "settings": { "name": "Lip Blush Neutralisation", "price": "25,000+ LKR" } },
+        "g1i2": { "type": "menu_item", "settings": { "name": "Microblading Brows", "price": "35,000+ LKR" } },
+        "g1i3": { "type": "menu_item", "settings": { "name": "Brow Lift (Brow Lamination) / Lash Lift", "price": "12,000+ LKR" } },
+        "faq1": { "type": "faq", "settings": { "question": "Important Information", "answer": "<p>Prices are subject to 18% VAT.</p>" } }
+      },
+      "block_order": ["g1","g1i1","g1i2","g1i3","faq1"]
+    }
+  },
+  "order": ["service-detail"]
+}

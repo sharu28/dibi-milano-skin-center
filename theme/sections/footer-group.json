@@ -1,0 +1,31 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "quick-links": {
+          "type": "quick_links",
+          "settings": {
+            "heading": "Quick Links",
+            "show_home": true,
+            "show_products": true,
+            "show_book_online": true
+          }
+        }
+      },
+      "block_order": [
+        "quick-links"
+      ],
+      "settings": {
+        "brand_title": "DIBI Milano",
+        "brand_subtitle": "Skin Center",
+        "show_policies": true
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

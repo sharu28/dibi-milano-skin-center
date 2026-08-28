@@ -1,0 +1,44 @@
+{
+  "sections": {
+    "service-detail": {
+      "type": "service-detail",
+      "settings": {
+        "service_name": "Laser Hair Removal",
+        "short_description": "<p>Medical-grade laser hair removal for fast, safe, and permanent hair reduction.</p>",
+        "hero_image_url": "https://images.unsplash.com/photo-1552693673-1bf958298935?q=80&w=2073&auto=format&fit=crop"
+      },
+      "blocks": {
+        "g1": { "type": "group", "settings": { "title": "Ladies Laser Hair Removal", "subtitle": "Tailored laser hair removal for all skin types and tones.", "layout": "menu" } },
+        "g1i1": { "type": "menu_item", "settings": { "name": "Face", "price": "20,000+ LKR" } },
+        "g1i2": { "type": "menu_item", "settings": { "name": "Chin / Side Burns", "price": "10,000+ LKR" } },
+        "g1i3": { "type": "menu_item", "settings": { "name": "Upper Lips", "price": "6,500+ LKR" } },
+        "g1i4": { "type": "menu_item", "settings": { "name": "Arms (Full)", "price": "20,000+ LKR" } },
+        "g1i5": { "type": "menu_item", "settings": { "name": "Arms (Half)", "price": "12,500+ LKR" } },
+        "g1i6": { "type": "menu_item", "settings": { "name": "Legs (Full)", "price": "35,000+ LKR" } },
+        "g1i7": { "type": "menu_item", "settings": { "name": "Legs (Half)", "price": "20,000+ LKR" } },
+        "g1i8": { "type": "menu_item", "settings": { "name": "Full Back", "price": "35,000+ LKR" } },
+        "g1i9": { "type": "menu_item", "settings": { "name": "Chest", "price": "20,000+ LKR" } },
+        "g1i10": { "type": "menu_item", "settings": { "name": "Tummy", "price": "15,000+ LKR" } },
+        "g1i11": { "type": "menu_item", "settings": { "name": "Underarms", "price": "15,000+ LKR" } },
+        "g1i12": { "type": "menu_item", "settings": { "name": "Brazilian", "price": "25,000+ LKR" } },
+        "g1i13": { "type": "menu_item", "settings": { "name": "Bikini", "price": "14,500+ LKR" } },
+        "g1i14": { "type": "menu_item", "settings": { "name": "Full Body (Excluding Brazilian)", "price": "80,000+ LKR" } },
+        "g2": { "type": "group", "settings": { "title": "Gents Laser Hair Removal", "subtitle": "Effective and reliable hair reduction tailored for men.", "layout": "menu" } },
+        "g2i1": { "type": "menu_item", "settings": { "name": "Chin / Side Burns", "price": "15,000+ LKR" } },
+        "g2i2": { "type": "menu_item", "settings": { "name": "Shoulders", "price": "15,000+ LKR" } },
+        "g2i3": { "type": "menu_item", "settings": { "name": "Arms (Full)", "price": "25,000+ LKR" } },
+        "g2i4": { "type": "menu_item", "settings": { "name": "Arms (Half)", "price": "17,000+ LKR" } },
+        "g2i5": { "type": "menu_item", "settings": { "name": "Legs (Full)", "price": "45,000+ LKR" } },
+        "g2i6": { "type": "menu_item", "settings": { "name": "Legs (Half)", "price": "20,000+ LKR" } },
+        "g2i7": { "type": "menu_item", "settings": { "name": "Full Back", "price": "40,000+ LKR" } },
+        "g2i8": { "type": "menu_item", "settings": { "name": "Chest", "price": "30,000+ LKR" } },
+        "g2i9": { "type": "menu_item", "settings": { "name": "Tummy", "price": "20,000+ LKR" } },
+        "g2i10": { "type": "menu_item", "settings": { "name": "Underarms", "price": "17,000+ LKR" } },
+        "g2i11": { "type": "menu_item", "settings": { "name": "Face", "price": "25,000+ LKR" } },
+        "faq1": { "type": "faq", "settings": { "question": "Important Information", "answer": "<p>Prices are subject to 18% VAT. Please note that we do not offer Boyzilian laser hair removal for gents.</p>" } }
+      },
+      "block_order": ["g1","g1i1","g1i2","g1i3","g1i4","g1i5","g1i6","g1i7","g1i8","g1i9","g1i10","g1i11","g1i12","g1i13","g1i14","g2","g2i1","g2i2","g2i3","g2i4","g2i5","g2i6","g2i7","g2i8","g2i9","g2i10","g2i11","faq1"]
+    }
+  },
+  "order": ["service-detail"]
+}

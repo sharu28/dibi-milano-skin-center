@@ -1,0 +1,42 @@
+{%- comment -%}
+  DIBI bespoke intro — matches the "Your Bespoke Experience" block in
+  hydrogen/app/routes/_index.tsx. Centered eyebrow heading + serif paragraph.
+{%- endcomment -%}
+
+<section class="dibi-bespoke" id="dibi-bespoke-{{ section.id }}">
+  <div class="dibi-bespoke__inner dibi-reveal">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="dibi-bespoke__eyebrow">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.body != blank -%}
+      <div class="dibi-bespoke__body">{{ section.settings.body }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bespoke intro",
+  "tag": "section",
+  "class": "dibi-bespoke-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Eyebrow heading",
+      "default": "Your Bespoke Experience"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>At DIBI Milano Skin Center, we believe that healthy skin is the foundation of true beauty. Our expert clinicians combine advanced technology with personalized care to deliver transformative results.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bespoke intro"
+    }
+  ]
+}
+{% endschema %}

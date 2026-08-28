@@ -1,0 +1,48 @@
+{
+  "sections": {
+    "gallery": {
+      "type": "gallery-grid",
+      "blocks": {
+        "item-1": {
+          "type": "item",
+          "settings": { "media_type": "image", "alt": "DIBI Milano studio interior" }
+        },
+        "item-2": {
+          "type": "item",
+          "settings": { "media_type": "image", "alt": "Treatment in progress" }
+        },
+        "item-3": {
+          "type": "item",
+          "settings": { "media_type": "video", "alt": "DIBI Milano treatment reel" }
+        },
+        "item-4": {
+          "type": "item",
+          "settings": { "media_type": "image", "alt": "Product close-up" }
+        },
+        "item-5": {
+          "type": "item",
+          "settings": { "media_type": "image", "alt": "Facial treatment detail" }
+        },
+        "item-6": {
+          "type": "item",
+          "settings": { "media_type": "video", "alt": "Behind the scenes at the studio" }
+        }
+      },
+      "block_order": [
+        "item-1",
+        "item-2",
+        "item-3",
+        "item-4",
+        "item-5",
+        "item-6"
+      ],
+      "settings": {
+        "heading": "Gallery",
+        "subheading": "<p>Moments from our studio.</p>"
+      }
+    }
+  },
+  "order": [
+    "gallery"
+  ]
+}

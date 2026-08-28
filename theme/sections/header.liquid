@@ -1,0 +1,235 @@
+{%- comment -%}
+  DIBI Milano header — matches hydrogen/app/components/Navbar.tsx
+  Solid white background, centered brand lockup, split desktop nav,
+  Services dropdown, BOOK ONLINE plain-text CTA (WhatsApp), mobile drawer.
+{%- endcomment -%}
+
+{%- comment -%}
+  Services nav links directly to the 8 service pages (/pages/<slug>).
+  Defined inline so it works out of the box without metaobjects or a menu.
+{%- endcomment -%}
+{%- capture services_nav -%}
+  <a class="dibi-nav__services-link" href="{{ routes.root_url }}pages/skin-conditions">Skin Conditions</a>
+  <a class="dibi-nav__services-link" href="{{ routes.root_url }}pages/anti-aging-energy">Anti-Aging & Energy</a>
+  <a class="dibi-nav__services-link" href="{{ routes.root_url }}pages/peels-refresh">Peels & Refresh</a>
+  <a class="dibi-nav__services-link" href="{{ routes.root_url }}pages/laser-hair-removal">Laser Hair Removal</a>
+  <a class="dibi-nav__services-link" href="{{ routes.root_url }}pages/injectables-boosters">Injectables & Skin Boosters</a>
+  <a class="dibi-nav__services-link" href="{{ routes.root_url }}pages/eye-body-enhancements">Eye & Body Enhancements</a>
+  <a class="dibi-nav__services-link" href="{{ routes.root_url }}pages/specialized-laser">Specialized Laser</a>
+  <a class="dibi-nav__services-link" href="{{ routes.root_url }}pages/semi-permanent-makeup">Semi-Permanent Makeup</a>
+{%- endcapture -%}
+{%- capture services_nav_mobile -%}
+  <a class="dibi-mobile-menu__sublink" href="{{ routes.root_url }}pages/skin-conditions">Skin Conditions</a>
+  <a class="dibi-mobile-menu__sublink" href="{{ routes.root_url }}pages/anti-aging-energy">Anti-Aging & Energy</a>
+  <a class="dibi-mobile-menu__sublink" href="{{ routes.root_url }}pages/peels-refresh">Peels & Refresh</a>
+  <a class="dibi-mobile-menu__sublink" href="{{ routes.root_url }}pages/laser-hair-removal">Laser Hair Removal</a>
+  <a class="dibi-mobile-menu__sublink" href="{{ routes.root_url }}pages/injectables-boosters">Injectables & Skin Boosters</a>
+  <a class="dibi-mobile-menu__sublink" href="{{ routes.root_url }}pages/eye-body-enhancements">Eye & Body Enhancements</a>
+  <a class="dibi-mobile-menu__sublink" href="{{ routes.root_url }}pages/specialized-laser">Specialized Laser</a>
+  <a class="dibi-mobile-menu__sublink" href="{{ routes.root_url }}pages/semi-permanent-makeup">Semi-Permanent Makeup</a>
+{%- endcapture -%}
+
+<header
+  class="dibi-header{% if section.settings.sticky %} dibi-header--sticky{% endif %}"
+  data-dibi-header
+>
+  <div class="dibi-header__inner">
+    {%- comment -%} Left nav (desktop) {%- endcomment -%}
+    <nav class="dibi-nav dibi-nav--left" aria-label="Primary">
+      <a class="dibi-nav__link" href="{{ routes.root_url }}">HOME</a>
+      <a class="dibi-nav__link" href="{{ routes.all_products_collection_url }}">PRODUCTS</a>
+      <a class="dibi-nav__link" href="{{ section.settings.gallery_url | default: '/pages/gallery' }}">GALLERY</a>
+
+      <div class="dibi-nav__services">
+        <button type="button" class="dibi-nav__link dibi-nav__services-toggle" aria-haspopup="true">
+          SERVICES
+          {% render 'dibi-icon-chevron' %}
+        </button>
+        <div class="dibi-nav__services-menu">
+          <div class="dibi-nav__services-inner">
+            {{ services_nav }}
+          </div>
+        </div>
+      </div>
+
+      <a
+        class="dibi-nav__cta"
+        href="{% render 'booking-url' %}"
+        target="_blank"
+        rel="noopener"
+      >BOOK ONLINE</a>
+    </nav>
+
+    {%- comment -%} Centered brand {%- endcomment -%}
+    <a class="dibi-header__brand" href="{{ routes.root_url }}">
+      {%- if section.settings.logo != blank -%}
+        {%- assign logo_width = section.settings.logo_width | default: 120 -%}
+        {{
+          section.settings.logo
+          | image_url: width: 600
+          | image_tag:
+            class: 'dibi-header__logo-img',
+            widths: '120, 240, 360, 480, 600',
+            sizes: logo_width | append: 'px',
+            alt: section.settings.brand_title | default: shop.name
+        }}
+      {%- else -%}
+        <span class="dibi-header__brand-title">{{ section.settings.brand_title | default: 'DIBI Milano' }}</span>
+        {%- if section.settings.brand_subtitle != blank -%}
+          <span class="dibi-header__brand-sub">{{ section.settings.brand_subtitle }}</span>
+        {%- endif -%}
+      {%- endif -%}
+    </a>
+
+    {%- comment -%} Right nav (desktop) {%- endcomment -%}
+    <nav class="dibi-nav dibi-nav--right" aria-label="Secondary">
+      <a class="dibi-nav__link" href="{{ section.settings.training_url | default: '/pages/training' }}">TRAINING</a>
+      <a class="dibi-nav__link" href="{{ section.settings.careers_url | default: '/pages/careers' }}">CAREERS</a>
+      <a
+        class="dibi-nav__cart"
+        href="{{ routes.cart_url }}"
+        aria-label="Cart, {{ cart.item_count }} items"
+      >
+        <svg class="dibi-nav__cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        {%- if cart.item_count > 0 -%}
+          <span class="dibi-nav__cart-count">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+    </nav>
+
+    {%- comment -%} Mobile toggle {%- endcomment -%}
+    <button
+      type="button"
+      class="dibi-header__mobile-toggle"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      data-dibi-menu-toggle
+    >
+      <span data-dibi-icon-menu>{% render 'dibi-icon-menu' %}</span>
+      <span data-dibi-icon-close hidden>{% render 'dibi-icon-close' %}</span>
+    </button>
+  </div>
+
+  {%- comment -%} Mobile drawer {%- endcomment -%}
+  <div class="dibi-mobile-menu" data-dibi-mobile-menu>
+    <div class="dibi-mobile-menu__list">
+      <a class="dibi-mobile-menu__link" href="{{ routes.root_url }}">HOME</a>
+      <a class="dibi-mobile-menu__link" href="{{ routes.all_products_collection_url }}">PRODUCTS</a>
+      <a class="dibi-mobile-menu__link" href="{{ section.settings.gallery_url | default: '/pages/gallery' }}">GALLERY</a>
+
+      <div>
+        <button
+          type="button"
+          class="dibi-mobile-menu__services-toggle"
+          aria-expanded="false"
+          data-dibi-mobile-services-toggle
+        >
+          SERVICES
+          {% render 'dibi-icon-chevron' %}
+        </button>
+        <div class="dibi-mobile-menu__sublist" data-dibi-mobile-services>
+          {{ services_nav_mobile }}
+        </div>
+      </div>
+
+      <a class="dibi-mobile-menu__link" href="{{ section.settings.training_url | default: '/pages/training' }}">TRAINING</a>
+      <a class="dibi-mobile-menu__link" href="{{ section.settings.careers_url | default: '/pages/careers' }}">CAREERS</a>
+      <a
+        class="dibi-mobile-menu__link"
+        href="{% render 'booking-url' %}"
+        target="_blank"
+        rel="noopener"
+      >BOOK ONLINE</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  (function () {
+    var header = document.querySelector('[data-dibi-header]');
+    if (!header) return;
+
+    var toggle = header.querySelector('[data-dibi-menu-toggle]');
+    var menu = header.querySelector('[data-dibi-mobile-menu]');
+    var iconMenu = header.querySelector('[data-dibi-icon-menu]');
+    var iconClose = header.querySelector('[data-dibi-icon-close]');
+
+    if (toggle && menu) {
+      toggle.addEventListener('click', function () {
+        var open = menu.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (iconMenu) iconMenu.hidden = open;
+        if (iconClose) iconClose.hidden = !open;
+      });
+    }
+
+    var servicesToggle = header.querySelector('[data-dibi-mobile-services-toggle]');
+    var servicesList = header.querySelector('[data-dibi-mobile-services]');
+    if (servicesToggle && servicesList) {
+      servicesToggle.addEventListener('click', function () {
+        var open = servicesList.classList.toggle('is-open');
+        servicesToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 60,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 120
+    },
+    {
+      "type": "text",
+      "id": "brand_title",
+      "label": "Brand title (text logo)",
+      "default": "DIBI Milano"
+    },
+    {
+      "type": "text",
+      "id": "brand_subtitle",
+      "label": "Brand subtitle",
+      "default": "Skin Center"
+    },
+    {
+      "type": "header",
+      "content": "Right-side links"
+    },
+    {
+      "type": "url",
+      "id": "gallery_url",
+      "label": "Gallery URL"
+    },
+    {
+      "type": "url",
+      "id": "training_url",
+      "label": "Training URL"
+    },
+    {
+      "type": "url",
+      "id": "careers_url",
+      "label": "Careers URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "Sticky header",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

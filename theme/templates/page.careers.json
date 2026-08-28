@@ -1,0 +1,48 @@
+{
+  "sections": {
+    "careers": {
+      "type": "careers-listing",
+      "blocks": {
+        "role-1": {
+          "type": "role",
+          "settings": {
+            "title": "Senior Aesthetician",
+            "meta": "Full-Time • Colombo",
+            "description": "<p>Seeking an experienced aesthetician with a deep understanding of advanced skin treatments, chemical peels, and laser therapies. Minimum 3 years of clinical experience required.</p>",
+            "apply_email": "careers@dibimilano.com?subject=Application for Senior Aesthetician"
+          }
+        },
+        "role-2": {
+          "type": "role",
+          "settings": {
+            "title": "Front Desk Coordinator",
+            "meta": "Full-Time • Colombo",
+            "description": "<p>The first point of contact for our clients. We are looking for a highly organized, impeccably presented individual with excellent communication skills and a passion for customer service.</p>",
+            "apply_email": "careers@dibimilano.com?subject=Application for Front Desk Coordinator"
+          }
+        }
+      },
+      "block_order": [
+        "role-1",
+        "role-2"
+      ],
+      "settings": {
+        "hero_heading": "Join Our Team",
+        "hero_image_url": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=1974&auto=format&fit=crop",
+        "hero_subheading": "<p>Build your career with the leaders in bespoke skin treatments and advanced aesthetics.</p>",
+        "hero_overlay_opacity": 40,
+        "intro_eyebrow": "Our Culture",
+        "intro_body": "<p>At DIBI Milano Skin Center, we are passionate about transforming lives through skin health. We are always looking for dedicated, talented professionals who share our commitment to excellence, continuous learning, and providing an unparalleled client experience.</p>",
+        "openings_heading": "Current Openings",
+        "openings_subtitle": "<p>We are currently accepting applications for the following roles.</p>",
+        "cta_heading": "Don't see your role?",
+        "cta_body": "<p>We are always open to meeting exceptional talent. Send us your CV and a cover letter detailing how you can contribute to the DIBI Milano team.</p>",
+        "cta_email": "careers@dibimilano.com",
+        "cta_label": "Email Your CV"
+      }
+    }
+  },
+  "order": [
+    "careers"
+  ]
+}

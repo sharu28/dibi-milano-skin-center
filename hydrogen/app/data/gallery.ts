@@ -1,41 +1,78 @@
-export interface GalleryItem {
-  type: 'image' | 'video';
-  // Path under /public, served at site root. e.g. /gallery/photo-01.jpg
-  src: string;
-  // Required for type 'video': first-frame image shown before/while loading.
-  poster?: string;
+interface GalleryItemBase {
   // Accessibility / fallback text. Always provide something meaningful.
   alt: string;
   // Display order, ascending.
   order: number;
 }
 
-// Curated Instagram content. One entry per file in public/gallery/.
+export interface GalleryImageItem extends GalleryItemBase {
+  type: 'image';
+  // Path under /public, served at site root. e.g. /gallery/photo-01.jpg
+  src: string;
+}
+
+export interface GalleryVideoItem extends GalleryItemBase {
+  type: 'video';
+  // Path under /public. Short muted H.264 MP4.
+  src: string;
+  // First-frame image shown before/while loading.
+  poster?: string;
+}
+
+export interface GalleryInstagramItem extends GalleryItemBase {
+  type: 'instagram';
+  // Instagram post/reel shortcode, e.g. 'DbqZFXaonW_' from
+  // instagram.com/reel/DbqZFXaonW_/. Embedded via the official
+  // instagram.com/reel/<code>/embed/ endpoint.
+  code: string;
+}
+
+export type GalleryItem =
+  | GalleryImageItem
+  | GalleryVideoItem
+  | GalleryInstagramItem;
+
+// Curated gallery content.
 //
-// HOW TO POPULATE:
-//   1. Drop your optimized files into hydrogen/public/gallery/ using these
-//      exact filenames (or rename both the file and the `src` here to match).
+// Instagram reels from @dibimilano_skincentre are embedded directly — to add
+// one, copy the shortcode from the reel URL and add an `instagram` entry.
+//
+// Local files can be mixed in too:
+//   1. Drop optimized files into hydrogen/public/gallery/.
 //      - Images: ~1600px long edge, compressed JPG/WebP.
 //      - Videos: short muted H.264 MP4 + a poster JPG (first frame).
-//   2. Update each `alt` to describe the actual shot.
-//   3. Delete any rows you don't fill. Reorder via the `order` field.
+//   2. Add an `image`/`video` entry pointing at the file.
 //
-// Mix below = 11 images + 4 clips (~70/30). `order` spaced by 10 for easy
-// reordering. Clips are interleaved so video isn't clustered.
+// `order` spaced by 10 for easy reordering.
 export const galleryItems: GalleryItem[] = [
-  {type: 'image', src: '/gallery/photo-01.jpg', alt: 'DIBI Milano studio interior', order: 10},
-  {type: 'image', src: '/gallery/photo-02.jpg', alt: 'Treatment in progress', order: 20},
-  {type: 'video', src: '/gallery/clip-01.mp4', poster: '/gallery/clip-01.jpg', alt: 'DIBI Milano treatment reel', order: 30},
-  {type: 'image', src: '/gallery/photo-03.jpg', alt: 'Product close-up', order: 40},
-  {type: 'image', src: '/gallery/photo-04.jpg', alt: 'Facial treatment detail', order: 50},
-  {type: 'image', src: '/gallery/photo-05.jpg', alt: 'DIBI Milano team', order: 60},
-  {type: 'video', src: '/gallery/clip-02.mp4', poster: '/gallery/clip-02.jpg', alt: 'Behind the scenes at the studio', order: 70},
-  {type: 'image', src: '/gallery/photo-06.jpg', alt: 'Skincare products on display', order: 80},
-  {type: 'image', src: '/gallery/photo-07.jpg', alt: 'Treatment room', order: 90},
-  {type: 'image', src: '/gallery/photo-08.jpg', alt: 'Client consultation', order: 100},
-  {type: 'video', src: '/gallery/clip-03.mp4', poster: '/gallery/clip-03.jpg', alt: 'Treatment technique close-up', order: 110},
-  {type: 'image', src: '/gallery/photo-09.jpg', alt: 'Studio detail', order: 120},
-  {type: 'image', src: '/gallery/photo-10.jpg', alt: 'Skincare application', order: 130},
-  {type: 'video', src: '/gallery/clip-04.mp4', poster: '/gallery/clip-04.jpg', alt: 'DIBI Milano studio moment', order: 140},
-  {type: 'image', src: '/gallery/photo-11.jpg', alt: 'Finished result', order: 150},
+  {
+    type: 'instagram',
+    code: 'DbljI2HIpQ8',
+    alt: 'Discover your signature glow — skin treatments at DIBI Milano',
+    order: 10,
+  },
+  {
+    type: 'instagram',
+    code: 'DbFucOEI1WE',
+    alt: 'Scabbing after laser: is it normal? Aftercare explained',
+    order: 20,
+  },
+  {
+    type: 'instagram',
+    code: 'DcI4WWxoGE3',
+    alt: 'Reading the visible signs that show what your skin needs',
+    order: 30,
+  },
+  {
+    type: 'instagram',
+    code: 'Db2hyTkom4M',
+    alt: 'DIBI HIFU — a facelift without surgery, using focused ultrasound',
+    order: 40,
+  },
+  {
+    type: 'instagram',
+    code: 'Db2gfsTIl4l',
+    alt: 'How the layers of your skin protect, repair and renew themselves',
+    order: 50,
+  },
 ];

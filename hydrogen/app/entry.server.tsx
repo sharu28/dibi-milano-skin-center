@@ -47,7 +47,11 @@ export default async function handleRequest(
       'ws://localhost:*',
       'ws://127.0.0.1:*',
     ],
-    frameSrc: ["'self'", 'https://www.google.com'],
+    frameSrc: [
+      "'self'",
+      'https://www.google.com',
+      'https://www.instagram.com',
+    ],
   });
 
   const body = await renderToReadableStream(

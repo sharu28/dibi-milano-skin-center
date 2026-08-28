@@ -81,3 +81,7 @@ h1, h2, h3, h4, h5, h6 {
   @apply px-4 py-2 border border-gray-300 text-xs uppercase tracking-widest hover:border-[#D4C5B9] cursor-pointer;
 }
 .product-options-item[disabled] { @apply opacity-40 cursor-not-allowed; }
+
+/* Sale price: current price first, original struck through and de-emphasised */
+.product-price-on-sale { @apply flex items-baseline gap-3; }
+.product-price-on-sale s { @apply text-base text-gray-400 no-underline line-through; }

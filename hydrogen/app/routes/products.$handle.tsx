@@ -13,6 +13,7 @@ import {
 import {motion, AnimatePresence} from 'motion/react';
 import {ArrowLeft, ArrowRight, Info, Sparkles, Star} from 'lucide-react';
 import {ProductForm} from '~/components/ProductForm';
+import {ProductPrice} from '~/components/ProductPrice';
 import {redirectIfHandleIsLocalized} from '~/lib/redirect';
 
 export const meta: Route.MetaFunction = ({data}) => {
@@ -187,6 +188,13 @@ export default function Product() {
                   {summary}
                 </p>
               )}
+
+              <div className="text-2xl md:text-3xl font-light text-gray-900 tracking-wide">
+                <ProductPrice
+                  price={selectedVariant?.price}
+                  compareAtPrice={selectedVariant?.compareAtPrice}
+                />
+              </div>
 
               <div className="bg-white border border-gray-200 p-6 md:p-7 space-y-4">
                 <div className="flex items-center space-x-2">

@@ -47,44 +47,32 @@ export type GalleryItem =
 export const galleryItems: GalleryItem[] = [
   {
     type: 'instagram',
-    code: 'DbqZFXaonW_',
-    alt: 'Laser hair removal launch offer at DIBI Milano Skin Centre',
-    order: 10,
-  },
-  {
-    type: 'instagram',
     code: 'DbljI2HIpQ8',
     alt: 'Discover your signature glow — skin treatments at DIBI Milano',
-    order: 20,
+    order: 10,
   },
   {
     type: 'instagram',
     code: 'DbFucOEI1WE',
     alt: 'Scabbing after laser: is it normal? Aftercare explained',
-    order: 30,
-  },
-  {
-    type: 'instagram',
-    code: 'Dbm_DIvorWG',
-    alt: 'Book your first laser hair removal session at DIBI Milano',
-    order: 40,
+    order: 20,
   },
   {
     type: 'instagram',
     code: 'DcI4WWxoGE3',
     alt: 'Reading the visible signs that show what your skin needs',
-    order: 50,
+    order: 30,
   },
   {
     type: 'instagram',
     code: 'Db2hyTkom4M',
     alt: 'DIBI HIFU — a facelift without surgery, using focused ultrasound',
-    order: 60,
+    order: 40,
   },
   {
     type: 'instagram',
     code: 'Db2gfsTIl4l',
     alt: 'How the layers of your skin protect, repair and renew themselves',
-    order: 70,
+    order: 50,
   },
 ];
